@@ -7,7 +7,7 @@
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presenter.candidate;
+package creamylatte.presenter.admin.candidate;
 
 import com.airhacks.afterburner.views.FXMLView;
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" minHeight="610.0" minWidth="1136.0" prefHeight="610.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presenter.admin.candidate.CandidatePresenter">
+   <children>
+      <Accordion layoutX="14.0" layoutY="14.0" prefHeight="583.0" prefWidth="1110.0">
+        <panes>
+          <TitledPane fx:id="manageCandidatesPane" animated="false" text="Manage Candidates">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </TitledPane>
+          <TitledPane fx:id="monitorResultPane" animated="false" text="Monitor Results">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </TitledPane>
+          <TitledPane fx:id="reservedPane" animated="false" text="Reserved!">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="0.0" prefWidth="1108.0" />
+            </content>
+          </TitledPane>
+        </panes>
+      </Accordion>
+   </children>
+</AnchorPane>

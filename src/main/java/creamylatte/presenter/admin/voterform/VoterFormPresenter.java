@@ -9,7 +9,7 @@
 
 
 
-package creamylatte.presenter.voterform;
+package creamylatte.presenter.admin.voterform;
 
 
 
@@ -35,8 +35,8 @@ import creamylatte.business.models.Candidate;
 import creamylatte.business.models.ImageWrapper;
 import creamylatte.business.models.UserAccount;
 import creamylatte.business.services.CandidateService;
-import creamylatte.presenter.voter.VoterPresenter;
-import creamylatte.presenter.voter.VoterView;
+import creamylatte.presenter.admin.voter.VoterPresenter;
+import creamylatte.presenter.admin.voter.VoterView;
 
 /**
  * FXML Controller class
@@ -78,7 +78,6 @@ public class VoterFormPresenter implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {        
         prepareGradeBox();
         Candidate c = new Candidate();
-        
         this.selectedCandidate = new SimpleObjectProperty<>(c);
         this.currentCandidate = new SimpleObjectProperty<>();        
         this.selectedCandidate.addListener(selectedCandidateListener());        
@@ -91,7 +90,7 @@ public class VoterFormPresenter implements Initializable {
     public void prepareGradeBox(){
         List<String> gradeList = Arrays.asList("Seven", 
                 "Eight", "Nine","Ten","Eleven","Twelve");
-        ObservableList<String> oGradeList = FXCollections.observableArrayList(gradeList);
+        ObservableList<String> oGradeList = FXCollections.observableArrayList("Seven","Eigth","Nine","Ten");
         gradeLevelCBox.setItems(oGradeList);
     }
 

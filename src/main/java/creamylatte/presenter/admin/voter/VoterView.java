@@ -8,7 +8,7 @@
  */
 
 
-package creamylatte.presenter.voterform;
+package creamylatte.presenter.admin.voter;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -18,6 +18,6 @@ import com.airhacks.afterburner.views.FXMLView;
  * This class extends FXMLView from afterburner.fx that handles the loading of
  * FXML, Presenter and CSS(if it exist in the certain package).
  */
-public class VoterFormView extends FXMLView{
+public class VoterView extends FXMLView{
     
 }

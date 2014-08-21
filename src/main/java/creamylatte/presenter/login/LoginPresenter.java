@@ -27,10 +27,10 @@ import javafx.scene.layout.AnchorPane;
 import javax.inject.Inject;
 import creamylatte.business.models.UserAccount;
 import creamylatte.business.services.Authenticator;
-import creamylatte.presenter.admin.AdminPresenter;
-import creamylatte.presenter.admin.AdminView;
-import creamylatte.presenter.vote.VotePresenter;
-import creamylatte.presenter.vote.VoteView;
+import creamylatte.presenter.admin.admin.AdminPresenter;
+import creamylatte.presenter.admin.admin.AdminView;
+import creamylatte.presenter.vote.vote.VotePresenter;
+import creamylatte.presenter.vote.vote.VoteView;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
 

@@ -7,7 +7,7 @@
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presenter.partylist;
+package creamylatte.presenter.admin.partylist;
 
 import java.net.URL;
 import java.util.ResourceBundle;

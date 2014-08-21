@@ -10,6 +10,13 @@
 
 package creamylatte.presenter.main;
 
+import creamylatte.business.models.UserAccount;
+import creamylatte.business.services.Authenticator;
+import creamylatte.business.services.CandidateService;
+import creamylatte.presenter.admin.voter.VoterPresenter;
+import creamylatte.presenter.admin.voter.VoterView;
+import creamylatte.presenter.login.LoginPresenter;
+import creamylatte.presenter.login.LoginView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
@@ -19,18 +26,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
 import javax.inject.Inject;
-import creamylatte.business.models.UserAccount;
-import creamylatte.business.services.Authenticator;
-import creamylatte.business.services.CandidateService;
-import creamylatte.presenter.login.LoginPresenter;
-import creamylatte.presenter.login.LoginView;
-import creamylatte.presenter.voter.VoterPresenter;
-import creamylatte.presenter.voter.VoterView;
 
 
 /**
@@ -102,6 +103,7 @@ public class MainPresenter implements Initializable {
 
     @FXML
     private void closeStage(ActionEvent event) {
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
 }

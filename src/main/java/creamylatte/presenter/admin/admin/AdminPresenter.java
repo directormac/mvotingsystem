@@ -7,37 +7,24 @@
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presenter.vote;
+package creamylatte.presenter.admin.admin;
 
+import creamylatte.business.models.UserAccount;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.beans.property.*;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import creamylatte.business.models.UserAccount;
 
 
 /**
  * FXML Controller class
  *
  * @author Hadouken
+ * 
  */
-public class VotePresenter implements Initializable {
-    
-    
-    @FXML
-    private Label labelabel;
-    
-    
-    @FXML
-    private Button showMeName;
-    
+public class AdminPresenter implements Initializable {
     private ObjectProperty<UserAccount> user;
-
-
     /**
      * Initializes the controller class.
      */
@@ -47,15 +34,10 @@ public class VotePresenter implements Initializable {
     }    
 
     /**
-     * @return the currentUser
+     * @return the user
      */
     public ObjectProperty<UserAccount> getUser() {
         return user;
-    }
-    
-    @FXML
-    private void showMeNameAction(ActionEvent event) {          
-        labelabel.setText(user.get().getUsername());
     }
     
 }

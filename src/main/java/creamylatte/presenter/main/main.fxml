@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1136.0" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presenter.main.MainPresenter">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1136.0" styleClass="background" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presenter.main.MainPresenter">
    <center>
       <AnchorPane fx:id="contentPane" prefHeight="610.0" prefWidth="1136.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
-      <AnchorPane prefHeight="26.0" prefWidth="1136.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="30.0" prefWidth="1136.0" BorderPane.alignment="CENTER">
          <children>
             <MenuBar fx:id="mainMenu" style="-fx-background-color: transparent; -fx-border-color: transparent;" visible="false">
                <menus>
@@ -27,12 +28,12 @@
                   </Menu>
                   <Menu mnemonicParsing="false" text="Party List">
                      <items>
-                        <MenuItem fx:id="partylistMenu" mnemonicParsing="false" onAction="#searchPartylist" text="Search Partylists" />
+                        <MenuItem fx:id="partylistMenu" mnemonicParsing="false" onAction="#searchPartylist" text="Manage Partylist" />
                      </items>
                   </Menu>
                </menus>
             </MenuBar>
-            <Button id="closeButton" fx:id="closeButton" layoutX="1117.0" layoutY="2.0" mnemonicParsing="false" onAction="#closeStage" style="-fx-background-color: transparent;" />
+            <Button id="btn" fx:id="closeButton" layoutX="1116.0" minHeight="24.0" minWidth="19.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="24.0" prefWidth="19.0" />
          </children>
       </AnchorPane>
    </top>

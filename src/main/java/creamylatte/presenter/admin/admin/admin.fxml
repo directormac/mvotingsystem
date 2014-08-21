@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane id="AnchorPane" minHeight="610.0" minWidth="1136.0" prefHeight="610.0" prefWidth="1136.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="creamylatte.presenter.admin.AdminPresenter">
+<AnchorPane id="AnchorPane" minHeight="610.0" minWidth="1136.0" prefHeight="610.0" prefWidth="1136.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="creamylatte.presenter.admin.admin.AdminPresenter">
    <children>
       <Label layoutX="529.0" layoutY="298.0" text="HOOOOOOORA!" />
    </children>
