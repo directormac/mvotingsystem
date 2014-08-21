@@ -11,18 +11,14 @@ package creamylatte.presenter.vote;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import creamylatte.business.models.UserAccount;
-import creamylatte.presenter.admin.AdminPresenter;
-import creamylatte.presenter.admin.AdminView;
+
 
 /**
  * FXML Controller class

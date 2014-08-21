@@ -5,6 +5,7 @@ import creamylatte.presenter.main.MainView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  *
@@ -15,6 +16,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         Scene scene = new Scene(new MainView().getView());
+        stage.initStyle(StageStyle.TRANSPARENT);
 //        stage.getIcons().add(new Image("file:resources/images/appicon.png"));
         stage.setTitle("JVoting System");
 //        final String uri = getClass().getResource("app.css").toExternalForm();

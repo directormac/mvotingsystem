@@ -31,6 +31,8 @@ import creamylatte.presenter.admin.AdminPresenter;
 import creamylatte.presenter.admin.AdminView;
 import creamylatte.presenter.vote.VotePresenter;
 import creamylatte.presenter.vote.VoteView;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Label;
 
 
 /**
@@ -57,34 +59,64 @@ public class LoginPresenter implements Initializable {
     AdminPresenter adminPresenter;
     ObservableList<UserAccount> userList;
     private ObjectProperty<UserAccount> user;
-    /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb
-     */
+    
+    @FXML
+    private Label incorrectPasswordLabel;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         user = new SimpleObjectProperty<>();
+        loginButton.disableProperty().bind(passwordField.textProperty().isEmpty()); 
+        passwordField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            if(newValue.isEmpty()){
+                incorrectPasswordLabel.setVisible(false);
+            }
+        });
     }    
-
 
     @FXML
     private void loginAccount(ActionEvent event) {          
-        this.user.set(auth.findUser(accountCBox.getEditor().textProperty().get()));
-        if(this.user.get().getPassword().equals(passwordField.textProperty().get())){
-            if(this.getUser().get().getUsername().equals("admin")){
-                AdminView adminView = new AdminView();
-                this.adminPresenter = (AdminPresenter) adminView.getPresenter();                
-                this.adminPresenter.getUser().bindBidirectional(user);
-                changeContentPane(adminView.getView());
-            }else{
-                VoteView voteView = new VoteView();
-                this.votePresenter = (VotePresenter) voteView.getPresenter();
-                this.votePresenter.getUser().bindBidirectional(user);
-                changeContentPane(voteView.getView());
+        login();
+    }
+    
+    private void login(){
+        if(!accountCBox.getEditor().textProperty().get().isEmpty()){
+//            this.user.set(auth.findUser(accountCBox.getEditor().textProperty().get()));
+//            if(this.user.get().getPassword().equals(passwordField.textProperty().get())){
+//                if(this.getUser().get().getUsername().equals("admin")
+//                        && !passwordField.textProperty().get().isEmpty()){
+//                    AdminView adminView = new AdminView();
+//                    this.adminPresenter = (AdminPresenter) adminView.getPresenter();                
+//                    this.adminPresenter.getUser().bindBidirectional(user);
+//                    changeContentPane(adminView.getView());
+//                }else{
+//                    VoteView voteView = new VoteView();
+//                    this.votePresenter = (VotePresenter) voteView.getPresenter();
+//                    this.votePresenter.getUser().bindBidirectional(user);
+//                    changeContentPane(voteView.getView());
+//                }
+//            }else{
+//
+//            }
+            try{
+                this.user.set(auth.checkCredentials(accountCBox.getEditor().textProperty().get(), passwordField.getText()));
+
+                    if(this.getUser().get().getUsername().equals("admin")){
+                        AdminView adminView = new AdminView();
+                        this.adminPresenter = (AdminPresenter) adminView.getPresenter();                
+                        this.adminPresenter.getUser().bindBidirectional(user);
+                        changeContentPane(adminView.getView());
+                    }else{
+                        VoteView voteView = new VoteView();
+                        this.votePresenter = (VotePresenter) voteView.getPresenter();
+                        this.votePresenter.getUser().bindBidirectional(user);
+                        changeContentPane(voteView.getView());
+                    }
+
+            }catch(NullPointerException e){
+                incorrectPasswordLabel.setVisible(true);
             }
-        }else{
-            
+
         }
     }
     
@@ -94,7 +126,6 @@ public class LoginPresenter implements Initializable {
        accountCBox.setItems(userList); 
     }
     
-    @FXML
     private void mooose(ActionEvent event){
         accountCBox.setEditable(true);
     }

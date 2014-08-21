@@ -14,7 +14,7 @@ package creamylatte.business.services;
 import creamylatte.business.models.UserAccount;
 import java.util.List;
 import javax.inject.Inject;
-import javax.persistence.Query;
+import javax.persistence.NoResultException;
 
 
 /**
@@ -28,19 +28,19 @@ public class Authenticator {
     @Inject
     DBService service;
     
-    public List<UserAccount> findByUserName(String search){
-         List<UserAccount> searched;
-         Query query = service.getManager().createNamedQuery("UserAccount.findByUsername");
-         query.setParameter("username", "%" + search + "%");
-         searched = query.getResultList();
-         return searched;
+    public List<UserAccount> findByUserName(String search){         
+         return service.getManager().createNamedQuery("UserAccount.findByUsername")
+                 .setParameter("username", "%" + search + "%").getResultList();
+    }
+
+    public UserAccount checkCredentials(String username, String password){
+        try{
+            return (UserAccount)service.getManager().createNamedQuery("UserAccount.CheckCredentials")
+                .setParameter("username", username).setParameter("password", password).getSingleResult();
+        }catch(NoResultException e){
+            return null;
+        }
     }
     
-    public UserAccount findUser(String username){
-        UserAccount ua;
-        Query query = service.getManager().createNamedQuery("UserAccount.findByUsername");
-        query.setParameter("username", username);
-        ua = (UserAccount)query.getSingleResult();
-        return ua;
-    }
+    
 }

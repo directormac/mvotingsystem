@@ -34,19 +34,16 @@ public class CandidateService {
     
     public List<Candidate> search(String search){        
         List<Candidate> searched = new ArrayList<>();
-        Query queryCandidatesByFirstName = service.getManager().createNamedQuery("Candidate.findByFirstName");
-        Query queryCandidatesByLastName = service.getManager().createNamedQuery("Candidate.findByLastName");
-        queryCandidatesByFirstName.setParameter("firstName","%" + search + "%");
-        queryCandidatesByLastName.setParameter("lastName", "%" + search + "%");
-        List<Candidate> firstNameList = queryCandidatesByFirstName.getResultList();
-        List<Candidate> lastNameList = queryCandidatesByLastName.getResultList();
+        List<Candidate> firstNameList = service.getManager().createNamedQuery("Candidate.findByFirstName")
+                .setParameter("firstName","%" + search + "%").getResultList();
+        List<Candidate> lastNameList = service.getManager().createNamedQuery("Candidate.findByLastName")
+                .setParameter("lastName", "%" + search + "%").getResultList();
         firstNameList.stream().filter((candidate) -> (!searched.contains(candidate))).forEach((candidate) -> {
             searched.add(candidate);
         });
         lastNameList.stream().filter((candidate) -> (!searched.contains(candidate))).forEach((candidate) -> {
             searched.add(candidate);
         });        
-
         return searched;
     }
     
