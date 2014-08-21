@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="currentPane" prefHeight="610.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presenter.admin.voter.VoterPresenter">
     <children>
-      <VBox layoutX="20.0" layoutY="128.0" prefHeight="424.0" prefWidth="498.0" spacing="15.0">
+      <VBox layoutX="20.0" layoutY="128.0" prefHeight="424.0" prefWidth="544.0" spacing="15.0">
          <children>
             <HBox layoutX="43.0" layoutY="128.0" spacing="15.0">
                <children>
@@ -25,7 +25,7 @@
                   <Insets left="5.0" />
                </padding>
             </HBox>
-            <StackPane fx:id="stackPane" layoutX="43.0" layoutY="169.0" prefHeight="379.0" prefWidth="464.0" />
+            <StackPane fx:id="stackPane" layoutX="43.0" layoutY="169.0" prefHeight="379.0" prefWidth="493.0" />
          </children>
          <padding>
             <Insets top="5.0" />
@@ -39,21 +39,22 @@
          </children>
       </AnchorPane>
       <Label fx:id="dyanmicLabel" layoutX="578.0" layoutY="39.0" prefHeight="65.0" prefWidth="436.0" style="-fx-font-size: 40;" text="Voters Per Grade Level" />
-      <TextField fx:id="lastNameField" layoutX="174.0" layoutY="563.0" promptText="Last Name" visible="false">
+      <TextField fx:id="lastNameField" layoutX="174.0" layoutY="563.0" promptText="Last Name">
          <tooltip>
             <Tooltip text="Last Name" />
          </tooltip>
       </TextField>
-      <TextField fx:id="firstNameField" layoutX="20.0" layoutY="563.0" promptText="First Name" visible="false">
+      <TextField fx:id="firstNameField" layoutX="20.0" layoutY="563.0" promptText="First Name">
          <tooltip>
             <Tooltip text="First Name" />
          </tooltip>
       </TextField>
-      <ComboBox fx:id="gradeLevelCBox" layoutX="331.0" layoutY="563.0" prefHeight="25.0" prefWidth="128.0" promptText="Grade Level" visible="false">
+      <ComboBox fx:id="gradeLevelCBox" layoutX="331.0" layoutY="563.0" prefHeight="25.0" prefWidth="128.0" promptText="Grade Level">
          <tooltip>
             <Tooltip text="Grade Level" />
          </tooltip>
       </ComboBox>
-      <Button fx:id="saveButton" layoutX="468.0" layoutY="563.0" mnemonicParsing="false" onAction="#saveVoter" prefHeight="25.0" prefWidth="50.0" text="Save" visible="false" />
+      <Button fx:id="saveButton" layoutX="496.0" layoutY="563.0" mnemonicParsing="false" onAction="#saveVoter" prefHeight="25.0" prefWidth="50.0" text="Save" />
+      <Button fx:id="iSelectButton" layoutX="467.0" layoutY="563.0" mnemonicParsing="false" onAction="#selectPhoto" text="I" />
    </children>
 </AnchorPane>

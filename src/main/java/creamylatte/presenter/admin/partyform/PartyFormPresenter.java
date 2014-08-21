@@ -17,6 +17,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +29,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.PixelWriter;
 import javafx.scene.image.WritableImage;
@@ -56,7 +62,14 @@ public class PartyFormPresenter implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         candidatesList = FXCollections.observableArrayList();
-        
+        presidentSearchBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Candidate>() {
+            @Override
+            public void changed(ObservableValue<? extends Candidate> observable, Candidate oldValue, Candidate newValue) {
+                if(newValue != null)
+                presidentImageView.setImage(loadImage(newValue.getImage().getData()));
+            }
+        });
+                
     }    
     
     private WritableImage loadImage(byte[] imageInByte){
@@ -106,5 +119,11 @@ public class PartyFormPresenter implements Initializable {
         
     }
     
-    
+    private ChangeListener<Candidate> comboBoxListener(ComboBox cb){
+        return (final ObservableValue<? extends Candidate> observableValue, Candidate oldValue, Candidate newValue) -> {
+            if(newValue != null){
+                
+            }
+        };
+    }
 }

@@ -11,13 +11,20 @@
 package creamylatte.presenter.admin.voter;
 
 import creamylatte.business.models.Candidate;
+import creamylatte.business.models.ImageWrapper;
 import creamylatte.business.models.UserAccount;
 import creamylatte.business.services.CandidateService;
 import creamylatte.presenter.admin.voterform.VoterFormPresenter;
 import creamylatte.presenter.admin.voterform.VoterFormView;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -34,7 +41,9 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.*;
 import javafx.scene.layout.*;
+import javafx.stage.FileChooser;
 import javafx.util.Callback;
+import javax.imageio.ImageIO;
 import javax.inject.Inject;
 
 /**
@@ -83,9 +92,10 @@ public class VoterPresenter implements Initializable {
     @FXML
     private ComboBox<String> gradeLevelCBox;
     @FXML
-    private Button saveButton;
+    private Button saveButton,iSelectButton;
     
-    
+    File file;
+    BufferedImage bufferedImage;
 
     /**
      * Initializes the controller class.
@@ -159,6 +169,58 @@ public class VoterPresenter implements Initializable {
             enableForm();
         }
     }
+    
+    @FXML
+    private void selectPhoto(ActionEvent event){
+        FileChooser fileChooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image files (*.png)(*.jpg)", "*.jpg");
+        fileChooser.getExtensionFilters().add(extFilter);
+        file = fileChooser.showOpenDialog(iSelectButton.getScene().getWindow());
+
+    }
+    
+        @FXML
+    private void saveVoter(ActionEvent event) {
+        Candidate c;
+        if(this.voterTable.getSelectionModel().getSelectedItem() == null){
+            c = new Candidate();
+        }else{
+            c = voterTable.getSelectionModel().getSelectedItem();
+        }        
+        c.setFirstName(firstNameField.textProperty().get().toLowerCase());
+        c.setLastName(lastNameField.textProperty().get().toLowerCase());
+        c.setGradeLevel(gradeLevelCBox.getSelectionModel().getSelectedItem());
+        UserAccount ua;
+        if(c.getAccount() == null){
+            ua = new UserAccount();
+            ua.setUsername(c.getFirstName()+","+c.getLastName());
+            ua.setPassword("" + (int)(Math.random() * 1001));
+            System.out.println(ua.getPassword());
+            c.setAccount(ua);
+        }
+        
+        try {
+            bufferedImage = ImageIO.read(file);
+        } catch (IOException ex) {
+            Logger.getLogger(VoterPresenter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            ImageIO.write(bufferedImage, "jpg", baos);
+        } catch (IOException ex) {
+            Logger.getLogger(VoterPresenter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        ImageWrapper image = new ImageWrapper();            
+        image.setImageName(c.getFirstName()+c.getLastName() + ".jpg");
+        image.setData(baos.toByteArray()); 
+        c.setImage(image);  
+        service.save(c);
+        loadAllVoters();
+        prepareChart();
+        disableForm();
+    }
+    
+    
     
     
     //Prepare the table and columns
@@ -240,32 +302,7 @@ public class VoterPresenter implements Initializable {
         enableForm();
     }
 
-    @FXML
-    private void saveVoter(ActionEvent event) {
-        Candidate c;
-        if(this.voterTable.getSelectionModel().getSelectedItem() == null){
-            c = new Candidate();
-        }else{
-            c = voterTable.getSelectionModel().getSelectedItem();
-        }        
-        c.setFirstName(firstNameField.textProperty().get().toLowerCase());
-        c.setLastName(lastNameField.textProperty().get().toLowerCase());
-        c.setGradeLevel(gradeLevelCBox.getSelectionModel().getSelectedItem());
-        UserAccount ua;
-        if(c.getAccount() == null){
-            ua = new UserAccount();
-            ua.setUsername(c.getFirstName()+","+c.getLastName());
-            ua.setPassword("" + (int)(Math.random() * 1001));
-            System.out.println(ua.getPassword());
-            c.setAccount(ua);
-        }
-        service.save(c);
-        loadAllVoters();
-        prepareChart();
-        disableForm();
-        
-        
-    }
+
     
     private void enableForm(){
         firstNameField.setVisible(true);
