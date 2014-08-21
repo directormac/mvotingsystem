@@ -7,10 +7,8 @@
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presentation.login;
+package creamylatte.presenter.login;
 
-import creamylatte.business.models.UserAccount;
-import creamylatte.business.services.Authenticator;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
@@ -27,6 +25,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javax.inject.Inject;
+import creamylatte.business.models.UserAccount;
+import creamylatte.business.services.Authenticator;
+import creamylatte.presenter.admin.AdminPresenter;
+import creamylatte.presenter.admin.AdminView;
+import creamylatte.presenter.vote.VotePresenter;
+import creamylatte.presenter.vote.VoteView;
 
 
 /**
@@ -49,7 +53,8 @@ public class LoginPresenter implements Initializable {
     @Inject
     Authenticator auth;
     
-
+    VotePresenter votePresenter;
+    AdminPresenter adminPresenter;
     ObservableList<UserAccount> userList;
     private ObjectProperty<UserAccount> user;
     /**
@@ -65,22 +70,22 @@ public class LoginPresenter implements Initializable {
 
     @FXML
     private void loginAccount(ActionEvent event) {          
-//        this.user.set(auth.findUser(accountCBox.getEditor().textProperty().get()));
-//        if(this.user.get().getPassword().equals(passwordField.textProperty().get())){
-//            if(this.getUser().get().getUsername().equals("admin")){
-//                AdminView adminView = new AdminView();
-//                this.adminPresenter = (AdminPresenter) adminView.getPresenter();                
-//                this.adminPresenter.getUser().bindBidirectional(user);
-//                changeContentPane(adminView.getView());
-//            }else{
-//                VoteView voteView = new VoteView();
-//                this.votePresenter = (VotePresenter) voteView.getPresenter();
-//                this.votePresenter.getUser().bindBidirectional(user);
-//                changeContentPane(voteView.getView());
-//            }
-//        }else{
-//            
-//        }
+        this.user.set(auth.findUser(accountCBox.getEditor().textProperty().get()));
+        if(this.user.get().getPassword().equals(passwordField.textProperty().get())){
+            if(this.getUser().get().getUsername().equals("admin")){
+                AdminView adminView = new AdminView();
+                this.adminPresenter = (AdminPresenter) adminView.getPresenter();                
+                this.adminPresenter.getUser().bindBidirectional(user);
+                changeContentPane(adminView.getView());
+            }else{
+                VoteView voteView = new VoteView();
+                this.votePresenter = (VotePresenter) voteView.getPresenter();
+                this.votePresenter.getUser().bindBidirectional(user);
+                changeContentPane(voteView.getView());
+            }
+        }else{
+            
+        }
     }
     
     @FXML

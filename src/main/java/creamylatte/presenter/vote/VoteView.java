@@ -7,7 +7,7 @@
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presentation.login;
+package creamylatte.presenter.vote;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -17,6 +17,6 @@ import com.airhacks.afterburner.views.FXMLView;
  * This class extends FXMLView from afterburner.fx that handles the loading of
  * FXML, Presenter and CSS(if it exist in the certain package).
  */
-public class LoginView extends FXMLView{
+public class VoteView extends FXMLView{
     
 }

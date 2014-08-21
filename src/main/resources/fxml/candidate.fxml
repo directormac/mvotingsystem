@@ -7,6 +7,6 @@
 <?import javafx.scene.layout.*?>
 
 
-<AnchorPane id="AnchorPane" fx:id="currentPane" prefHeight="615.0" prefWidth="1136.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="creamylatte.presentation.admin.candidate.CandidatePresenter">
+<AnchorPane id="AnchorPane" minHeight="610.0" minWidth="1136.0" prefHeight="610.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presenter.candidate.CandidatePresenter">
     
 </AnchorPane>
