@@ -1,8 +1,21 @@
-igniter.fx
+Voting System
 ===========
+<h4>Project by:</h4>
+<ul>
+<li>Almiradz Mling
+<li>Eduard John Madriaga
+<li>Rodz Aguilar Piang
+<li>Mark Kendrick Asena
+</ul>
+<hr>
+<h4>Description</h4>
+<p>This project is built on Netbeans 8.0 and Java 8</p>
+<h5>Libraries as of <small>8/12/2014</small></h5>
+<ul>
+<li>Afterburner.fx 1.5.1
+<li>PostgreSQL Driver 9.3
+<li>Java Persistence API 2.1
+</ul>
+<hr>
 
-0. Use recent JDK 8 (JavaFX is already in the classpath). You can use the build.sh to temporarily set the JAVA_HOME in the script
-1. Build the project with mvn clean install
-2. Start the application with java -jar ./target/[project.artifactId]-app.jar
-
-See also: [http://afterburner.adam-bien.com](http://afterburner.adam-bien.com)
+Contact: [http://facebook.com/markasena](http://facebook.com/markasena)
