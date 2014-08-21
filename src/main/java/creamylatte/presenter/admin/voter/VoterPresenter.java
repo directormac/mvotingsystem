@@ -155,7 +155,7 @@ public class VoterPresenter implements Initializable {
             firstNameField.setText(this.voterTable.getSelectionModel().getSelectedItem().getFirstName());
             lastNameField.setText(this.voterTable.getSelectionModel().getSelectedItem().getLastName());
             if(!this.voterTable.getSelectionModel().getSelectedItem().getGradeLevel().equals(""))
-            gradeLevelCBox.getSelectionModel().select(this.voterTable.getSelectionModel().getSelectedItem().getGradeLevel());
+                gradeLevelCBox.getSelectionModel().select(this.voterTable.getSelectionModel().getSelectedItem().getGradeLevel());
             enableForm();
         }
     }

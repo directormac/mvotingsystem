@@ -48,9 +48,7 @@ public class CandidateService {
     }
     
     public List<Candidate> searchByGradeLevel(String gradeLevel){
-        Query query = service.getManager().createNamedQuery("Candidate.findByGradeLevel");
-        query.setParameter("gradeLevel", gradeLevel);
-        return query.getResultList();
+        return service.getManager().createNamedQuery("Candidate.findByGradeLevel").setParameter("gradeLevel", gradeLevel).getResultList();
     }
     
     

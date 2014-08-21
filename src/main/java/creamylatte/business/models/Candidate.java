@@ -162,4 +162,9 @@ public class Candidate implements Serializable {
         this.account.set(account);
     }
     
+    @Override
+    public String toString(){
+        return this.getLastName() + " , " + getFirstName();
+    }
+    
 }

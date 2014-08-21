@@ -7,7 +7,7 @@
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presenter.admin.candidate;
+package creamylatte.presenter.admin.candidateprofile;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,15 +18,14 @@ import javafx.fxml.Initializable;
  *
  * @author Hadouken
  */
-public class CandidatePresenter implements Initializable {
+public class CandidateProfilePresenter implements Initializable {
 
-
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-    
-    
-    
     
 }

@@ -73,5 +73,8 @@ public class Party implements Serializable {
         this.candidates.set(list);
     }
     
-    
+    @Override
+    public String toString(){
+        return this.getName();
+    }
 }
