@@ -9,10 +9,17 @@
 
 package creamylatte.presenter.login;
 
+import creamylatte.business.models.UserAccount;
+import creamylatte.business.services.Authenticator;
+import creamylatte.presenter.admin.admin.AdminPresenter;
+import creamylatte.presenter.admin.admin.AdminView;
+import creamylatte.presenter.vote.vote.VotePresenter;
+import creamylatte.presenter.vote.vote.VoteView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,17 +29,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javax.inject.Inject;
-import creamylatte.business.models.UserAccount;
-import creamylatte.business.services.Authenticator;
-import creamylatte.presenter.admin.admin.AdminPresenter;
-import creamylatte.presenter.admin.admin.AdminView;
-import creamylatte.presenter.vote.vote.VotePresenter;
-import creamylatte.presenter.vote.vote.VoteView;
-import javafx.beans.value.ObservableValue;
-import javafx.scene.control.Label;
 
 
 /**
@@ -49,7 +50,6 @@ public class LoginPresenter implements Initializable {
     private Button loginButton;
     @FXML
     private TextField passwordField;
-    @FXML
     private AnchorPane currentPane;
     
     @Inject
@@ -80,24 +80,7 @@ public class LoginPresenter implements Initializable {
     }
     
     private void login(){
-        if(!accountCBox.getEditor().textProperty().get().isEmpty()){
-//            this.user.set(auth.findUser(accountCBox.getEditor().textProperty().get()));
-//            if(this.user.get().getPassword().equals(passwordField.textProperty().get())){
-//                if(this.getUser().get().getUsername().equals("admin")
-//                        && !passwordField.textProperty().get().isEmpty()){
-//                    AdminView adminView = new AdminView();
-//                    this.adminPresenter = (AdminPresenter) adminView.getPresenter();                
-//                    this.adminPresenter.getUser().bindBidirectional(user);
-//                    changeContentPane(adminView.getView());
-//                }else{
-//                    VoteView voteView = new VoteView();
-//                    this.votePresenter = (VotePresenter) voteView.getPresenter();
-//                    this.votePresenter.getUser().bindBidirectional(user);
-//                    changeContentPane(voteView.getView());
-//                }
-//            }else{
-//
-//            }
+        if(!accountCBox.getEditor().textProperty().get().isEmpty()){          
             try{
                 this.user.set(auth.checkCredentials(accountCBox.getEditor().textProperty().get(), passwordField.getText()));
 
@@ -138,9 +121,8 @@ public class LoginPresenter implements Initializable {
     }
     
     public void changeContentPane(Parent parent){
-        AnchorPane contentPane = (AnchorPane)currentPane.getParent();
-        contentPane.getChildren().clear();
-        contentPane.getChildren().add(parent);
+        ScrollPane contentPane = (ScrollPane)currentPane.getParent().getParent();
+        contentPane.setContent(parent);
         
     }
     

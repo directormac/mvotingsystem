@@ -13,7 +13,6 @@ package creamylatte.presenter.main;
 import creamylatte.business.models.UserAccount;
 import creamylatte.business.services.Authenticator;
 import creamylatte.business.services.CandidateService;
-import creamylatte.presenter.admin.partylist.PartyListPresenter;
 import creamylatte.presenter.admin.partylist.PartyListView;
 import creamylatte.presenter.admin.voter.VoterPresenter;
 import creamylatte.presenter.admin.voter.VoterView;
@@ -32,6 +31,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
 import javax.inject.Inject;
 
@@ -47,7 +47,8 @@ public class MainPresenter implements Initializable {
     @FXML
     private MenuBar mainMenu;
     @FXML
-    private AnchorPane contentPane;
+    private ScrollPane contentPane;
+    
     
     private ObjectProperty<UserAccount> user;
     private ObservableList<UserAccount> userList;
@@ -60,8 +61,6 @@ public class MainPresenter implements Initializable {
     private Authenticator auth;
     @FXML
     private MenuItem partylistMenu;
-    @FXML
-    private Button closeButton;
     
     
     @Override
@@ -75,16 +74,15 @@ public class MainPresenter implements Initializable {
         LoginView loginView = new LoginView();
         this.loginPresenter = (LoginPresenter) loginView.getPresenter();
         this.user.bindBidirectional(this.loginPresenter.getUser());
-        contentPane.getChildren().clear();
-        contentPane.getChildren().add(loginView.getView());
+        contentPane.setContent(loginView.getView());
+        
     }    
 
     @FXML
     private void searchVoter(ActionEvent event) {
         VoterView voterView = new VoterView();
-        voterPresenter = (VoterPresenter) voterView.getPresenter();
-        contentPane.getChildren().clear();
-        contentPane.getChildren().add(voterView.getView());
+        voterPresenter = (VoterPresenter) voterView.getPresenter();        
+        contentPane.setContent(voterView.getView());
     }
     
     
@@ -100,12 +98,10 @@ public class MainPresenter implements Initializable {
     }
 
     @FXML
-    private void searchPartylist(ActionEvent event) {
-        contentPane.getChildren().clear();
-        contentPane.getChildren().add(new PartyListView().getView());        
+    private void searchPartylist(ActionEvent event) {        
+        contentPane.setContent(new PartyListView().getView());
     }
 
-    @FXML
     private void closeStage(ActionEvent event) {
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }

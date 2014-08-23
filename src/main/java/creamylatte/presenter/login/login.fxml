@@ -6,11 +6,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="currentPane" minHeight="610.0" minWidth="1136.0" prefHeight="610.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presenter.login.LoginPresenter">
-   <children>
-      <ComboBox fx:id="accountCBox" editable="true" layoutX="455.0" layoutY="254.0" onShown="#comboAction" prefHeight="25.0" prefWidth="227.0" />
-      <PasswordField fx:id="passwordField" layoutX="455.0" layoutY="293.0" prefHeight="25.0" prefWidth="227.0" />
-      <Button fx:id="loginButton" layoutX="456.0" layoutY="332.0" mnemonicParsing="false" onAction="#loginAccount" prefHeight="25.0" prefWidth="227.0" text="LOGIN" />
-      <Label fx:id="incorrectPasswordLabel" layoutX="517.0" layoutY="368.0" style="-fx-text-fill: red;" text="Incorrect Password!" visible="false" />
-   </children>    
-</AnchorPane>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presenter.login.LoginPresenter">
+   <center>
+      <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <VBox alignment="CENTER" fillWidth="false" layoutX="149.0" layoutY="112.0" prefHeight="177.0" prefWidth="303.0" spacing="10.0">
+               <children>
+                  <ComboBox fx:id="accountCBox" editable="true" layoutX="174.0" layoutY="46.0" onShown="#comboAction" prefHeight="25.0" prefWidth="227.0" />
+                  <PasswordField fx:id="passwordField" layoutX="174.0" layoutY="84.0" prefHeight="25.0" prefWidth="227.0" />
+                  <Button fx:id="loginButton" layoutX="174.0" layoutY="125.0" mnemonicParsing="false" onAction="#loginAccount" prefHeight="25.0" prefWidth="227.0" text="LOGIN" />
+                  <Label fx:id="incorrectPasswordLabel" layoutX="248.0" layoutY="172.0" style="-fx-text-fill: red;" text="Incorrect Password!" />
+               </children>
+            </VBox>
+         </children>
+      </Pane>
+   </center>
+</BorderPane>
