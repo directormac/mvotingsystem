@@ -83,7 +83,6 @@ public class LoginPresenter implements Initializable {
         if(!accountCBox.getEditor().textProperty().get().isEmpty()){          
             try{
                 this.user.set(auth.checkCredentials(accountCBox.getEditor().textProperty().get(), passwordField.getText()));
-
                     if(this.getUser().get().getUsername().equals("admin")){
                         AdminView adminView = new AdminView();
                         this.adminPresenter = (AdminPresenter) adminView.getPresenter();                
@@ -95,11 +94,9 @@ public class LoginPresenter implements Initializable {
                         this.votePresenter.getUser().bindBidirectional(user);
                         changeContentPane(voteView.getView());
                     }
-
             }catch(NullPointerException e){
                 incorrectPasswordLabel.setVisible(true);
             }
-
         }
     }
     
@@ -121,9 +118,9 @@ public class LoginPresenter implements Initializable {
     }
     
     public void changeContentPane(Parent parent){
-        ScrollPane contentPane = (ScrollPane)currentPane.getParent().getParent();
-        contentPane.setContent(parent);
-        
+        AnchorPane mainPane = (AnchorPane) currentPane.getParent();
+        mainPane.getChildren().clear();
+        mainPane.getChildren().add(parent);
     }
     
 }

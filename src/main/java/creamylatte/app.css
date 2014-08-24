@@ -253,7 +253,7 @@
 
 .menu-item .label {
     -fx-padding: 0em 1.333332em 0em 0em;
-    -fx-text-fill: -test-color;
+    -fx-text-fill: black;
     -fx-font-size: 11pt;
 }
 

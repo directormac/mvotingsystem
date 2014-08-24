@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1136.0" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presenter.main.MainPresenter">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="640.0" minWidth="1136.0" styleClass="background" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presenter.main.MainPresenter">
    <top>
       <MenuBar fx:id="mainMenu" visible="false" BorderPane.alignment="CENTER">
          <menus>
@@ -29,6 +30,9 @@
       </MenuBar>
    </top>
    <center>
-      <ScrollPane fx:id="contentPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <ScrollPane fx:id="contentPane" BorderPane.alignment="CENTER">
+         <content>
+            <AnchorPane fx:id="mainPane" prefHeight="613.0" prefWidth="1134.0" />
+         </content></ScrollPane>
    </center>
 </BorderPane>

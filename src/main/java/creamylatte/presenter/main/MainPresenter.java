@@ -33,6 +33,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
 import javax.inject.Inject;
 
 
@@ -61,7 +62,8 @@ public class MainPresenter implements Initializable {
     private Authenticator auth;
     @FXML
     private MenuItem partylistMenu;
-    
+    @FXML
+    private AnchorPane mainPane;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -72,9 +74,12 @@ public class MainPresenter implements Initializable {
             }
         });
         LoginView loginView = new LoginView();
-        this.loginPresenter = (LoginPresenter) loginView.getPresenter();
-        this.user.bindBidirectional(this.loginPresenter.getUser());
-        contentPane.setContent(loginView.getView());
+//        this.loginPresenter = (LoginPresenter) loginView.getPresenter();
+//        this.user.bindBidirectional(this.loginPresenter.getUser());
+//        contentPane.setContent(loginView.getView());          
+        mainPane.getChildren().clear();
+        AnchorPane.setTopAnchor(loginView.getView(), 10.0);        
+        mainPane.getChildren().add(loginView.getView());
         
     }    
 
@@ -83,8 +88,7 @@ public class MainPresenter implements Initializable {
         VoterView voterView = new VoterView();
         voterPresenter = (VoterPresenter) voterView.getPresenter();        
         contentPane.setContent(voterView.getView());
-    }
-    
+    }    
     
     /**
      * @return the currentUser

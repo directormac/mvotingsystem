@@ -14,7 +14,7 @@ import creamylatte.business.models.Candidate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
-import javax.persistence.Query;
+
 
 
 /**

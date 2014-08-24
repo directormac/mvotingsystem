@@ -77,4 +77,6 @@ public class Party implements Serializable {
     public String toString(){
         return this.getName();
     }
+    
+    
 }
