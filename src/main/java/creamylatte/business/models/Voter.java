@@ -20,8 +20,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -31,6 +32,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "voter")
+@NamedQueries({
+@NamedQuery(name = "Voter.findAll", query = "SELECT v FROM Voter v")})
 public class Voter implements Serializable {
     private IntegerProperty id;
     private StringProperty firstName;    
