@@ -8,7 +8,7 @@
  */
 
 
-package creamylatte.presenter.main;
+package creamylatte.presentation.main;
 
 import com.airhacks.afterburner.views.FXMLView;
 

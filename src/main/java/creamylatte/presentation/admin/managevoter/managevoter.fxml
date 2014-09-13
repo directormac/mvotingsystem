@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="936.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managevoter.ManageVoterPresenter">
+   <top>
+      <HBox prefHeight="71.0" prefWidth="900.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="10.0" left="30.0" right="20.0" top="10.0" />
+         </padding>
+         <children>
+            <Button fx:id="searchButton" mnemonicParsing="false" onAction="#searchButtonAction" prefHeight="51.0" prefWidth="134.0" text="Search" />
+            <Button fx:id="viewAllButton" mnemonicParsing="false" onAction="#viewAllButton" prefHeight="51.0" prefWidth="134.0" text="View All" />
+            <Button fx:id="addNewButton" mnemonicParsing="false" onAction="#addNewButtonAction" prefHeight="51.0" prefWidth="134.0" text="Add new" />
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <AnchorPane fx:id="centerPane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>

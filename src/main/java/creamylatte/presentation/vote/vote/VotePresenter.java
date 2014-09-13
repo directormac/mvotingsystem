@@ -7,7 +7,7 @@
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presenter.vote.vote;
+package creamylatte.presentation.vote.vote;
 
 import java.net.URL;
 import java.util.ResourceBundle;

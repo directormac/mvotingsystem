@@ -7,16 +7,20 @@
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presenter.login;
+package creamylatte.presentation.login;
 
 import creamylatte.business.models.UserAccount;
 import creamylatte.business.services.Authenticator;
+import creamylatte.presentation.admin.AdminPresenter;
+import creamylatte.presentation.admin.AdminView;
 
-import creamylatte.presenter.vote.vote.VotePresenter;
+import creamylatte.presentation.vote.vote.VotePresenter;
+import creamylatte.presentation.vote.vote.VoteView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,7 +34,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javax.inject.Inject;
 
 
@@ -55,11 +58,10 @@ public class LoginPresenter implements Initializable {
     Authenticator auth;
     
     VotePresenter votePresenter;
-
+    AdminPresenter adminPresenter;
     ObservableList<UserAccount> userList;
     private ObjectProperty<UserAccount> user;
-    
-    BorderPane mainPane;
+
     
     @FXML
     private Label incorrectPasswordLabel;
@@ -73,6 +75,7 @@ public class LoginPresenter implements Initializable {
                 incorrectPasswordLabel.setVisible(false);
             }
         });
+
     }    
 
     @FXML
@@ -81,26 +84,21 @@ public class LoginPresenter implements Initializable {
     }
     
     private void login(){
-//        if(!accountCBox.getEditor().textProperty().get().isEmpty()){          
-//            try{
-//                this.user.set(auth.checkCredentials(accountCBox.getEditor().textProperty().get(), passwordField.getText()));
-//                System.out.println("username:" + this.user.get().getUsername());
-//                    if(this.getUser().get().getUsername().equals("admin")){
-//                        AdminView adminView = new AdminView();
-//                        this.adminPresenter = (AdminPresenter) adminView.getPresenter();                
-//                        this.adminPresenter.getUser().bindBidirectional(user);
-//                        mainPane = (BorderPane)currentPane.getParent();
-//                        mainPane.setCenter(adminView.getView());
-//                    }else{
-//                        VoteView voteView = new VoteView();
-//                        this.votePresenter = (VotePresenter) voteView.getPresenter();
-//                        this.votePresenter.getUser().bindBidirectional(user);
-//                        changeContentPane(voteView.getView());
-//                    }
-//            }catch(NullPointerException e){
-//                incorrectPasswordLabel.setVisible(true);                
-//            }
-//        }
+        if(!accountCBox.getEditor().textProperty().get().isEmpty()){          
+            try{
+                this.user.set(auth.checkCredentials(accountCBox.getEditor().textProperty().get(), passwordField.getText()));
+                System.out.println("username:" + this.user.get().getUsername());
+                    if(this.getUser().get().getUsername().equals("admin")){
+                        AdminView adminView = new AdminView();
+                        adminPresenter = (AdminPresenter)adminView.getPresenter();
+                        changeContentPane(adminView.getView());
+                    }else{
+                        changeContentPane(new VoteView().getView());
+                    }
+            }catch(NullPointerException e){
+                incorrectPasswordLabel.setVisible(true);                
+            }
+        }
     }
     
     @FXML

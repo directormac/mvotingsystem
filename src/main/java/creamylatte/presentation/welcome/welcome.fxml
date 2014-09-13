@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="currentPane" prefHeight="610.00" prefWidth="1136.0" stylesheets="@../../app.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.welcome.WelcomePresenter">
+   <children>
+      <Label id="header" layoutX="480.0" layoutY="191.0" prefHeight="62.0" prefWidth="176.0" text="Welcome" />
+      <Hyperlink layoutX="432.0" layoutY="282.0" onAction="#goToLogin" text="Click here to login" />
+      <Hyperlink layoutX="631.0" layoutY="282.0" onAction="#goToResults" text="Blind results" />
+   </children>
+</AnchorPane>
