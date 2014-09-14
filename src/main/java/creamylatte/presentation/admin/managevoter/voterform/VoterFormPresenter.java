@@ -45,7 +45,10 @@ public class VoterFormPresenter implements Initializable {
     private TextField firstNameField;
     @FXML
     private TextField lastNameField;
-
+    
+    @FXML
+    private AnchorPane currentPane;
+    
     private ObjectProperty<Voter> selectedVoter;
     
     SearchVoterPresenter searchVoterPresenter;
@@ -83,17 +86,22 @@ public class VoterFormPresenter implements Initializable {
         vs.save(voter);
         SearchVoterView searchVoterView = new SearchVoterView();
         searchVoterPresenter = (SearchVoterPresenter) searchVoterView.getPresenter();
-        searchVoterPresenter.getSelecterVoter().bindBidirectional(selectedVoter);
-        AnchorPane parent = 
+        AnchorPane parent = (AnchorPane) currentPane.getParent();
+        parent.getChildren().clear();
+        parent.getChildren().add(searchVoterView.getView());
     }
-    
-    
     
     @FXML
     private void editButtonAction(ActionEvent event) {
+        AnchorPane parent = (AnchorPane) currentPane.getParent().getParent();
+        parent.getChildren().clear();
+        parent.getChildren().add(new VoterFormView().getView());
     }
+    
+    
     @FXML
     private void removeButtonAction(ActionEvent event) {
+        vs.remove(this.selectedVoter.get());
     }
     
     private ChangeListener<Voter> selectedVoterListener(){

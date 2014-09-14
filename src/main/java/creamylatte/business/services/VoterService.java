@@ -38,6 +38,12 @@ public class VoterService {
         service.getManager().persist(voter);
         service.getTransaction().commit();
     }
+
+    public void remove(Voter voter) {
+        service.getTransaction().begin();
+        service.getManager().remove(voter);
+        service.getTransaction().commit();
+    }
     
     
     

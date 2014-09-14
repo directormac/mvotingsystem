@@ -23,6 +23,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javax.inject.Inject;
@@ -42,7 +43,7 @@ public class SearchVoterPresenter implements Initializable {
 
     VoterFormPresenter voterFormPresenter;
     ObservableList<Voter> voterList;
-    private ObjectProperty<Voter> selecterVoter;
+    private ObjectProperty<Voter> selectedVoter;
     
     
     @Inject
@@ -60,9 +61,19 @@ public class SearchVoterPresenter implements Initializable {
         voterFormPresenter.getEditButton().setVisible(true);
         voterFormPresenter.getRemoveButton().setVisible(true);
         voterFormPresenter.getSaveButton().setText("Update");        
+        voterFormPresenter.getSelectedVoter().bind(selectedVoter);
+        voterFormPresenter.getSaveButton().setVisible(false);
+        voterFormPane.getChildren().add(voterFormView.getView());        
+        voterListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        voterListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voter>() {
+            @Override
+            public void changed(ObservableValue<? extends Voter> observable, Voter oldValue, Voter newValue) {
+                selectedVoter.set(voterListView.getSelectionModel().getSelectedItem());
+                voterFormPresenter.getSelectedVoter().set(newValue);
+            }
+        });
         
-        prepareListView();
-        
+        prepareListView();        
         searchVoter.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -73,7 +84,10 @@ public class SearchVoterPresenter implements Initializable {
                 }
             }
         });    
-    
+        
+        
+        
+        
     }   
     
    private void prepareListView(){
@@ -81,12 +95,12 @@ public class SearchVoterPresenter implements Initializable {
        voterListView.setItems(voterList);
    }
 
-    public ObjectProperty<Voter> getSelecterVoter() {
-        return selecterVoter;
+    public ObjectProperty<Voter> getSelectedVoter() {
+        return selectedVoter;
     }
 
-    public void setSelecterVoter(ObjectProperty<Voter> selecterVoter) {
-        this.selecterVoter = selecterVoter;
+    public void setSelectedVoter(ObjectProperty<Voter> selecterVoter) {
+        this.selectedVoter = selecterVoter;
     }
     
 }
