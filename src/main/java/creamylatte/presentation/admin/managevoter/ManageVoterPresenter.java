@@ -10,6 +10,7 @@
 package creamylatte.presentation.admin.managevoter;
 
 import creamylatte.presentation.admin.managevoter.searchvoter.SearchVoterView;
+import creamylatte.presentation.admin.managevoter.voterform.VoterFormView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -57,8 +58,7 @@ public class ManageVoterPresenter implements Initializable {
 
     @FXML
     private void addNewButtonAction(ActionEvent event) {
-        
-        
+        changePane(new VoterFormView().getView());
     }
     
     public void changePane(Parent parent){

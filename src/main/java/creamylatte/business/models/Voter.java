@@ -33,7 +33,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "voter")
 @NamedQueries({
-@NamedQuery(name = "Voter.findAll", query = "SELECT v FROM Voter v")})
+@NamedQuery(name = "Voter.findAll", query = "SELECT v FROM Voter v"),
+    @NamedQuery(name = "Voter.find", query = "SELECT V FROM Voter V WHERE v.firstName = :firstName OR v.lastName = :lastName")})
 public class Voter implements Serializable {
     private IntegerProperty id;
     private StringProperty firstName;    
