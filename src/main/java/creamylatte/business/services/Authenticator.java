@@ -38,6 +38,7 @@ public class Authenticator {
             return (UserAccount)service.getManager().createNamedQuery("UserAccount.CheckCredentials")
                 .setParameter("username", username).setParameter("password", password).getSingleResult();
         }catch(NoResultException e){
+            System.out.println("Something went wrong");
             return null;
         }
     }

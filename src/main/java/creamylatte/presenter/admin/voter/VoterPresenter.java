@@ -11,20 +11,16 @@
 package creamylatte.presenter.admin.voter;
 
 import creamylatte.business.models.Candidate;
-import creamylatte.business.models.ImageWrapper;
 import creamylatte.business.models.UserAccount;
+import creamylatte.business.models.Voter;
 import creamylatte.business.services.CandidateService;
 import creamylatte.presenter.admin.voterform.VoterFormPresenter;
 import creamylatte.presenter.admin.voterform.VoterFormView;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -36,14 +32,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.*;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.*;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.stage.FileChooser;
+import javafx.scene.paint.Color;
 import javafx.util.Callback;
-import javax.imageio.ImageIO;
 import javax.inject.Inject;
 
 /**
@@ -61,13 +58,13 @@ public class VoterPresenter implements Initializable {
     private AnchorPane currentPane;
     @FXML
     private StackPane stackPane;    
-    private TableView<Candidate> voterTable;  
+    private TableView<Voter> voterTable;  
     
     ProgressIndicator progressIndicator;    
     Region veil;    
-    Task<ObservableList<Candidate>> task;
-    ObservableList<Candidate> candidates;
-    ObjectProperty<Candidate> selectedCandidate;    
+    Task<ObservableList<Voter>> task;
+    ObservableList<Voter> candidates;
+    ObjectProperty<Voter> selectedCandidate;    
     VoterFormPresenter voterFormPresenter;
     VoterFormView voterFormView;
     StringProperty label;
@@ -92,11 +89,15 @@ public class VoterPresenter implements Initializable {
     @FXML
     private ComboBox<String> gradeLevelCBox;
     @FXML
-    private Button saveButton,iSelectButton;
+    private Button saveButton;
+    
+    private double grade7,grade8,grade9,grade10;
     
     File file;
     BufferedImage bufferedImage;
 
+    PieChart.Data pdGrade7,pdGrade8,pdGrade9,pdGrade10;
+    
     /**
      * Initializes the controller class.
      * @param url
@@ -104,12 +105,19 @@ public class VoterPresenter implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        pdGrade7 = new PieChart.Data("Grade 7", grade7);
+        pdGrade8 = new PieChart.Data("Grade 8", grade8);
+        pdGrade9 = new PieChart.Data("Grade 9", grade9);
+        pdGrade10 = new PieChart.Data("Grade 10", grade10);
+
         this.label = new SimpleStringProperty();
         this.candidates = FXCollections.observableArrayList();
-        this.selectedCandidate = new SimpleObjectProperty<>(new Candidate());              
+        
+        
+        this.selectedCandidate = new SimpleObjectProperty<>(new Voter());              
         prepareTable();        
+        loadAllVoters();   
         prepareChart();
-        loadAllVoters();    
         rebindProperty();           
         searchField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             if(newValue.isEmpty()){
@@ -120,16 +128,36 @@ public class VoterPresenter implements Initializable {
         this.firstNameField.textProperty().addListener(textFieldListeners(this.firstNameField));        
         this.lastNameField.textProperty().addListener(textFieldListeners(this.lastNameField)); 
         
+                 final Label caption = new Label("");
+        caption.setTextFill(Color.DARKORANGE);
+        caption.setStyle("-fx-font: 24 arial;");
+        for (final PieChart.Data data : voterChart.getData()) {
+            data.getNode().addEventHandler(MouseEvent.MOUSE_PRESSED,
+                new EventHandler<MouseEvent>() {
+                    @Override public void handle(MouseEvent e) {
+                        caption.setTranslateX(e.getSceneX());
+                        caption.setTranslateY(e.getSceneY());
+                        caption.setText(String.valueOf(data.getPieValue()) + "%");
+                     }
+                });
+        }
+        
+        voterTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voter>() {
+            @Override
+            public void changed(ObservableValue<? extends Voter> observable, Voter oldValue, Voter newValue) {
+                if(newValue == null){
+                    disableForm();
+                }
+            }
+        });
     }   
 
     private void prepareChart(){
-         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(
-                         new PieChart.Data("Grade 7", service.searchByGradeLevel("Seven").size()),
-                         new PieChart.Data("Grade 8", service.searchByGradeLevel("Eight").size()),
-                         new PieChart.Data("Grade 9", service.searchByGradeLevel("Nine").size()),
-                         new PieChart.Data("Grade 10", service.searchByGradeLevel("Ten").size())
-                         );         
+        
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList(pdGrade7,pdGrade8,pdGrade9,pdGrade10);         
          voterChart.setData(pieChartData);
+
+         
     }
     
     private void rebindProperty(){
@@ -153,7 +181,6 @@ public class VoterPresenter implements Initializable {
             service.remove(voterTable.getSelectionModel().getSelectedItem());
             stackPane.getChildren().clear();
             loadAllVoters();
-            prepareChart();
             voterTable.getSelectionModel().clearSelection();
         }
         
@@ -167,23 +194,24 @@ public class VoterPresenter implements Initializable {
             if(!this.voterTable.getSelectionModel().getSelectedItem().getGradeLevel().equals(""))
                 gradeLevelCBox.getSelectionModel().select(this.voterTable.getSelectionModel().getSelectedItem().getGradeLevel());
             enableForm();
+
         }
     }
     
-    @FXML
-    private void selectPhoto(ActionEvent event){
-        FileChooser fileChooser = new FileChooser();
-        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image files (*.png)(*.jpg)", "*.jpg");
-        fileChooser.getExtensionFilters().add(extFilter);
-        file = fileChooser.showOpenDialog(iSelectButton.getScene().getWindow());
-
-    }
+//    @FXML
+//    private void selectPhoto(ActionEvent event){
+//        FileChooser fileChooser = new FileChooser();
+//        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Image files (*.png)(*.jpg)", "*.jpg");
+//        fileChooser.getExtensionFilters().add(extFilter);
+//        file = fileChooser.showOpenDialog(iSelectButton.getScene().getWindow());
+//
+//    }
     
         @FXML
     private void saveVoter(ActionEvent event) {
-        Candidate c;
+        Voter c;
         if(this.voterTable.getSelectionModel().getSelectedItem() == null){
-            c = new Candidate();
+            c = new Voter();
         }else{
             c = voterTable.getSelectionModel().getSelectedItem();
         }        
@@ -198,26 +226,11 @@ public class VoterPresenter implements Initializable {
             System.out.println(ua.getPassword());
             c.setAccount(ua);
         }
-        
-        try {
-            bufferedImage = ImageIO.read(file);
-        } catch (IOException ex) {
-            Logger.getLogger(VoterPresenter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        try {
-            ImageIO.write(bufferedImage, "jpg", baos);
-        } catch (IOException ex) {
-            Logger.getLogger(VoterPresenter.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ImageWrapper image = new ImageWrapper();            
-        image.setImageName(c.getFirstName()+c.getLastName() + ".jpg");
-        image.setData(baos.toByteArray()); 
-        c.setImage(image);  
         service.save(c);
         loadAllVoters();
-        prepareChart();
+//        prepareChart();
         disableForm();
+        voterTable.getSelectionModel().clearSelection();
     }
     
     
@@ -274,10 +287,10 @@ public class VoterPresenter implements Initializable {
         progressIndicator.setMaxSize(150, 150);
         veil = new Region();
         veil.setStyle("-fx-background-color: rgba(0, 0, 0, 0.4)");
-        task = new Task<ObservableList<Candidate>>() {
+        task = new Task<ObservableList<Voter>>() {
             @Override
-            protected ObservableList<Candidate> call() throws Exception {                
-                    List<Candidate> votersList= service.all();
+            protected ObservableList<Voter> call() throws Exception {                
+                    List<Voter> votersList= service.all();
                 if(!searchField.getText().isEmpty()){
                     votersList = service.search(searchField.textProperty().get());
                 }                
@@ -292,10 +305,21 @@ public class VoterPresenter implements Initializable {
         voterTable.itemsProperty().bind(task.valueProperty()); 
         stackPane.getChildren().addAll(voterTable,veil,progressIndicator);
         new Thread(task).start();
+        voterTable.itemsProperty().addListener(new ChangeListener<ObservableList<Voter>>() {
+            @Override
+            public void changed(ObservableValue<? extends ObservableList<Voter>> observable, ObservableList<Voter> oldValue, ObservableList<Voter> newValue) {
+                pdGrade7.pieValueProperty().set(service.searchByGradeLevel("Seven").size());
+                pdGrade8.pieValueProperty().set(service.searchByGradeLevel("Eight").size());
+                pdGrade9.pieValueProperty().set(service.searchByGradeLevel("Nine").size());
+                pdGrade10.pieValueProperty().set(service.searchByGradeLevel("Ten").size());
+            }
+        });
+        
     }
 
     @FXML
     private void addVoter(ActionEvent event) {
+        voterTable.getSelectionModel().clearSelection();
         firstNameField.clear();
         lastNameField.clear();
         gradeLevelCBox.getSelectionModel().clearSelection();

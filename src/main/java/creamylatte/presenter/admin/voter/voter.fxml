@@ -38,23 +38,22 @@
             <PieChart fx:id="voterChart" prefHeight="454.0" prefWidth="528.0" />
          </children>
       </AnchorPane>
-      <Label fx:id="dyanmicLabel" layoutX="578.0" layoutY="39.0" prefHeight="65.0" prefWidth="436.0" style="-fx-font-size: 40;" text="Voters Per Grade Level" />
-      <TextField fx:id="lastNameField" layoutX="174.0" layoutY="563.0" promptText="Last Name">
+      <Label fx:id="dyanmicLabel" layoutX="649.0" layoutY="39.0" prefHeight="65.0" prefWidth="436.0" style="-fx-font-size: 40;" text="Voters Per Grade Level" />
+      <TextField fx:id="lastNameField" layoutX="174.0" layoutY="563.0" promptText="Last Name" visible="false">
          <tooltip>
             <Tooltip text="Last Name" />
          </tooltip>
       </TextField>
-      <TextField fx:id="firstNameField" layoutX="20.0" layoutY="563.0" promptText="First Name">
+      <TextField fx:id="firstNameField" layoutX="20.0" layoutY="563.0" promptText="First Name" visible="false">
          <tooltip>
             <Tooltip text="First Name" />
          </tooltip>
       </TextField>
-      <ComboBox fx:id="gradeLevelCBox" layoutX="331.0" layoutY="563.0" prefHeight="25.0" prefWidth="128.0" promptText="Grade Level">
+      <ComboBox fx:id="gradeLevelCBox" layoutX="331.0" layoutY="563.0" prefHeight="25.0" prefWidth="128.0" promptText="Grade Level" visible="false">
          <tooltip>
             <Tooltip text="Grade Level" />
          </tooltip>
       </ComboBox>
-      <Button fx:id="saveButton" layoutX="496.0" layoutY="563.0" mnemonicParsing="false" onAction="#saveVoter" prefHeight="25.0" prefWidth="50.0" text="Save" />
-      <Button fx:id="iSelectButton" layoutX="467.0" layoutY="563.0" mnemonicParsing="false" onAction="#selectPhoto" text="I" />
+      <Button fx:id="saveButton" layoutX="475.0" layoutY="563.0" mnemonicParsing="false" onAction="#saveVoter" prefHeight="25.0" prefWidth="50.0" text="Save" visible="false" />
    </children>
 </AnchorPane>

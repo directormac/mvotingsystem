@@ -13,8 +13,7 @@ package creamylatte.presenter.main;
 import creamylatte.business.models.UserAccount;
 import creamylatte.business.services.Authenticator;
 import creamylatte.business.services.CandidateService;
-import creamylatte.presenter.admin.partylist.PartyListPresenter;
-import creamylatte.presenter.admin.partylist.PartyListView;
+
 import creamylatte.presenter.admin.voter.VoterPresenter;
 import creamylatte.presenter.admin.voter.VoterView;
 import creamylatte.presenter.login.LoginPresenter;
@@ -101,8 +100,7 @@ public class MainPresenter implements Initializable {
 
     @FXML
     private void searchPartylist(ActionEvent event) {
-        contentPane.getChildren().clear();
-        contentPane.getChildren().add(new PartyListView().getView());        
+      
     }
 
     @FXML

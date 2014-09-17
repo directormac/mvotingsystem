@@ -125,10 +125,6 @@ public class LoginPresenter implements Initializable {
        userList = FXCollections.observableList(auth.findByUserName(accountCBox.getEditor().textProperty().get()));
        accountCBox.setItems(userList); 
     }
-    
-    private void mooose(ActionEvent event){
-        accountCBox.setEditable(true);
-    }
 
     /**
      * @return the user

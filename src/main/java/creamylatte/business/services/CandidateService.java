@@ -11,10 +11,11 @@
 package creamylatte.business.services;
 
 import creamylatte.business.models.Candidate;
+import creamylatte.business.models.Voter;
 import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
-import javax.persistence.Query;
+
 
 
 /**
@@ -28,49 +29,41 @@ public class CandidateService {
     private DBService service;
 
     
-    public List<Candidate> all(){
-        return service.getManager().createNamedQuery("Candidate.findAll").getResultList();
+    public List<Voter> all(){
+        return service.getManager().createNamedQuery("Voter.findAll").getResultList();
     }
     
-    public List<Candidate> search(String search){        
-        List<Candidate> searched = new ArrayList<>();
-        List<Candidate> firstNameList = service.getManager().createNamedQuery("Candidate.findByFirstName")
+    public List<Voter> search(String search){        
+        List<Voter> searched = new ArrayList<>();
+        List<Voter> firstNameList = service.getManager().createNamedQuery("Voter.findByFirstName")
                 .setParameter("firstName","%" + search + "%").getResultList();
-        List<Candidate> lastNameList = service.getManager().createNamedQuery("Candidate.findByLastName")
+        List<Voter> lastNameList = service.getManager().createNamedQuery("Voter.findByLastName")
                 .setParameter("lastName", "%" + search + "%").getResultList();
-        firstNameList.stream().filter((candidate) -> (!searched.contains(candidate))).forEach((candidate) -> {
-            searched.add(candidate);
+        firstNameList.stream().filter((voter) -> (!searched.contains(voter))).forEach((voter) -> {
+            searched.add(voter);
         });
-        lastNameList.stream().filter((candidate) -> (!searched.contains(candidate))).forEach((candidate) -> {
-            searched.add(candidate);
+        lastNameList.stream().filter((voter) -> (!searched.contains(voter))).forEach((voter) -> {
+            searched.add(voter);
         });        
         return searched;
     }
     
-    public List<Candidate> searchByGradeLevel(String gradeLevel){
-        return service.getManager().createNamedQuery("Candidate.findByGradeLevel").setParameter("gradeLevel", gradeLevel).getResultList();
+    public List<Voter> searchByGradeLevel(String gradeLevel){
+        return service.getManager().createNamedQuery("Voter.findByGradeLevel").setParameter("gradeLevel", gradeLevel).getResultList();
     }
     
     
    
-    public void save(Candidate candidate){
+    public void save(Voter voter){
         service.getTransaction().begin();
-        Candidate merged = this.service.getManager().merge(candidate);;
+        Voter merged = this.service.getManager().merge(voter);;
         service.getTransaction().commit();
     }
     
-    public void remove(Candidate candidate){
+    public void remove(Voter voter){
         service.getTransaction().begin();
-        service.getManager().remove(candidate);
+        service.getManager().remove(voter);
         service.getTransaction().commit();
-    }
-    
-    public Candidate find(int id){        
-        Candidate c = service.getManager().find(Candidate.class, id);
-        if(c==null){
-            return null;
-        }
-        return c;
     }
     
     
