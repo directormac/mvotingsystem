@@ -31,7 +31,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "candidate")
 @NamedQueries({
-@NamedQuery(name = "Candidate.findAll", query = "SELECT c FROM Candidate c")})
+@NamedQuery(name = "Candidate.findAll", query = "SELECT c FROM Candidate c")
+//        ,
+//    @NamedQuery(name = "Candidate.findByGradeLevel", query = "SELECT c FROM Candidate c WHERE c. ")
+})
 public class Candidate implements Serializable {
     private IntegerProperty id;
     private ObjectProperty<Voter> voterId;
@@ -114,6 +117,7 @@ public class Candidate implements Serializable {
     public void setVoters(List<Voter> voters){
         this.voters.set(FXCollections.observableArrayList(voters));
     }
+
 
     
 }

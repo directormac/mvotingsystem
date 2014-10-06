@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managecandidate.ManageCandidatePresenter">
+   <top>
+      <HBox prefHeight="50.0" prefWidth="1150.0" spacing="10.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+         <children>
+            <Button fx:id="viewAllCandidatesButton" mnemonicParsing="false" onAction="#viewAllCandidatesButtonAction" prefHeight="40.0" prefWidth="176.0" text="View all Candidates" />
+            <Button fx:id="addNewCandidate" mnemonicParsing="false" onAction="#addNewCandidateAction" prefHeight="40.0" prefWidth="164.0" text="Add new Candidate" />
+            <Button fx:id="viewAllPartyList" mnemonicParsing="false" onAction="#viewAllPartyListAction" prefHeight="40.0" prefWidth="171.0" text="View all Party List" />
+            <Button fx:id="addNewPartyList" mnemonicParsing="false" onAction="#addNewPartyListAction" prefHeight="40.0" prefWidth="173.0" text="Add new Party List" />
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <AnchorPane fx:id="contentPane" prefHeight="600.0" prefWidth="1100.0" BorderPane.alignment="CENTER" />
+   </center>
+   <padding>
+      <Insets left="30.0" />
+   </padding>
+</BorderPane>

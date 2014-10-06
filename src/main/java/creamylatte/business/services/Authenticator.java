@@ -30,9 +30,10 @@ public class Authenticator {
     
     public List<UserAccount> findByUserName(String search){         
          return service.getManager().createNamedQuery("UserAccount.findByUsername")
-                 .setParameter("username", "%" + search + "%").getResultList();
+                 .setParameter("username",  search + "%").getResultList();
     }
-
+    
+    
     public UserAccount checkCredentials(String username, String password){
         try{
             return (UserAccount)service.getManager().createNamedQuery("UserAccount.CheckCredentials")

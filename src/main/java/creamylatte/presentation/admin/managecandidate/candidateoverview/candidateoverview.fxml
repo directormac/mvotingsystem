@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1100.0" stylesheets="@../../../../flatred.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managecandidate.candidateoverview.CandidateOverviewPresenter">
+   <children>
+      <ListView fx:id="candidateListView" layoutX="14.0" layoutY="73.0" prefHeight="489.0" prefWidth="227.0" />
+      <TextField fx:id="candidateFilterField" layoutX="14.0" layoutY="33.0" prefHeight="25.0" prefWidth="227.0" promptText="filter list here" />
+      <AnchorPane fx:id="contentPane" layoutX="256.0" layoutY="41.0" prefHeight="553.0" prefWidth="830.0" />
+   </children>
+</AnchorPane>

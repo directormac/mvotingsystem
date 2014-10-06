@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1100.0" stylesheets="@../../../../flatred.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managecandidate.candidateform.CandidateFormPresenter">
+   <children>
+      <ComboBox fx:id="positionComboBox" layoutX="63.0" layoutY="135.0" onShown="#showPositions" prefHeight="25.0" prefWidth="226.0" promptText="Select Position Here" />
+      <ComboBox fx:id="partylistComboBox" layoutX="63.0" layoutY="63.0" onShown="#showPartyList" prefHeight="25.0" prefWidth="226.0" promptText="Select Party List Here" />
+      <ImageView fx:id="candidateImageView" fitHeight="278.0" fitWidth="226.0" layoutX="428.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="selectPhotoButton" layoutX="425.0" layoutY="462.0" mnemonicParsing="false" onAction="#selectPhotoAction" prefHeight="27.0" prefWidth="84.0" text="Select Photo" />
+      <Button fx:id="saveButton" layoutX="519.0" layoutY="519.0" mnemonicParsing="false" onAction="#saveButtonAction" prefHeight="34.0" prefWidth="63.0" text="Save" />
+      <Label layoutX="322.0" layoutY="61.0" text="First Name">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="322.0" layoutY="96.0" text="Last Name">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="322.0" layoutY="136.0" text="Grade Level">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="109.0" text="Position">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="48.0" layoutY="35.0" text="Partylist">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="54.0" layoutY="178.0" text="Select Student">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="firstNameLabel" layoutX="425.0" layoutY="61.0" prefHeight="17.0" prefWidth="150.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="lastNameLabel" layoutX="426.0" layoutY="95.0" prefHeight="17.0" prefWidth="150.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="gradeLevelLabel" layoutX="428.0" layoutY="135.0" prefHeight="17.0" prefWidth="150.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ListView fx:id="studentListView" layoutX="63.0" layoutY="260.0" prefHeight="245.0" prefWidth="226.0" />
+      <TextField fx:id="filterStudentField" layoutX="63.0" layoutY="211.0" prefHeight="33.0" prefWidth="170.0" promptText="filter student list" />
+      <Label layoutX="323.0" layoutY="180.0" text="Photo">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

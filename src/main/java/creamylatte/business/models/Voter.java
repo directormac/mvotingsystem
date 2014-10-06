@@ -35,6 +35,7 @@ import javax.persistence.Table;
 @NamedQueries({
 @NamedQuery(name = "Voter.findAll", query = "SELECT v FROM Voter v"),
     @NamedQuery(name = "Voter.find", query = "SELECT V FROM Voter V WHERE v.firstName = :firstName OR v.lastName = :lastName"),
+    
     @NamedQuery(name = "Voter.SearchByName", 
             query = "SELECT c FROM Voter c WHERE lower('c.lastName') like :lastName OR lower('c.firstName') like :firstName" ),
     @NamedQuery(name = "Voter.findByGradeLevel", query = "SELECT c FROM Voter c WHERE c.gradeLevel = :gradeLevel")})
@@ -104,7 +105,7 @@ public class Voter implements Serializable {
     
     @Override
     public String toString(){
-        return this.getLastName() + " , " + getFirstName() + " , " + getAccount().getPassword();
+        return this.getLastName() + " , " + getFirstName();
     }
     
     @ManyToMany

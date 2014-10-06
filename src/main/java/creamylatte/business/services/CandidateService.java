@@ -7,62 +7,52 @@
  * Mark Kendrick Asena * 
  */
 
-
 package creamylatte.business.services;
 
 import creamylatte.business.models.Candidate;
+import creamylatte.business.models.Party;
+import creamylatte.business.models.Position;
 import creamylatte.business.models.Voter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
-
-
 
 /**
  *
  * @author Hadouken
- * This class handles all transaction for the Candidate Entity
  */
 public class CandidateService {
-    
     @Inject
     private DBService service;
-
     
-    public List<Voter> all(){
-        return service.getManager().createNamedQuery("Voter.findAll").getResultList();
+    public List<Party> getAllParty(){
+        return service.getManager().createNamedQuery("Party.findAll").getResultList();
     }
     
-    public List<Voter> search(String search){        
-        List<Voter> searched = new ArrayList<>();
-        List<Voter> firstNameList = service.getManager().createNamedQuery("Voter.findByFirstName")
-                .setParameter("firstName","%" + search + "%").getResultList();
-        List<Voter> lastNameList = service.getManager().createNamedQuery("Voter.findByLastName")
-                .setParameter("lastName", "%" + search + "%").getResultList();
-        firstNameList.stream().filter((voter) -> (!searched.contains(voter))).forEach((voter) -> {
-            searched.add(voter);
-        });
-        lastNameList.stream().filter((voter) -> (!searched.contains(voter))).forEach((voter) -> {
-            searched.add(voter);
-        });        
-        return searched;
+    public List<Position> getAllPositions(){
+        return service.getManager().createNamedQuery("Position.findAll").getResultList();
+    }
+    
+    public List<Voter> getAllVoter(){
+        return service.getManager().createNamedQuery("Voter.findAll").getResultList();
     }
     
     public List<Voter> searchByGradeLevel(String gradeLevel){
         return service.getManager().createNamedQuery("Voter.findByGradeLevel").setParameter("gradeLevel", gradeLevel).getResultList();
     }
     
-    
-   
-    public void save(Voter voter){
-        service.getTransaction().begin();
-        Voter merged = this.service.getManager().merge(voter);;
-        service.getTransaction().commit();
+    public List<Candidate> getAllCandidates(){
+        return service.getManager().createNamedQuery("Candidate.findAll").getResultList();
     }
     
-    public void remove(Voter voter){
+    public void save(Party party){
+     service.getTransaction().begin();
+     Party merge = service.getManager().merge(party);
+     service.getTransaction().commit();
+    }
+    
+    public void save(Candidate candidate){
         service.getTransaction().begin();
-        service.getManager().remove(voter);
+        Candidate merge = service.getManager().merge(candidate);
         service.getTransaction().commit();
     }
     

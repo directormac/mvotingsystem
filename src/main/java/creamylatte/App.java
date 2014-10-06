@@ -1,7 +1,7 @@
 package creamylatte;
 
 
-import creamylatte.presenter.main.MainView;
+import creamylatte.presentation.main.MainView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -17,10 +17,11 @@ public class App extends Application {
     public void start(Stage stage) throws Exception {
         Scene scene = new Scene(new MainView().getView());
         stage.initStyle(StageStyle.TRANSPARENT);
+//        stage.setFullScreen(true);
 //        stage.getIcons().add(new Image("file:resources/images/appicon.png"));
         stage.setTitle("JVoting System");
-//        final String uri = getClass().getResource("app.css").toExternalForm();
-//        scene.getStylesheets().add(uri);
+        final String uri = getClass().getResource("flatred.css").toExternalForm();
+        scene.getStylesheets().add(uri);
         stage.setScene(scene);
         stage.show();
     }

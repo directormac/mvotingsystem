@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" styleClass="background" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.main.MainPresenter">
+   <center>
+      <AnchorPane fx:id="contentPane" prefHeight="610.0" prefWidth="1136.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin></AnchorPane>
+   </center>
+   <top>
+      <AnchorPane prefHeight="30.0" prefWidth="1136.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button id="btn" fx:id="closeButton" layoutX="1343.0" layoutY="2.0" minHeight="24.0" minWidth="19.0" mnemonicParsing="false" onAction="#closeStage" prefHeight="24.0" prefWidth="19.0" />
+         </children>
+      </AnchorPane>
+   </top>
+</BorderPane>
