@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1100.0" stylesheets="@../../../../flatred.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managecandidate.candidateform.CandidateFormPresenter">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managecandidate.candidateform.CandidateFormPresenter">
    <children>
       <ComboBox fx:id="positionComboBox" layoutX="63.0" layoutY="135.0" onShown="#showPositions" prefHeight="25.0" prefWidth="226.0" promptText="Select Position Here" />
       <ComboBox fx:id="partylistComboBox" layoutX="63.0" layoutY="63.0" onShown="#showPartyList" prefHeight="25.0" prefWidth="226.0" promptText="Select Party List Here" />

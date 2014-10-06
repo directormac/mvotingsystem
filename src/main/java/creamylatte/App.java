@@ -20,8 +20,8 @@ public class App extends Application {
 //        stage.setFullScreen(true);
 //        stage.getIcons().add(new Image("file:resources/images/appicon.png"));
         stage.setTitle("JVoting System");
-        final String uri = getClass().getResource("flatred.css").toExternalForm();
-        scene.getStylesheets().add(uri);
+//        final String uri = getClass().getResource("flatred.css").toExternalForm();
+//        scene.getStylesheets().add(uri);
         stage.setScene(scene);
         stage.show();
     }

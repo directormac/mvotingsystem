@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1100.0" stylesheets="@../../../../flatred.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managecandidate.candidateoverview.CandidateOverviewPresenter">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managecandidate.candidateoverview.CandidateOverviewPresenter">
    <children>
-      <ListView fx:id="candidateListView" layoutX="14.0" layoutY="73.0" prefHeight="489.0" prefWidth="227.0" />
-      <TextField fx:id="candidateFilterField" layoutX="14.0" layoutY="33.0" prefHeight="25.0" prefWidth="227.0" promptText="filter list here" />
-      <AnchorPane fx:id="contentPane" layoutX="256.0" layoutY="41.0" prefHeight="553.0" prefWidth="830.0" />
+      <ListView fx:id="candidateListView" layoutX="14.0" layoutY="67.0" prefHeight="495.0" prefWidth="282.0" />
+      <AnchorPane fx:id="contentPane" layoutX="310.0" layoutY="41.0" prefHeight="553.0" prefWidth="776.0" />
+      <ComboBox fx:id="partyListComboBox" layoutX="121.0" layoutY="29.0" onShown="#partyListComboBoxShown" prefHeight="25.0" prefWidth="175.0" />
+      <Label layoutX="21.0" layoutY="27.0" prefHeight="17.0" prefWidth="92.0" text="Party List">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

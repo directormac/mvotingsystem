@@ -104,6 +104,7 @@ public class CandidateFormPresenter implements Initializable {
             }
         });
         
+        
         positionComboBox.setCellFactory(new Callback<ListView<Position>,ListCell<Position>>(){ 
             @Override
             public ListCell<Position> call(ListView<Position> p) {                 
@@ -121,9 +122,7 @@ public class CandidateFormPresenter implements Initializable {
                 return cell;
             }
         });
-        
-       
-    
+
        studentListView.setCellFactory(new Callback<ListView<Voter>,ListCell<Voter>>(){ 
             @Override
             public ListCell<Voter> call(ListView<Voter> p) {                 
@@ -141,10 +140,7 @@ public class CandidateFormPresenter implements Initializable {
                 return cell;
             }
         });
-       
-       
-       
-       
+
        studentListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voter>() {
            @Override
            public void changed(ObservableValue<? extends Voter> observable, Voter oldValue, Voter newValue) {
@@ -241,7 +237,14 @@ public class CandidateFormPresenter implements Initializable {
         }else if(position.getName().equalsIgnoreCase("Grade 10 Representative")){
             return service.searchByGradeLevel("Ten");
         }else{
-            return service.getAllVoter();
+            List<Voter> voters = service.getAllVoter();
+            List<Candidate> candidates = service.getAllCandidates();
+            for(Candidate candidate: candidates){
+                if(voters.contains(candidate.getVoterId())){
+                    voters.remove(candidate.getVoterId());
+                }
+            }
+            return voters;
         }
     }
     
