@@ -20,7 +20,6 @@ import creamylatte.presentation.admin.managevotertest.voterchart.VoterChartView;
 import creamylatte.presentation.admin.managevotertest.voterform.VoterFormPresenter;
 import creamylatte.presentation.admin.managevotertest.voterform.VoterFormView;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -139,14 +138,7 @@ public class ManageVoterTestPresenter implements Initializable {
 
     @FXML
     private void removeVoterButtonAction(ActionEvent event) {
-        List<Candidate> candidates = candidateService.getAllCandidates();
-            for(Candidate candidate : candidates){
-                if(candidate.getVoterId().equals(voterTable.getSelectionModel().getSelectedItem())){
-                    service.remove(candidate);
-                }else{
-                    service.remove(voterTable.getSelectionModel().getSelectedItem());
-                }
-            }
+        masterData.remove(voterTable.getSelectionModel().getSelectedItem());
     }
 
     @FXML
