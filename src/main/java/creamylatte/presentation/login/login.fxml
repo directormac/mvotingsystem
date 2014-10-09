@@ -14,6 +14,6 @@
          </tooltip></ComboBox>
       <PasswordField fx:id="passwordField" layoutX="569.0" layoutY="339.0" prefHeight="25.0" prefWidth="227.0" />
       <Button fx:id="loginButton" layoutX="570.0" layoutY="378.0" mnemonicParsing="false" onAction="#loginAccount" prefHeight="25.0" prefWidth="227.0" text="LOGIN" />
-      <Label fx:id="incorrectPasswordLabel" layoutX="639.0" layoutY="414.0" style="-fx-text-fill: red;" text="Incorrect Password!" />
+      <Label fx:id="incorrectPasswordLabel" layoutX="631.0" layoutY="418.0" style="-fx-text-fill: red;" text="Incorrect Password!" visible="false" />
    </children>    
 </AnchorPane>

@@ -13,6 +13,7 @@ package creamylatte.presentation.admin.managevoter;
 import creamylatte.business.models.Candidate;
 import creamylatte.business.models.UserAccount;
 import creamylatte.business.models.Voter;
+import creamylatte.business.services.CandidateService;
 import creamylatte.business.services.VoterService;
 import creamylatte.presentation.admin.voterform1.VoterFormView;
 import java.awt.image.BufferedImage;
@@ -29,6 +30,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -62,14 +64,15 @@ public class ManageVoterPresenter implements Initializable {
     ProgressIndicator progressIndicator;    
     Region veil;    
     Task<ObservableList<Voter>> task;
-    ObservableList<Voter> candidates;
+    ObservableList<Voter> votersList;
     ObjectProperty<Voter> selectedCandidate;    
     ManageVoterPresenter voterFormPresenter;
     VoterFormView voterFormView;
     StringProperty label;
     @Inject
     VoterService service;
-    
+    @Inject
+    CandidateService candidateService;
     
     @FXML
     private Button addVoter;
@@ -97,11 +100,9 @@ public class ManageVoterPresenter implements Initializable {
 
     PieChart.Data pdGrade7,pdGrade8,pdGrade9,pdGrade10;
     
-    /**
-     * Initializes the controller class.
-     * @param url
-     * @param rb
-     */
+    FilteredList<Voter> filteredVoterList;
+    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         pdGrade7 = new PieChart.Data("Grade 7", grade7);
@@ -110,7 +111,7 @@ public class ManageVoterPresenter implements Initializable {
         pdGrade10 = new PieChart.Data("Grade 10", grade10);
 
         this.label = new SimpleStringProperty();
-        this.candidates = FXCollections.observableArrayList();
+        this.votersList = FXCollections.observableArrayList();
         
         
         this.selectedCandidate = new SimpleObjectProperty<>(new Voter());              
@@ -118,11 +119,31 @@ public class ManageVoterPresenter implements Initializable {
         loadAllVoters();   
         prepareChart();
         rebindProperty();           
-        searchField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            if(newValue.isEmpty()){
-                loadAllVoters(); 
-            }
-        });        
+//        searchField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+//                loadAllVoters(); 
+//        });     
+        
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            filteredVoterList.setPredicate(voter -> {
+                // If filter text is empty, display all persons.
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+
+                // Compare first name and last name of every person with filter text.
+                String lowerCaseFilter = newValue.toLowerCase();
+
+                if (voter.getFirstName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches first name.
+                } else if (voter.getLastName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; // Filter matches last name.
+                }
+                return false; // Does not match.
+            });
+        });
+        
+        
+        
         gradeLevelCBox.setItems(FXCollections.observableArrayList("Seven","Eight","Nine","Ten"));
         this.firstNameField.textProperty().addListener(textFieldListeners(this.firstNameField));        
         this.lastNameField.textProperty().addListener(textFieldListeners(this.lastNameField)); 
@@ -182,7 +203,15 @@ public class ManageVoterPresenter implements Initializable {
     @FXML
     private void deleteVoter(ActionEvent event) {
         if(voterTable.getSelectionModel().getSelectedItem() != null){
-            service.remove(voterTable.getSelectionModel().getSelectedItem());
+            List<Candidate> candidates = candidateService.getAllCandidates();
+            for(Candidate candidate : candidates){
+                if(candidate.getVoterId().equals(voterTable.getSelectionModel().getSelectedItem())){
+                    service.remove(candidate);
+                }else{
+                    service.remove(voterTable.getSelectionModel().getSelectedItem());
+                }
+            }
+
             stackPane.getChildren().clear();
             loadAllVoters();
             voterTable.getSelectionModel().clearSelection();
@@ -232,7 +261,6 @@ public class ManageVoterPresenter implements Initializable {
         }
         service.save(c);
         loadAllVoters();
-//        prepareChart();
         disableForm();
         voterTable.getSelectionModel().clearSelection();
     }
@@ -261,7 +289,6 @@ public class ManageVoterPresenter implements Initializable {
                         protected void updateItem(UserAccount item, boolean empty) {
                             super.updateItem(item, empty);
                           if (!empty) {
-                            // Use a SimpleDateFormat or similar in the format method
                             setText(item.getPassword());
                           } else {
                             setText(null);
@@ -272,7 +299,6 @@ public class ManageVoterPresenter implements Initializable {
             });
         columns.add(passwordColumn);
         voterTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        voterTable.setItems(this.candidates);
         voterTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);        
     }
     
@@ -294,13 +320,12 @@ public class ManageVoterPresenter implements Initializable {
         task = new Task<ObservableList<Voter>>() {
             @Override
             protected ObservableList<Voter> call() throws Exception {                
-                    List<Voter> votersList= service.all();
-                if(!searchField.getText().isEmpty()){
-                    votersList = service.search(searchField.textProperty().get());
-                }                
+                    votersList = FXCollections.observableArrayList(service.all());
+                    filteredVoterList = new FilteredList(votersList,p-> true);
+                    voterTable.setItems(filteredVoterList);
                 Thread.sleep(5);
-                candidates = FXCollections.observableArrayList(votersList);                
-                return candidates;
+                ManageVoterPresenter.this.votersList = FXCollections.observableArrayList(votersList);                
+                return ManageVoterPresenter.this.votersList;
             }
         };
         progressIndicator.progressProperty().bind(task.progressProperty());

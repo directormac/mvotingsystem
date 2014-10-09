@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="559.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="creamylatte.presentation.admin.managevotertest.voterchart.VoterChartPresenter">
+   <children>
+      <Label layoutX="155.0" layoutY="27.0" text="Voter's Per Grade Level">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Separator layoutY="78.0" prefHeight="0.0" prefWidth="556.0" />
+      <PieChart fx:id="voterChart" layoutY="78.0" prefHeight="477.0" prefWidth="559.0" />
+   </children>
+</AnchorPane>

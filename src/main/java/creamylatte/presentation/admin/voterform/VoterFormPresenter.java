@@ -309,8 +309,7 @@ public class VoterFormPresenter implements Initializable {
                 pdGrade8.pieValueProperty().set(gradeLevelSize("Eigth"));
                 pdGrade9.pieValueProperty().set(gradeLevelSize("Nine"));
                 pdGrade10.pieValueProperty().set(gradeLevelSize("Ten"));
-                
-                
+
             }
         });
         

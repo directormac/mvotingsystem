@@ -11,6 +11,7 @@
 package creamylatte.business.services;
 
 
+import creamylatte.business.models.Candidate;
 import creamylatte.business.models.Voter;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,21 +34,11 @@ public class VoterService {
         return service.getManager().createNamedQuery("Voter.findAll").getResultList();
     }
     
-    public List<Voter> search(String search){        
-        List<Voter> searched = new ArrayList<>();
-        List<Voter> firstNameList = service.getManager().createNamedQuery("Voter.findByFirstName")
-                .setParameter("firstName","%" + search + "%").getResultList();
-        List<Voter> lastNameList = service.getManager().createNamedQuery("Voter.findByLastName")
+    public List<Voter> search(String search){
+        return service.getManager().createNamedQuery("Voter.SearchByName")
+                .setParameter("firstName", "%" + search + "%")
                 .setParameter("lastName", "%" + search + "%").getResultList();
-        firstNameList.stream().filter((voter) -> (!searched.contains(voter))).forEach((voter) -> {
-            searched.add(voter);
-        });
-        lastNameList.stream().filter((voter) -> (!searched.contains(voter))).forEach((voter) -> {
-            searched.add(voter);
-        });        
-        return searched;
     }
-    
     
     
     public List<Voter> searchByGradeLevel(String gradeLevel){
@@ -65,6 +56,12 @@ public class VoterService {
     public void remove(Voter voter){
         service.getTransaction().begin();
         service.getManager().remove(voter);
+        service.getTransaction().commit();
+    }
+    
+    public void remove(Candidate candidate){
+        service.getTransaction().begin();
+        service.getManager().remove(candidate);
         service.getTransaction().commit();
     }
     

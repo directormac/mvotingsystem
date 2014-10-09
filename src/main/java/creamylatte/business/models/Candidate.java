@@ -70,6 +70,7 @@ public class Candidate implements Serializable {
         this.id.set(id);
     }    
     
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "voter_id")
     public Voter getVoterId(){
         return this.voterId.get();

@@ -11,6 +11,7 @@ package creamylatte.presentation.admin;
 
 import creamylatte.presentation.admin.managecandidate.ManageCandidateView;
 import creamylatte.presentation.admin.managevoter.ManageVoterView;
+import creamylatte.presentation.admin.managevotertest.ManageVoterTestView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -51,7 +52,7 @@ public class AdminPresenter implements Initializable {
 
     @FXML
     private void votersButtonAction(ActionEvent event) {
-        changePane(new ManageVoterView().getView());        
+        changePane(new ManageVoterTestView().getView());        
     }
 
     

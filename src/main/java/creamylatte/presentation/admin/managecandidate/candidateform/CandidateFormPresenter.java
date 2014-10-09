@@ -15,10 +15,13 @@ import creamylatte.business.models.Party;
 import creamylatte.business.models.Position;
 import creamylatte.business.models.Voter;
 import creamylatte.business.services.CandidateService;
+import creamylatte.business.services.VoterService;
+import creamylatte.presentation.admin.managecandidate.candidateoverview.CandidateOverviewView;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ChangeListener;
@@ -29,6 +32,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -37,6 +41,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.util.Callback;
 import javax.inject.Inject;
@@ -68,11 +73,17 @@ public class CandidateFormPresenter implements Initializable {
     private ImageView candidateImageView;
     @FXML
     private ListView<Voter> studentListView;
+
     @FXML
     private TextField filterStudentField;
     
+    @FXML
+    private AnchorPane anchorPane;
+    
     @Inject
     CandidateService service;
+    @Inject
+    VoterService voterService;
     
     ObservableList<Party> partyList;
     ObservableList<Position> positionList;
@@ -103,8 +114,7 @@ public class CandidateFormPresenter implements Initializable {
                 return cell;
             }
         });
-        
-        
+
         positionComboBox.setCellFactory(new Callback<ListView<Position>,ListCell<Position>>(){ 
             @Override
             public ListCell<Position> call(ListView<Position> p) {                 
@@ -153,17 +163,32 @@ public class CandidateFormPresenter implements Initializable {
        positionComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Position>() {
             @Override
             public void changed(ObservableValue<? extends Position> observable, Position oldValue, Position newValue) {
-                studentListView.setItems(FXCollections.observableArrayList(getAvailableVoter()));
+                if(newValue == null){
+                    studentListView.getItems().clear();
+                }else{
+                    studentListView.setItems(FXCollections.observableArrayList(getAvailableVoter()));
+                }
+                
             }
         });
-       
-       
+       filterStudentField.disableProperty().bind(positionComboBox.getSelectionModel().selectedItemProperty().isNull());
+       filterStudentField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if(newValue.isEmpty()){
+                    studentListView.setItems(FXCollections.observableArrayList(getAvailableVoter()));
+                }else{
+                    
+                }
+                
+                
+            }
+        });
     }  
     
     @FXML
     private void showStudents(Event event) { 
-       
-        
+ 
     }
     
     @FXML
@@ -219,7 +244,7 @@ public class CandidateFormPresenter implements Initializable {
         }
         service.save(candidate);
         
-        
+        changePane(new CandidateOverviewView().getView());
     }
     
     private List<Voter> getAvailableVoter(){
@@ -260,6 +285,12 @@ public class CandidateFormPresenter implements Initializable {
             }
             return positions;
         }
+    }
+    
+    private void changePane(Parent parent){
+        AnchorPane mainPane = (AnchorPane)anchorPane.getParent();
+        mainPane.getChildren().clear();
+        mainPane.getChildren().add(parent);
     }
     
 }

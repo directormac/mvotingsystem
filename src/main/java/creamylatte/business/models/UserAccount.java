@@ -82,4 +82,11 @@ public class UserAccount implements Serializable {
         return getUsername();
     }
     
+    public StringProperty usernameProperty(){
+        return username;
+    }
+    
+    public StringProperty passwordProperty(){
+        return password;
+    }
 }

@@ -7,15 +7,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managecandidate.candidateoverview.CandidateOverviewPresenter">
+<AnchorPane id="AnchorPane" fx:id="mainPane" prefHeight="600.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managecandidate.candidateoverview.CandidateOverviewPresenter">
    <children>
-      <ListView fx:id="candidateListView" layoutX="14.0" layoutY="67.0" prefHeight="495.0" prefWidth="282.0" />
-      <AnchorPane fx:id="contentPane" layoutX="310.0" layoutY="41.0" prefHeight="553.0" prefWidth="776.0" />
-      <ComboBox fx:id="partyListComboBox" layoutX="121.0" layoutY="29.0" onShown="#partyListComboBoxShown" prefHeight="25.0" prefWidth="175.0" />
-      <Label layoutX="21.0" layoutY="27.0" prefHeight="17.0" prefWidth="92.0" text="Party List">
+      <ListView fx:id="candidateListView" layoutX="14.0" layoutY="61.0" prefHeight="495.0" prefWidth="282.0" />
+      <AnchorPane fx:id="contentPane" layoutX="307.0" layoutY="62.0" prefHeight="530.0" prefWidth="785.0" />
+      <ComboBox fx:id="partyListComboBox" layoutX="78.0" layoutY="23.0" onShown="#partyListComboBoxShown" prefHeight="25.0" prefWidth="147.0" />
+      <Label layoutX="17.0" layoutY="21.0" prefHeight="28.0" prefWidth="61.0" text="Party List">
          <font>
-            <Font size="19.0" />
+            <Font size="14.0" />
          </font>
       </Label>
+      <Button fx:id="showAllButton" layoutX="233.0" layoutY="23.0" mnemonicParsing="false" onAction="#showAllButtonAction" prefHeight="25.0" prefWidth="61.0" text="Show all" />
+      <Button fx:id="addNewCandidateButton" layoutX="307.0" layoutY="23.0" mnemonicParsing="false" onAction="#addNewCandidateButtonAction" prefHeight="28.0" prefWidth="133.0" text="Add new candidate" />
+      <Button fx:id="removeCandidateButton" layoutX="452.0" layoutY="23.0" mnemonicParsing="false" onAction="#removeCandidateButtonAction" prefHeight="28.0" prefWidth="133.0" text="Remove candidate" />
    </children>
 </AnchorPane>

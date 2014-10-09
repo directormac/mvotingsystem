@@ -28,6 +28,7 @@ public class CandidateService {
         return service.getManager().createNamedQuery("Party.findAll").getResultList();
     }
     
+    
     public List<Position> getAllPositions(){
         return service.getManager().createNamedQuery("Position.findAll").getResultList();
     }
@@ -37,6 +38,10 @@ public class CandidateService {
     }
     
     public List<Voter> searchByGradeLevel(String gradeLevel){
+        return service.getManager().createNamedQuery("Voter.findByGradeLevel").setParameter("gradeLevel", gradeLevel).getResultList();
+    }
+    
+    public List<Voter> searchByPartyList(String gradeLevel){
         return service.getManager().createNamedQuery("Voter.findByGradeLevel").setParameter("gradeLevel", gradeLevel).getResultList();
     }
     
