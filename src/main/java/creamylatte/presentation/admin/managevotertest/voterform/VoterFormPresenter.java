@@ -12,6 +12,8 @@ package creamylatte.presentation.admin.managevotertest.voterform;
 import creamylatte.business.models.UserAccount;
 import creamylatte.business.models.Voter;
 import creamylatte.business.services.VoterService;
+import creamylatte.presentation.admin.managevotertest.voterchart.VoterChartPresenter;
+import creamylatte.presentation.admin.managevotertest.voterchart.VoterChartView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
@@ -26,6 +28,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javax.inject.Inject;
 
 /**
@@ -42,24 +45,45 @@ public class VoterFormPresenter implements Initializable {
     private TextField lastNameField;
     @FXML
     private ComboBox<String> gradeLevelCBox;
+    @FXML
+    private AnchorPane contentPane;
     
-    ObjectProperty<Voter> currentVoter;
     
-    
+    private ObjectProperty<Voter> currentVoter;
+    private VoterChartPresenter voterChartPresenter;
+    private VoterChartView voterChartView;
     @Inject
     VoterService service;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gradeLevelCBox.setItems(FXCollections.observableArrayList("Seven","Eight","Nine","Ten"));
-        currentVoter = new SimpleObjectProperty<>(new Voter());
+        setCurrentVoter(new SimpleObjectProperty<>());
+        currentVoter.addListener(new ChangeListener<Voter>() {
+            @Override
+            public void changed(ObservableValue<? extends Voter> observable, Voter oldValue, Voter newValue) {
+                System.out.println(newValue);
+                addVoterButton.textProperty().set("Update");
+                if(newValue != null){
+                    firstNameField.textProperty().set(newValue.getFirstName());
+                    lastNameField.textProperty().set(newValue.getLastName());
+                    gradeLevelCBox.getSelectionModel().select(currentVoter.get().getGradeLevel());
+                }else{
+                    
+                }
+            }
+        });
         
-        
+       
     }    
 
     @FXML
     private void addVoterButtonAction(ActionEvent event) {
-        Voter voter = currentVoter.get();
+        Voter voter;
+        if(getCurrentVoter().get() == null)
+            voter = new Voter();
+        else
+            voter = getCurrentVoter().get();
         voter.setFirstName(firstNameField.textProperty().get().toLowerCase());
         voter.setLastName(lastNameField.textProperty().get().toLowerCase());
         voter.setGradeLevel(gradeLevelCBox.getSelectionModel().getSelectedItem());
@@ -72,6 +96,9 @@ public class VoterFormPresenter implements Initializable {
             voter.setAccount(ua);
         }
         service.save(voter);
+        AnchorPane currentPane = (AnchorPane) contentPane.getParent();
+        currentPane.getChildren().clear();
+        currentPane.getChildren().add(voterChartView.getView());
     }
     
     private String firstCharToUpperCase(String string){
@@ -84,6 +111,58 @@ public class VoterFormPresenter implements Initializable {
             if (!wholeNumberPattern.matcher(newValue).matches())
                 tf.setText(oldValue);
         };
+        
+    }
+
+
+    public VoterChartPresenter getVoterChartPresenter() {
+        return voterChartPresenter;
+    }
+
+    public void setVoterChartPresenter(VoterChartPresenter voterChartPresenter) {
+        this.voterChartPresenter = voterChartPresenter;
+    }
+
+    /**
+     * @return the voterChartView
+     */
+    public VoterChartView getVoterChartView() {
+        return voterChartView;
+    }
+
+    /**
+     * @param voterChartView the voterChartView to set
+     */
+    public void setVoterChartView(VoterChartView voterChartView) {
+        this.voterChartView = voterChartView;
+    }
+
+    /**
+     * @return the currentVoter
+     */
+    public ObjectProperty<Voter> getCurrentVoter() {
+        return currentVoter;
+    }
+
+    /**
+     * @param currentVoter the currentVoter to set
+     */
+    public void setCurrentVoter(ObjectProperty<Voter> currentVoter) {
+        this.currentVoter = currentVoter;
+    }
+
+    /**
+     * @return the addVoterButton
+     */
+    public Button getAddVoterButton() {
+        return addVoterButton;
+    }
+
+    /**
+     * @param addVoterButton the addVoterButton to set
+     */
+    public void setAddVoterButton(Button addVoterButton) {
+        this.addVoterButton = addVoterButton;
     }
     
     

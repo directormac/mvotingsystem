@@ -44,9 +44,7 @@ public class VoterService {
     public List<Voter> searchByGradeLevel(String gradeLevel){
         return service.getManager().createNamedQuery("Voter.findByGradeLevel").setParameter("gradeLevel", gradeLevel).getResultList();
     }
-    
-    
-   
+
     public void save(Voter voter){
         service.getTransaction().begin();
         Voter merged = this.service.getManager().merge(voter);;

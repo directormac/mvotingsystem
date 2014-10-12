@@ -21,13 +21,15 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -88,6 +90,12 @@ public class CandidateFormPresenter implements Initializable {
     ObservableList<Party> partyList;
     ObservableList<Position> positionList;
     
+    ObservableList<Voter> votersData;
+    FilteredList<Voter> filteredVotersData;
+
+    ObservableList<Position> positionsData;
+    FilteredList<Position> filteredPositionsData;
+    
     Image img;    
     File file;
     /**
@@ -96,7 +104,51 @@ public class CandidateFormPresenter implements Initializable {
      * @param rb
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {        
+    public void initialize(URL url, ResourceBundle rb) {  
+        votersData = FXCollections.observableArrayList();
+        filteredVotersData = new FilteredList<>(votersData, p -> true);
+        filterStudentField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+          filteredVotersData.setPredicate(voter ->{
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String lowerCaseFilter = newValue.toLowerCase();
+                if (voter.getFirstName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; 
+                } else if (voter.getLastName().toLowerCase().contains(lowerCaseFilter)) {
+                    return true; 
+                }
+                return false;
+            });
+        });
+        studentListView.setItems(filteredVotersData);
+        
+        positionsData = FXCollections.observableArrayList();
+        filteredPositionsData = new FilteredList<>(positionsData, p -> true);
+        partylistComboBox.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Party> observable, Party oldValue, Party newValue) -> {
+            positionComboBox.setItems(FXCollections.observableArrayList(getAvailablePositions(newValue)));
+        });
+        
+        
+        positionComboBox.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Position> observable, Position oldValue, Position newValue) -> {
+               votersData.clear(); 
+               if(newValue.getName().equalsIgnoreCase("President")){                   
+                   votersData.addAll(getAvailableCandidates(service.searchByGradeLevel("Ten")));
+               }else if(newValue.getName().equalsIgnoreCase("Vice president")){
+                   votersData.addAll(getAvailableCandidates(service.searchByGradeLevel("Nine")));
+                }else if(newValue.getName().equalsIgnoreCase("Grade 7 Representative")){
+                   votersData.addAll(getAvailableCandidates(service.searchByGradeLevel("Seven")));
+                }else if(newValue.getName().equalsIgnoreCase("Grade 8 Representative")){
+                   votersData.addAll(getAvailableCandidates(service.searchByGradeLevel("Eight")));
+                }else if(newValue.getName().equalsIgnoreCase("Grade 9 Representative")){
+                   votersData.addAll(getAvailableCandidates(service.searchByGradeLevel("Nine")));
+                }else if(newValue.getName().equalsIgnoreCase("Grade 10 Representative")){
+                   votersData.addAll(getAvailableCandidates(service.searchByGradeLevel("Ten")));
+                }else{
+                    votersData.addAll(getAvailableCandidates(service.getAllVoter()));
+                }
+        });
+
         partylistComboBox.setCellFactory(new Callback<ListView<Party>,ListCell<Party>>(){ 
             @Override
             public ListCell<Party> call(ListView<Party> p) {                 
@@ -132,6 +184,8 @@ public class CandidateFormPresenter implements Initializable {
                 return cell;
             }
         });
+        
+        
 
        studentListView.setCellFactory(new Callback<ListView<Voter>,ListCell<Voter>>(){ 
             @Override
@@ -150,8 +204,10 @@ public class CandidateFormPresenter implements Initializable {
                 return cell;
             }
         });
+        
+        
 
-       studentListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voter>() {
+        studentListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voter>() {
            @Override
            public void changed(ObservableValue<? extends Voter> observable, Voter oldValue, Voter newValue) {
                firstNameLabel.setText(newValue.getFirstName());
@@ -160,31 +216,48 @@ public class CandidateFormPresenter implements Initializable {
            }
        });
        
-       positionComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Position>() {
-            @Override
-            public void changed(ObservableValue<? extends Position> observable, Position oldValue, Position newValue) {
-                if(newValue == null){
-                    studentListView.getItems().clear();
-                }else{
-                    studentListView.setItems(FXCollections.observableArrayList(getAvailableVoter()));
-                }
-                
-            }
-        });
+//       positionComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Position>() {
+//            @Override
+//            public void changed(ObservableValue<? extends Position> observable, Position oldValue, Position newValue) {
+//                if(newValue == null){
+//                    studentListView.getItems().clear();
+//                }else{
+//                    studentListView.setItems(FXCollections.observableArrayList(getAvailableVoter()));
+//                }
+//                
+//            }
+//        });
+       
+       
        filterStudentField.disableProperty().bind(positionComboBox.getSelectionModel().selectedItemProperty().isNull());
-       filterStudentField.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if(newValue.isEmpty()){
-                    studentListView.setItems(FXCollections.observableArrayList(getAvailableVoter()));
-                }else{
-                    
-                }
-                
-                
-            }
-        });
+//       filterStudentField.textProperty().addListener(new ChangeListener<String>() {
+//            @Override
+//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//                if(newValue.isEmpty()){
+//                    studentListView.setItems(FXCollections.observableArrayList(getAvailableVoter()));
+//                }else{
+//                    
+//                }
+//                
+//                
+//            }
+//        });
     }  
+    
+    public List<Voter> getAvailableCandidates(List<Voter> voters){
+        List<Candidate> candidates = service.getAllCandidates();
+        candidates.stream().filter((candidate) -> 
+           (voters.contains(candidate.getVoterId()))).forEach((candidate) -> {
+            voters.remove(candidate.getVoterId());
+        });
+//        for(Voter voter: voters){
+//         if(!(voter.getGradeLevel().equalsIgnoreCase(position)))   {
+//             voters.remove(voter);
+//         }
+//        }
+        return voters;
+    }
+    
     
     @FXML
     private void showStudents(Event event) { 
@@ -199,7 +272,7 @@ public class CandidateFormPresenter implements Initializable {
     
     @FXML
     private void showPositions(Event event) { 
-        positionComboBox.setItems(FXCollections.observableArrayList(getAvailablePositions()));
+        
     }
     
     
@@ -273,8 +346,7 @@ public class CandidateFormPresenter implements Initializable {
         }
     }
     
-    private List<Position> getAvailablePositions(){
-        Party party = partylistComboBox.getSelectionModel().getSelectedItem();
+    private List<Position> getAvailablePositions(Party party){
         List<Position> positions = service.getAllPositions();
         List<Candidate> candidates = party.getCandidates();
         if(candidates.isEmpty()){

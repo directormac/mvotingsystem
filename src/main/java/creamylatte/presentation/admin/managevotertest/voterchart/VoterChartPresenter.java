@@ -57,12 +57,13 @@ public class VoterChartPresenter implements Initializable {
                 pdGrade10.setPieValue(gradeSize("Ten"));
             }
         });
-        
+ 
     }   
     
     public int gradeSize(String string){
         int size = 0;
         for(Voter voter : getMasterData()){
+            
             if(voter.getGradeLevel().equalsIgnoreCase(string))
                 size++;
         }

@@ -11,7 +11,7 @@
 package creamylatte.presentation.admin.managevotertest;
 
 
-import creamylatte.business.models.Candidate;
+
 import creamylatte.business.models.Voter;
 import creamylatte.business.services.CandidateService;
 import creamylatte.business.services.VoterService;
@@ -21,20 +21,24 @@ import creamylatte.presentation.admin.managevotertest.voterform.VoterFormPresent
 import creamylatte.presentation.admin.managevotertest.voterform.VoterFormView;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javax.inject.Inject;
+
 
 /**
  * FXML Controller class
@@ -70,16 +74,17 @@ public class ManageVoterTestPresenter implements Initializable {
     @Inject
     CandidateService candidateService;
     
-    VoterChartPresenter voterChartPresenter;
-    VoterChartView voterChartView;
+    private VoterChartPresenter voterChartPresenter;
+    private VoterChartView voterChartView;
     VoterFormPresenter voterFormPresenter;
     VoterFormView voterFormView;
     
     
     ObservableList<Voter> masterData = FXCollections.observableArrayList();
-    
-    
+    ObjectProperty<Voter> currentVoter = new SimpleObjectProperty<>();
+    FilteredList<Voter> filteredData;
 
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
       masterData.addAll(service.all());
@@ -88,7 +93,7 @@ public class ManageVoterTestPresenter implements Initializable {
       gradeLevelColumn.setCellValueFactory(cellData -> cellData.getValue().gradeLEvelProperty());
       passwordColumn.setCellValueFactory(cellData -> cellData.getValue().getAccount().passwordProperty());
     
-      FilteredList<Voter> filteredData = new FilteredList<>(masterData, p -> true);
+      filteredData = new FilteredList<>(masterData, p -> true);
       filterTextField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
           filteredData.setPredicate(voter ->{
                 // If filter text is empty, display all voter.
@@ -106,46 +111,103 @@ public class ManageVoterTestPresenter implements Initializable {
                 return false; // Does not match.
             });
         });
-       SortedList<Voter> sortedData = new SortedList<>(filteredData);
-       sortedData.comparatorProperty().bind(voterTable.comparatorProperty());
-       voterTable.setItems(sortedData);
+
+
+       voterTable.setItems(filteredData);
        
-       voterChartView = new VoterChartView();
-       voterChartPresenter = (VoterChartPresenter) voterChartView.getPresenter();
-       voterChartPresenter.getMasterData().addAll(service.all());
+       setVoterChartView(new VoterChartView());
+       setVoterChartPresenter((VoterChartPresenter) getVoterChartView().getPresenter());
+       getVoterChartPresenter().getMasterData().setAll(masterData.sorted());
        
+       voterFormView = new VoterFormView();
+       voterFormPresenter = (VoterFormPresenter) voterFormView.getPresenter();
+       voterFormPresenter.setVoterChartView(voterChartView);
+       currentVoter.bindBidirectional(voterFormPresenter.getCurrentVoter());
        rightPane.getChildren().clear();
-       rightPane.getChildren().add(voterChartView.getView());
+       rightPane.getChildren().add(getVoterChartView().getView());
        
        
-       voterTable.itemsProperty().addListener(new ChangeListener<ObservableList<Voter>>() {
+       
+       masterData.addListener(new ListChangeListener<Voter>() {
           @Override
-          public void changed(ObservableValue<? extends ObservableList<Voter>> observable, ObservableList<Voter> oldValue, ObservableList<Voter> newValue) {
-              voterChartPresenter.getMasterData().clear();
-              voterChartPresenter.getMasterData().addAll(service.all());
+          public void onChanged(ListChangeListener.Change<? extends Voter> c) {
+              getVoterChartPresenter().getMasterData().clear();
+              getVoterChartPresenter().getMasterData().addAll(service.all());
+          }
+        }
+       );
+
+       
+       removeVoterButton.disableProperty().bind(voterTable.getSelectionModel().selectedItemProperty().isNull());
+       editVoterButton.disableProperty().bind(voterTable.getSelectionModel().selectedItemProperty().isNull());
+       
+        voterTable.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Voter>() {
+          @Override
+          public void changed(ObservableValue<? extends Voter> observable, Voter oldValue, Voter newValue) {
+              currentVoter.set(voterTable.getSelectionModel().getSelectedItem());
+          }
+        }
+       );
+      
+        rightPane.getChildren().addListener(new ListChangeListener<Node>() {
+          @Override
+          public void onChanged(ListChangeListener.Change<? extends Node> c) {
+             masterData.clear();
+             masterData.addAll(service.all());
           }
       });
-       
-       
-       
+        
+        
     }
 
     @FXML
     private void addVoterButtonAction(ActionEvent event) {
+       voterFormView = new VoterFormView();
+       voterFormPresenter = (VoterFormPresenter)voterFormView.getPresenter();
+       voterFormPresenter.setVoterChartView(voterChartView);
        rightPane.getChildren().clear();
-       rightPane.getChildren().add(new VoterFormView().getView());
+       rightPane.getChildren().add(voterFormView.getView());
+       voterTable.getSelectionModel().clearSelection();
     }
 
     @FXML
     private void removeVoterButtonAction(ActionEvent event) {
-        masterData.remove(voterTable.getSelectionModel().getSelectedItem());
+
+//        masterData.remove(voterTable.getSelectionModel().getSelectedItem());
+//        service.remove(voterTable.getSelectionModel().getSelectedItem());
+        
+        service.remove(currentVoter.get());
+        voterTable.getSelectionModel().clearSelection();
+        masterData.clear();
+        masterData.addAll(service.all());
     }
 
     @FXML
     private void editVoterButtonAction(ActionEvent event) {
-        
-        
+       rightPane.getChildren().clear();
+       rightPane.getChildren().add(voterFormView.getView());       
+//       voterTable.getSelectionModel().clearSelection();     
     }
+
+
+    public VoterChartPresenter getVoterChartPresenter() {
+        return voterChartPresenter;
+    }
+
+
+    public void setVoterChartPresenter(VoterChartPresenter voterChartPresenter) {
+        this.voterChartPresenter = voterChartPresenter;
+    }
+
+    public VoterChartView getVoterChartView() {
+        return voterChartView;
+    }
+
+    public void setVoterChartView(VoterChartView voterChartView) {
+        this.voterChartView = voterChartView;
+    }
+    
+    
     
     
 }
