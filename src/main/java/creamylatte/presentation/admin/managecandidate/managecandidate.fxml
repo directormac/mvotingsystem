@@ -9,7 +9,6 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managecandidate.ManageCandidatePresenter">
    <children>
       <Separator layoutY="63.0" prefHeight="7.0" prefWidth="1150.0" />
@@ -21,7 +20,7 @@
                </HBox.margin>
             </Button>
             <Button mnemonicParsing="false" prefHeight="49.0" prefWidth="157.0" text="View Positions" />
-            <Button fx:id="viewAllPartyList" mnemonicParsing="false" onAction="#viewAllPartyListAction" prefHeight="49.0" prefWidth="157.0" text="View Party List" />
+            <Button fx:id="viewAllPartyList" mnemonicParsing="false" onAction="#viewAllPartyListAction" prefHeight="49.0" prefWidth="157.0" text="Add Party List" />
          </children>
          <padding>
             <Insets left="10.0" right="10.0" top="10.0" />

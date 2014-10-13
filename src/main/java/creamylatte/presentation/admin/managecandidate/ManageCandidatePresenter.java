@@ -10,6 +10,7 @@
 package creamylatte.presentation.admin.managecandidate;
 
 import creamylatte.presentation.admin.managecandidate.candidateoverview.CandidateOverviewView;
+import creamylatte.presentation.admin.managecandidate.partylistform.PartyListFormView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -50,7 +51,7 @@ public class ManageCandidatePresenter implements Initializable {
 
     @FXML
     private void viewAllPartyListAction(ActionEvent event) {
-        
+        changePane(new PartyListFormView().getView());
     }
     
     private void changePane(Parent parent){

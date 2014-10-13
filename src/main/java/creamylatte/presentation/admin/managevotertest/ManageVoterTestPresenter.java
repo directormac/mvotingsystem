@@ -20,6 +20,7 @@ import creamylatte.presentation.admin.managevotertest.voterchart.VoterChartView;
 import creamylatte.presentation.admin.managevotertest.voterform.VoterFormPresenter;
 import creamylatte.presentation.admin.managevotertest.voterform.VoterFormView;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -152,10 +153,15 @@ public class ManageVoterTestPresenter implements Initializable {
         rightPane.getChildren().addListener(new ListChangeListener<Node>() {
           @Override
           public void onChanged(ListChangeListener.Change<? extends Node> c) {
-             masterData.clear();
-             masterData.addAll(service.all());
+              List<Voter> updatedList = service.all();
+              updatedList.stream().filter((voter) -> (!masterData.contains(voter))).forEach((voter) -> {
+                  masterData.add(voter);
+              });
+              
+              
           }
-      });
+        });
+        
         
         
     }
