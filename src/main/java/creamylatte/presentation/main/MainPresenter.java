@@ -14,9 +14,9 @@ import creamylatte.business.models.UserAccount;
 import creamylatte.business.services.Authenticator;
 import creamylatte.business.services.VoterService;
 import creamylatte.presentation.admin.voterform.VoterFormPresenter;
-import creamylatte.presentation.admin.voterform.VoterFormView;
 import creamylatte.presentation.login.LoginPresenter;
-import creamylatte.presentation.login.LoginView;
+import creamylatte.presentation.welcome.WelcomePresenter;
+import creamylatte.presentation.welcome.WelcomeView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
@@ -54,16 +54,25 @@ public class MainPresenter implements Initializable {
     private MenuItem partylistMenu;
     @FXML
     private Button closeButton;
-    
+    private WelcomePresenter welcomePresenter;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.user = new SimpleObjectProperty<>();
-        LoginView loginView = new LoginView();
-        this.loginPresenter = (LoginPresenter) loginView.getPresenter();
-        this.user.bindBidirectional(this.loginPresenter.getUser());
-        contentPane.getChildren().clear();
-        contentPane.getChildren().add(loginView.getView());
+        
+        
+        WelcomeView wc = new WelcomeView();
+        welcomePresenter = (WelcomePresenter)wc.getPresenter();
+        contentPane.getChildren().add(wc.getView());
+        
+        
+        
+        
+//        LoginView loginView = new LoginView();
+//        this.loginPresenter = (LoginPresenter) loginView.getPresenter();
+//        this.user.bindBidirectional(this.loginPresenter.getUser());
+//        contentPane.getChildren().clear();
+//        contentPane.getChildren().add(loginView.getView());
     }    
 
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="welcomePane" fx:id="currentPane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" styleClass="welcomePane" stylesheets="@../../app.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.welcome.WelcomePresenter">
+   <children>
+      <Label id="welcomeLabel" layoutX="212.0" layoutY="158.0" text="Computerize Voting System" />
+      <Hyperlink fx:id="voteHyperlink" layoutX="212.0" layoutY="406.0" onAction="#voteHyperlinkAction" text="Click here to vote" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink fx:id="monitorHyperlink" layoutX="871.0" layoutY="406.0" onAction="#monitorHyperlinkAction" text="Click here to monitor" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Hyperlink>
+   </children>
+</AnchorPane>

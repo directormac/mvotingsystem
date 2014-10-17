@@ -1,0 +1,26 @@
+/*.root {
+  -dark                        : #27292D;
+  -standard                    : #c0392b;
+  -bright                      : #DF5B5B;
+  -text-color                  : #FFFEFE;
+  -highlight-effect            : dropshadow(two-pass-box, rgba(255, 255, 255, 1.0), 20, 0.5, 0, 0);
+  -fx-background               : #34383B;
+  -fx-base                     : -standard;
+  -fx-font-family              : "Roboto Light";
+  -fx-font-size                : 16px;
+  -fx-font-weight              : lighter;
+  -fx-selection-bar            : -standard;
+  -fx-selection-bar-non-focused: derive(-standard, 20%);
+}*/
+
+
+#welcomePane{
+    -fx-background-image : url("images/welcomebg.png");
+    -fx-background-color: #c0392b;
+}
+
+
+#welcomeLabel{
+    -fx-font-size: 70px;
+    -fx-text-fill: white;
+}

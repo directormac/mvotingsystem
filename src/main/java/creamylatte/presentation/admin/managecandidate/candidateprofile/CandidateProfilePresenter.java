@@ -57,18 +57,27 @@ public class CandidateProfilePresenter implements Initializable {
         getSelectedCandidate().addListener(new ChangeListener<Candidate>() {
             @Override
             public void changed(ObservableValue<? extends Candidate> observable, Candidate oldValue, Candidate newValue) {
-                InputStream inputStream = new ByteArrayInputStream(newValue.getImage().getData());
-                Image image = new Image(inputStream);
-                candidateImageView.setImage(image);
-                candidateNameLabel.setText(newValue.getVoterId().getLastName().concat(" , ")
-                                            .concat(newValue.getVoterId().getFirstName()));
+//                InputStream inputStream = new ByteArrayInputStream(newValue.getImage().getData());
+//                Image image = new Image(inputStream);
+//                candidateImageView.setImage(image);
+                candidateNameLabel.setText(firstCharToUpperCase(newValue.getVoterId().getLastName()).concat(" , ")
+                                            .concat(firstCharToUpperCase(newValue.getVoterId().getFirstName())));
                 positionPartyLabel.setText(newValue.getPosition().getName().concat(" , ")
                                             .concat(newValue.getParty().getName()));
-                totalVotesLabel.setText(newValue.getVoters().size() + " voters ");
+                totalVotesLabel.setText(newValue.getVoters().size() + " votes ");
                 
             }
         });
     }    
+    
+    private String firstCharToUpperCase(String string){
+        return Character.toUpperCase(string.charAt(0)) + string.substring(1);
+    }
+    
+    
+    public void setCandidate(Candidate candidate){
+       selectedCandidate.set(candidate);
+    }
 
     @FXML
     private void editCandidateButtonAction(ActionEvent event) {

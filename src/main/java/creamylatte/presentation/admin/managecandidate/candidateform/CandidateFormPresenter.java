@@ -23,13 +23,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -62,8 +60,6 @@ public class CandidateFormPresenter implements Initializable {
     @FXML
     private Button selectPhotoButton;
     @FXML
-    private Button removePhotoButton;
-    @FXML
     private Button saveButton;
     @FXML
     private Label firstNameLabel;
@@ -79,7 +75,6 @@ public class CandidateFormPresenter implements Initializable {
     @FXML
     private TextField filterStudentField;
     
-    @FXML
     private AnchorPane anchorPane;
     
     @Inject
@@ -98,6 +93,10 @@ public class CandidateFormPresenter implements Initializable {
     
     Image img;    
     File file;
+    @FXML
+    private AnchorPane mainPane;
+    @FXML
+    private Button cancelButton;
     /**
      * Initializes the controller class.
      * @param url
@@ -108,7 +107,7 @@ public class CandidateFormPresenter implements Initializable {
         votersData = FXCollections.observableArrayList();
         filteredVotersData = new FilteredList<>(votersData, p -> true);
         filterStudentField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-          filteredVotersData.setPredicate(voter ->{
+        filteredVotersData.setPredicate(voter ->{
                 if (newValue == null || newValue.isEmpty()) {
                     return true;
                 }
@@ -134,7 +133,7 @@ public class CandidateFormPresenter implements Initializable {
                votersData.clear(); 
                if(newValue.getName().equalsIgnoreCase("President")){                   
                    votersData.addAll(getAvailableCandidates(service.searchByGradeLevel("Ten")));
-               }else if(newValue.getName().equalsIgnoreCase("Vice president")){
+               }else if(newValue.getName().equalsIgnoreCase("Vice President")){
                    votersData.addAll(getAvailableCandidates(service.searchByGradeLevel("Nine")));
                 }else if(newValue.getName().equalsIgnoreCase("Grade 7 Representative")){
                    votersData.addAll(getAvailableCandidates(service.searchByGradeLevel("Seven")));
@@ -215,33 +214,14 @@ public class CandidateFormPresenter implements Initializable {
                gradeLevelLabel.setText(newValue.getGradeLevel());
            }
        });
-       
-//       positionComboBox.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Position>() {
-//            @Override
-//            public void changed(ObservableValue<? extends Position> observable, Position oldValue, Position newValue) {
-//                if(newValue == null){
-//                    studentListView.getItems().clear();
-//                }else{
-//                    studentListView.setItems(FXCollections.observableArrayList(getAvailableVoter()));
-//                }
-//                
-//            }
-//        });
-       
-       
+
        filterStudentField.disableProperty().bind(positionComboBox.getSelectionModel().selectedItemProperty().isNull());
-//       filterStudentField.textProperty().addListener(new ChangeListener<String>() {
-//            @Override
-//            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-//                if(newValue.isEmpty()){
-//                    studentListView.setItems(FXCollections.observableArrayList(getAvailableVoter()));
-//                }else{
-//                    
-//                }
-//                
-//                
-//            }
-//        });
+       studentListView.disableProperty().bind(positionComboBox.getSelectionModel().selectedItemProperty().isNull());
+       positionComboBox.disableProperty().bind(partylistComboBox.getSelectionModel().selectedItemProperty().isNull());
+       selectPhotoButton.disableProperty().bind(studentListView.selectionModelProperty().isNull());
+       saveButton.disableProperty().bind(candidateImageView.imageProperty().isNull());
+       
+       
     }  
     
     public List<Voter> getAvailableCandidates(List<Voter> voters){
@@ -250,19 +230,10 @@ public class CandidateFormPresenter implements Initializable {
            (voters.contains(candidate.getVoterId()))).forEach((candidate) -> {
             voters.remove(candidate.getVoterId());
         });
-//        for(Voter voter: voters){
-//         if(!(voter.getGradeLevel().equalsIgnoreCase(position)))   {
-//             voters.remove(voter);
-//         }
-//        }
         return voters;
     }
     
     
-    @FXML
-    private void showStudents(Event event) { 
- 
-    }
     
     @FXML
     private void showPartyList(Event event) { 
@@ -285,13 +256,10 @@ public class CandidateFormPresenter implements Initializable {
         if(file != null){
             img = new Image("file:" +file.getAbsolutePath());
             candidateImageView.setImage(img);
+            
         }
     }
 
-    @FXML
-    private void removePhotoAction(ActionEvent event) {
-        
-    }
 
     @FXML
     private void saveButtonAction(ActionEvent event) {
@@ -320,33 +288,9 @@ public class CandidateFormPresenter implements Initializable {
         changePane(new CandidateOverviewView().getView());
     }
     
-    private List<Voter> getAvailableVoter(){
-        Position position = positionComboBox.getSelectionModel().getSelectedItem();
-        if(position.getName().equalsIgnoreCase("President")){
-            return service.searchByGradeLevel("Ten");
-        }else if(position.getName().equalsIgnoreCase("Vice president")){
-            return service.searchByGradeLevel("Nine");
-        }else if(position.getName().equalsIgnoreCase("Grade 7 Representative")){
-            return service.searchByGradeLevel("Seven");
-        }else if(position.getName().equalsIgnoreCase("Grade 8 Representative")){
-            return service.searchByGradeLevel("Eight");
-        }else if(position.getName().equalsIgnoreCase("Grade 9 Representative")){
-            return service.searchByGradeLevel("Nine");
-        }else if(position.getName().equalsIgnoreCase("Grade 10 Representative")){
-            return service.searchByGradeLevel("Ten");
-        }else{
-            List<Voter> voters = service.getAllVoter();
-            List<Candidate> candidates = service.getAllCandidates();
-            for(Candidate candidate: candidates){
-                if(voters.contains(candidate.getVoterId())){
-                    voters.remove(candidate.getVoterId());
-                }
-            }
-            return voters;
-        }
-    }
     
     private List<Position> getAvailablePositions(Party party){
+        service.refresh(party);
         List<Position> positions = service.getAllPositions();
         List<Candidate> candidates = party.getCandidates();
         if(candidates.isEmpty()){
@@ -360,9 +304,16 @@ public class CandidateFormPresenter implements Initializable {
     }
     
     private void changePane(Parent parent){
-        AnchorPane mainPane = (AnchorPane)anchorPane.getParent();
-        mainPane.getChildren().clear();
-        mainPane.getChildren().add(parent);
+        AnchorPane mainPane1 = (AnchorPane)mainPane.getParent();
+        mainPane1.getChildren().clear();
+        mainPane1.getChildren().add(parent);
+    }
+
+    @FXML
+    private void cancelButtonAction(ActionEvent event) {
+        
+        
+        
     }
     
 }

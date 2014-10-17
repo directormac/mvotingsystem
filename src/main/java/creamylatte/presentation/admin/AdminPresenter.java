@@ -10,7 +10,7 @@
 package creamylatte.presentation.admin;
 
 import creamylatte.presentation.admin.managecandidate.ManageCandidateView;
-import creamylatte.presentation.admin.managevoter.ManageVoterView;
+import creamylatte.presentation.admin.managepartylist.ManagePartyListView;
 import creamylatte.presentation.admin.managevotertest.ManageVoterTestView;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -28,7 +28,7 @@ import javafx.scene.layout.AnchorPane;
  */
 public class AdminPresenter implements Initializable {
     @FXML
-    private Button votersButton,manageCandidateButton;
+    private Button votersButton,manageCandidateButton,partyListButton;
     @FXML
     private AnchorPane centerPane;
     @FXML
@@ -49,6 +49,10 @@ public class AdminPresenter implements Initializable {
         changePane(new ManageCandidateView().getView());        
     }
     
+    @FXML
+    private void partyListAction(ActionEvent event) {
+        changePane(new ManagePartyListView().getView());        
+    }
 
     @FXML
     private void votersButtonAction(ActionEvent event) {

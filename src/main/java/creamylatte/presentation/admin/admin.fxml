@@ -7,21 +7,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.AdminPresenter">
+<BorderPane maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.AdminPresenter">
    <center>
-      <AnchorPane fx:id="centerPane" prefHeight="723.0" prefWidth="1087.0" BorderPane.alignment="CENTER" />
+      <AnchorPane fx:id="centerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1040.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
-      <AnchorPane fx:id="topPane" prefHeight="45.0" prefWidth="1136.0" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="topPane" prefHeight="30.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="14.0" layoutY="14.0" text="Admin Panel" />
+            <Label layoutX="14.0" layoutY="8.0" text="Admin Panel" />
+            <Separator layoutX="-3.0" layoutY="29.0" prefHeight="0.0" prefWidth="1280.0" />
          </children>
       </AnchorPane>
    </top>
    <left>
-      <AnchorPane prefHeight="595.0" prefWidth="234.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="690.0" prefWidth="240.0" BorderPane.alignment="CENTER">
          <children>
-            <Accordion prefHeight="200.0" prefWidth="234.0">
+            <Accordion prefHeight="200.0" prefWidth="241.0">
               <panes>
                 <TitledPane animated="false" prefHeight="149.0" prefWidth="234.0" text="Manage">
                      <content>
@@ -29,7 +30,7 @@
                            <children>
                               <Button fx:id="votersButton" mnemonicParsing="false" onAction="#votersButtonAction" prefHeight="25.0" prefWidth="217.0" text="Voters" />
                               <Button fx:id="manageCandidateButton" mnemonicParsing="false" onAction="#manageCandidateButtonAction" prefHeight="25.0" prefWidth="217.0" text="Candidates" />
-                              <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="217.0" text="Party List" />
+                              <Button fx:id="partyListButton" mnemonicParsing="false" onAction="#partyListAction" prefHeight="25.0" prefWidth="217.0" text="Party List" />
                            </children>
                            <padding>
                               <Insets left="30.0" right="10.0" top="10.0" />
@@ -37,7 +38,7 @@
                         </VBox>
                      </content>
                 </TitledPane>
-                <TitledPane animated="false" text="View">
+                <TitledPane animated="false" prefHeight="213.0" prefWidth="234.0" text="View">
                      <content>
                         <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
                            <children>

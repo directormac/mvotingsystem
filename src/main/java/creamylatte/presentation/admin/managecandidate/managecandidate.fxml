@@ -9,11 +9,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managecandidate.ManageCandidatePresenter">
+<AnchorPane id="AnchorPane" maxHeight="690.0" maxWidth="1040.0" minHeight="690.0" minWidth="1040.0" prefHeight="690.0" prefWidth="1040.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managecandidate.ManageCandidatePresenter">
    <children>
-      <Separator layoutY="63.0" prefHeight="7.0" prefWidth="1150.0" />
-      <HBox layoutX="14.0" prefHeight="59.0" prefWidth="603.0" spacing="30.0">
+      <Separator layoutY="54.0" prefHeight="0.0" prefWidth="1040.0" />
+      <HBox prefHeight="40.0" prefWidth="623.0" spacing="30.0">
          <children>
             <Button fx:id="viewAllCandidatesButton" mnemonicParsing="false" onAction="#viewAllCandidatesButtonAction" prefHeight="49.0" prefWidth="157.0" text="View All Candidates">
                <HBox.margin>
@@ -27,6 +26,6 @@
             <Insets left="10.0" right="10.0" top="10.0" />
          </padding>
       </HBox>
-      <AnchorPane fx:id="contentPane" layoutY="73.0" prefHeight="570.0" prefWidth="1150.0" />
+      <AnchorPane fx:id="contentPane" layoutY="57.0" prefHeight="640.0" prefWidth="1040.0" />
    </children>
 </AnchorPane>

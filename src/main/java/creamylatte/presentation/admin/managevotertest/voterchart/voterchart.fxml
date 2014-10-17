@@ -8,15 +8,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="556.0" prefWidth="559.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="creamylatte.presentation.admin.managevotertest.voterchart.VoterChartPresenter">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managevotertest.voterchart.VoterChartPresenter">
    <children>
-      <Label layoutX="155.0" layoutY="27.0" text="Voter's Per Grade Level">
+      <Label layoutX="127.0" layoutY="27.0" text="Voter's Per Grade Level">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Separator layoutY="78.0" prefHeight="0.0" prefWidth="556.0" />
-      <PieChart fx:id="voterChart" layoutY="78.0" prefHeight="477.0" prefWidth="559.0" />
+      <Separator layoutY="86.0" prefHeight="0.0" prefWidth="500.0" />
+      <PieChart fx:id="voterChart" layoutY="96.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="520.0" prefWidth="500.0" />
    </children>
 </AnchorPane>

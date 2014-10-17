@@ -29,6 +29,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.*;
 import javafx.scene.Node;
@@ -83,7 +84,7 @@ public class ManageVoterTestPresenter implements Initializable {
     ObservableList<Voter> masterData = FXCollections.observableArrayList();
     ObjectProperty<Voter> currentVoter = new SimpleObjectProperty<>();
     FilteredList<Voter> filteredData;
-
+    SortedList<Voter> sortedData;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -111,9 +112,10 @@ public class ManageVoterTestPresenter implements Initializable {
                 return false; // Does not match.
             });
         });
+      sortedData = new SortedList<>(filteredData);
+       sortedData.comparatorProperty().bind(voterTable.comparatorProperty());        
 
-
-       voterTable.setItems(filteredData);
+       voterTable.setItems(sortedData);
        
        setVoterChartView(new VoterChartView());
        setVoterChartPresenter((VoterChartPresenter) getVoterChartView().getPresenter());
@@ -122,7 +124,7 @@ public class ManageVoterTestPresenter implements Initializable {
        voterFormView = new VoterFormView();
        voterFormPresenter = (VoterFormPresenter) voterFormView.getPresenter();
        voterFormPresenter.setVoterChartView(voterChartView);
-       currentVoter.bindBidirectional(voterFormPresenter.getCurrentVoter());
+//       currentVoter.bindBidirectional(voterFormPresenter.getCurrentVoter());
        rightPane.getChildren().clear();
        rightPane.getChildren().add(getVoterChartView().getView());
        
@@ -152,8 +154,10 @@ public class ManageVoterTestPresenter implements Initializable {
         rightPane.getChildren().addListener(new ListChangeListener<Node>() {
           @Override
           public void onChanged(ListChangeListener.Change<? extends Node> c) {
-             masterData.clear();
-             masterData.addAll(service.all());
+              if(rightPane.getChildren().contains(voterChartView.getView())){
+                  masterData.clear();
+                  masterData.addAll(service.all());
+              }
           }
       });
         
@@ -172,10 +176,6 @@ public class ManageVoterTestPresenter implements Initializable {
 
     @FXML
     private void removeVoterButtonAction(ActionEvent event) {
-
-//        masterData.remove(voterTable.getSelectionModel().getSelectedItem());
-//        service.remove(voterTable.getSelectionModel().getSelectedItem());
-        
         service.remove(currentVoter.get());
         voterTable.getSelectionModel().clearSelection();
         masterData.clear();
@@ -184,6 +184,7 @@ public class ManageVoterTestPresenter implements Initializable {
 
     @FXML
     private void editVoterButtonAction(ActionEvent event) {
+       voterFormPresenter.setVoter(currentVoter.get());
        rightPane.getChildren().clear();
        rightPane.getChildren().add(voterFormView.getView());       
 //       voterTable.getSelectionModel().clearSelection();     

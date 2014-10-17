@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1140.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managepartylist.ManagePartyListPresenter">
+   <children>
+      <TreeTableView fx:id="partylistTable" layoutX="29.0" layoutY="112.0" prefHeight="392.0" prefWidth="565.0">
+        <columns>
+            <TreeTableColumn fx:id="positionColumn" prefWidth="207.0" text="Position" />
+            <TreeTableColumn fx:id="nameColumn" prefWidth="234.0" text="Name" />
+            <TreeTableColumn fx:id="gradeColumn" prefWidth="122.0" text="Grade Level" />
+        </columns>
+      </TreeTableView>
+      <Button fx:id="addNewPartyButton" layoutX="29.0" layoutY="522.0" mnemonicParsing="false" onAction="#addNewPartyAction" text="Add New" />
+      <AnchorPane fx:id="addPartyPane" layoutX="62.0" layoutY="556.0">
+         <children>
+            <Label layoutY="4.0" text="Party Name :" />
+            <Button fx:id="addPartyListButton" layoutX="185.0" layoutY="43.0" mnemonicParsing="false" onAction="#addPartyListAction" text="Add" />
+            <TextField fx:id="partyNameField" layoutX="77.0" />
+         </children>
+      </AnchorPane>
+      <Button fx:id="candidateProfileButton" layoutX="371.0" layoutY="70.0" mnemonicParsing="false" onAction="#candidateProfileAction" text="Candidate Profile" />
+      <Button fx:id="renamePartyListButton" layoutX="29.0" layoutY="70.0" mnemonicParsing="false" onAction="#renamePartyListAction" text="Rename Partylist" />
+      <Button fx:id="removeCandidateButton" layoutX="488.0" layoutY="70.0" mnemonicParsing="false" onAction="#removeCandidateAction" text="Remove" />
+      <Button fx:id="editCandidateButton" layoutX="553.0" layoutY="70.0" mnemonicParsing="false" onAction="#editCandidateAction" prefHeight="25.0" prefWidth="41.0" text="Edit" />
+      <Button fx:id="removePartylistButton" layoutX="141.0" layoutY="70.0" mnemonicParsing="false" onAction="#removePartylistAction" prefHeight="25.0" prefWidth="105.0" text="Remove Partylist" />
+   </children>
+</AnchorPane>

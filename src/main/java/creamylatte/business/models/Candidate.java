@@ -52,6 +52,15 @@ public class Candidate implements Serializable {
         this.voters = new SimpleListProperty<>();
     }
     
+    public Candidate(String name) {       
+        this.id = new SimpleIntegerProperty();                
+        this.voterId = new SimpleObjectProperty<>();
+        this.position = new SimpleObjectProperty<>();
+        this.partylist = new SimpleObjectProperty<>();
+        this.voters = new SimpleListProperty<>();
+    }
+    
+    
     public Candidate(Voter voterId ,Position position,Party party){
         this();
         this.voterId.set(voterId);
@@ -70,7 +79,7 @@ public class Candidate implements Serializable {
         this.id.set(id);
     }    
     
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "voter_id")
     public Voter getVoterId(){
         return this.voterId.get();

@@ -54,11 +54,13 @@ public class VoterFormPresenter implements Initializable {
     private VoterChartView voterChartView;
     @Inject
     VoterService service;
+    @FXML
+    private Button cancelButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         gradeLevelCBox.setItems(FXCollections.observableArrayList("Seven","Eight","Nine","Ten"));
-        setCurrentVoter(new SimpleObjectProperty<>());
+        currentVoter = new SimpleObjectProperty<>();
         currentVoter.addListener(new ChangeListener<Voter>() {
             @Override
             public void changed(ObservableValue<? extends Voter> observable, Voter oldValue, Voter newValue) {
@@ -74,8 +76,16 @@ public class VoterFormPresenter implements Initializable {
             }
         });
         
+        
+        textFieldListeners(lastNameField);
+        textFieldListeners(firstNameField);
+        
        
     }    
+    
+    public void setVoter(Voter voter){
+        currentVoter.set(voter);
+    }
 
     @FXML
     private void addVoterButtonAction(ActionEvent event) {
@@ -163,6 +173,13 @@ public class VoterFormPresenter implements Initializable {
      */
     public void setAddVoterButton(Button addVoterButton) {
         this.addVoterButton = addVoterButton;
+    }
+
+    @FXML
+    private void cancelButtonAction(ActionEvent event) {
+        AnchorPane currentPane = (AnchorPane) contentPane.getParent();
+        currentPane.getChildren().clear();
+        currentPane.getChildren().add(voterChartView.getView());
     }
     
     

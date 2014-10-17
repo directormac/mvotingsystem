@@ -24,6 +24,17 @@ public class CandidateService {
     @Inject
     private DBService service;
     
+    
+    public void refresh(Party party){
+        service.getManager().refresh(party);
+    }
+    
+    public void remove(Candidate candidate){
+        service.getTransaction().begin();
+        service.getManager().remove(candidate);
+        service.getTransaction().commit();
+    }
+    
     public List<Party> getAllParty(){
         return service.getManager().createNamedQuery("Party.findAll").getResultList();
     }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="1040.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="creamylatte.presentation.admin.managepartylisttest.ManagePartyListTestPresenter">
+   <children>
+      <Button fx:id="removePartylistButton" layoutX="147.0" layoutY="97.0" mnemonicParsing="false" onAction="#removePartylistAction" prefHeight="25.0" prefWidth="105.0" text="Remove Partylist" />
+      <Button fx:id="editCandidateButton" layoutX="548.0" layoutY="97.0" mnemonicParsing="false" onAction="#editCandidateAction" prefHeight="25.0" prefWidth="41.0" text="Edit" />
+      <Button fx:id="removeCandidateButton" layoutX="483.0" layoutY="97.0" mnemonicParsing="false" onAction="#removeCandidateAction" text="Remove" />
+      <Button fx:id="renamePartyListButton" layoutX="24.0" layoutY="97.0" mnemonicParsing="false" onAction="#renamePartyListAction" text="Rename Partylist" />
+      <Button fx:id="candidateProfileButton" layoutX="366.0" layoutY="97.0" mnemonicParsing="false" onAction="#candidateProfileAction" text="Candidate Profile" />
+      <AnchorPane fx:id="formPane" layoutX="79.0" layoutY="576.0">
+         <children>
+            <TextField fx:id="partyNameField" layoutX="77.0" />
+            <Button fx:id="addPartyListButton" layoutX="76.0" layoutY="54.0" mnemonicParsing="false" onAction="#addPartyListAction" text="Add" />
+            <Label layoutY="4.0" text="Party Name :" />
+         </children>
+      </AnchorPane>
+      <Button fx:id="addNewPartyButton" layoutX="24.0" layoutY="541.0" mnemonicParsing="false" onAction="#addNewPartyAction" text="Add New" />
+      <TableView layoutX="24.0" layoutY="134.0" prefHeight="388.0" prefWidth="566.0">
+         <columns>
+            <TableColumn prefWidth="114.0" text="Position" />
+            <TableColumn prefWidth="331.0" text="Name" />
+            <TableColumn minWidth="0.0" prefWidth="120.0" text="Grade Level" />
+         </columns>
+      </TableView>
+      <ComboBox fx:id="partyListComboBox" layoutX="24.0" layoutY="54.0" onShown="#partyListComboBoxShown" prefWidth="150.0" promptText="Select here" />
+      <Label layoutX="25.0" layoutY="32.0" text="Select Party List here" />
+   </children>
+</AnchorPane>

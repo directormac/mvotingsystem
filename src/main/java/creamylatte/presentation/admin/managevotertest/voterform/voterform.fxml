@@ -7,44 +7,49 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" fx:id="contentPane" prefHeight="556.0" prefWidth="610.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managevotertest.voterform.VoterFormPresenter">
+<AnchorPane id="AnchorPane" fx:id="contentPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managevotertest.voterform.VoterFormPresenter">
    <children>
-      <Label layoutX="215.0" layoutY="14.0" text="Voter Form">
+      <Label layoutX="152.0" layoutY="25.0" text="Voter Form">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Separator layoutX="4.0" layoutY="86.0" prefHeight="0.0" prefWidth="603.0" />
-      <Label layoutX="123.0" layoutY="144.0" prefHeight="27.0" prefWidth="110.0" text="First Name :">
+      <Separator layoutY="86.0" prefHeight="0.0" prefWidth="500.0" />
+      <Label layoutX="41.0" layoutY="144.0" prefHeight="27.0" prefWidth="110.0" text="First Name :">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Button fx:id="addVoterButton" layoutX="437.0" layoutY="375.0" mnemonicParsing="false" onAction="#addVoterButtonAction" prefHeight="35.0" prefWidth="104.0" text="Add">
+      <Button fx:id="addVoterButton" layoutX="355.0" layoutY="375.0" mnemonicParsing="false" onAction="#addVoterButtonAction" prefHeight="35.0" prefWidth="104.0" text="Add">
          <font>
             <Font size="14.0" />
          </font>
       </Button>
-      <TextField fx:id="firstNameField" layoutX="253.0" layoutY="143.0" promptText="firstname">
+      <TextField fx:id="firstNameField" layoutX="171.0" layoutY="143.0" promptText="firstname">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="lastNameField" layoutX="253.0" layoutY="212.0" promptText="lastname">
+      <TextField fx:id="lastNameField" layoutX="171.0" layoutY="212.0" promptText="lastname">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <Label layoutX="123.0" layoutY="213.0" prefHeight="27.0" prefWidth="110.0" text="Last Name :">
+      <Label layoutX="41.0" layoutY="213.0" prefHeight="27.0" prefWidth="110.0" text="Last Name :">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="123.0" layoutY="279.0" prefHeight="27.0" prefWidth="110.0" text="Grade Level :">
+      <Label layoutX="41.0" layoutY="279.0" prefHeight="27.0" prefWidth="110.0" text="Grade Level :">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ComboBox fx:id="gradeLevelCBox" layoutX="253.0" layoutY="278.0" prefHeight="30.0" prefWidth="175.0" promptText="Grade Level" />
+      <ComboBox fx:id="gradeLevelCBox" layoutX="171.0" layoutY="278.0" prefHeight="30.0" prefWidth="175.0" promptText="Grade Level" />
+      <Button fx:id="cancelButton" layoutX="242.0" layoutY="375.0" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="35.0" prefWidth="104.0" text="Cancel">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

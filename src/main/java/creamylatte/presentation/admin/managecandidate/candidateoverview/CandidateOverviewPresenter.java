@@ -17,11 +17,13 @@ import creamylatte.presentation.admin.managecandidate.candidateprofile.Candidate
 import creamylatte.presentation.admin.managecandidate.candidateprofile.CandidateProfileView;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Pattern;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -66,9 +68,7 @@ public class CandidateOverviewPresenter implements Initializable {
         candidateProfileView = new CandidateProfileView();
         candidateProfilePresenter = (CandidateProfilePresenter)candidateProfileView.getPresenter();
         contentPane.getChildren().add(candidateProfileView.getView());
-        
-        
-        candidateListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
         candidateListView.setItems(FXCollections.observableArrayList(service.getAllCandidates()));
         candidateListView.setCellFactory(new Callback<ListView<Candidate>,ListCell<Candidate>>(){ 
             @Override
@@ -86,6 +86,13 @@ public class CandidateOverviewPresenter implements Initializable {
                     }
                 };
                 return cell;
+            }
+        });
+        
+        candidateListView.getItems().addListener(new ListChangeListener<Candidate>() {
+            @Override
+            public void onChanged(ListChangeListener.Change<? extends Candidate> c) {
+                candidateListView.setItems(FXCollections.observableArrayList(service.getAllCandidates()));
             }
         });
         
@@ -123,9 +130,11 @@ public class CandidateOverviewPresenter implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Candidate> observable, Candidate oldValue, Candidate newValue) {
                 selectedCandidate.set(newValue);
-                candidateProfilePresenter.setSelectedCandidate(selectedCandidate);
+                candidateProfilePresenter.setCandidate(newValue);
             }
         });
+        
+        
         
     }    
     
@@ -141,7 +150,7 @@ public class CandidateOverviewPresenter implements Initializable {
     @FXML
     private void showAllButtonAction(ActionEvent event) {
         partyListComboBox.getSelectionModel().clearSelection();
-        candidateListView.setItems(FXCollections.observableArrayList(service.getAllCandidates()));
+        
     }
     
     @FXML
@@ -151,7 +160,8 @@ public class CandidateOverviewPresenter implements Initializable {
     
     @FXML
     private void removeCandidateButtonAction(ActionEvent event) {
-        
+        Candidate candidate = selectedCandidate.get();
+        service.remove(candidate);
     }
     
     private void changePane(Parent parent){
