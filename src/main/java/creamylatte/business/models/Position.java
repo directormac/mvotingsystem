@@ -76,8 +76,14 @@ public class Position implements Serializable {
         this.candidates.set(list);
     }
     
+    
+    @Override
     public String toString(){
         return getName();
+    }
+    
+    public StringProperty nameProperty(){
+        return name;
     }
     
 }

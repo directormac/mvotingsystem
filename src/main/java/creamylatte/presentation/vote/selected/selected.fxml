@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@../../../app.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.vote.selected.SelectedPresenter">
+   <children>
+      <ComboBox layoutX="255.0" layoutY="31.0" prefWidth="150.0" />
+      <Label id="h1" layoutX="28.0" layoutY="21.0" text="Select Party list" />
+      <VBox layoutX="28.0" layoutY="72.0" prefHeight="623.0" prefWidth="527.0" />
+      <Label id="h2" layoutX="790.0" layoutY="110.0" text="President" />
+      <ComboBox id="candidateComboBox" layoutX="887.0" layoutY="97.0" prefHeight="44.0" prefWidth="224.0" />
+   </children>
+</AnchorPane>

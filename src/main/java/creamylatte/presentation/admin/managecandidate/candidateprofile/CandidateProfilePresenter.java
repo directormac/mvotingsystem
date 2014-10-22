@@ -57,9 +57,9 @@ public class CandidateProfilePresenter implements Initializable {
         getSelectedCandidate().addListener(new ChangeListener<Candidate>() {
             @Override
             public void changed(ObservableValue<? extends Candidate> observable, Candidate oldValue, Candidate newValue) {
-//                InputStream inputStream = new ByteArrayInputStream(newValue.getImage().getData());
-//                Image image = new Image(inputStream);
-//                candidateImageView.setImage(image);
+                InputStream inputStream = new ByteArrayInputStream(newValue.getImage().getData());
+                Image image = new Image(inputStream);
+                candidateImageView.setImage(image);
                 candidateNameLabel.setText(firstCharToUpperCase(newValue.getVoterId().getLastName()).concat(" , ")
                                             .concat(firstCharToUpperCase(newValue.getVoterId().getFirstName())));
                 positionPartyLabel.setText(newValue.getPosition().getName().concat(" , ")

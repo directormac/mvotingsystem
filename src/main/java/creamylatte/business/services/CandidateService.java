@@ -25,6 +25,11 @@ public class CandidateService {
     private DBService service;
     
     
+    public Candidate findCandidate(Integer id){
+        return service.getManager().find(Candidate.class, id);
+    }
+    
+    
     public void refresh(Party party){
         service.getManager().refresh(party);
     }

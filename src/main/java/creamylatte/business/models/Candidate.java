@@ -128,6 +128,8 @@ public class Candidate implements Serializable {
         this.voters.set(FXCollections.observableArrayList(voters));
     }
 
-
+    public StringProperty partyNameProperty(){
+        return partylist.get().nameProperty();
+    }
     
 }

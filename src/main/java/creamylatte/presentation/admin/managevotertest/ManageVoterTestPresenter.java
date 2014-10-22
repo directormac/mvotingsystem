@@ -93,7 +93,6 @@ public class ManageVoterTestPresenter implements Initializable {
       lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
       gradeLevelColumn.setCellValueFactory(cellData -> cellData.getValue().gradeLEvelProperty());
       passwordColumn.setCellValueFactory(cellData -> cellData.getValue().getAccount().passwordProperty());
-    
       filteredData = new FilteredList<>(masterData, p -> true);
       filterTextField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
           filteredData.setPredicate(voter ->{
@@ -111,7 +110,11 @@ public class ManageVoterTestPresenter implements Initializable {
                 }
                 return false; // Does not match.
             });
-        });
+      });
+      
+      
+      
+      
       sortedData = new SortedList<>(filteredData);
        sortedData.comparatorProperty().bind(voterTable.comparatorProperty());        
 

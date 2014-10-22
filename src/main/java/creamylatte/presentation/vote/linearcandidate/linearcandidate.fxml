@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="1280.0" styleClass="background" stylesheets="@../../../app.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.vote.linearcandidate.LinearCandidatePresenter">
+   <children>
+      <ImageView fx:id="candidateImageView" fitHeight="270.0" fitWidth="205.0" layoutX="1030.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" />
+      <HBox layoutX="14.0" layoutY="15.0">
+         <children>
+            <VBox layoutX="14.0" layoutY="15.0">
+               <children>
+                  <Label id="positionLabel" layoutX="14.0" layoutY="15.0" prefHeight="58.0" prefWidth="126.0" text="Name:" />
+                  <Label id="positionLabel" layoutX="14.0" layoutY="73.0" prefHeight="58.0" prefWidth="231.0" text="Grade Level:" />
+                  <Label id="positionLabel" layoutX="14.0" layoutY="130.0" prefHeight="58.0" prefWidth="162.0" text="Position:" />
+                  <Label id="positionLabel" layoutX="14.0" layoutY="206.0" prefHeight="58.0" prefWidth="190.0" text="Party List:" />
+               </children>
+            </VBox>
+            <VBox layoutX="245.0" layoutY="15.0">
+               <children>
+                  <Label id="candidateName" fx:id="candidateNameLabel" layoutX="245.0" layoutY="15.0" prefHeight="58.0" prefWidth="629.0" text="Candidate Name" />
+                  <Label id="positionLabel" fx:id="candidateGradeLevel" layoutX="245.0" layoutY="73.0" prefHeight="58.0" prefWidth="629.0" text="Candidate Grade" />
+                  <Label id="candidatePosition" fx:id="candidatePositionLabel" layoutX="245.0" layoutY="130.0" prefHeight="58.0" prefWidth="630.0" text="Candidate Position" />
+                  <Label id="candidateParty" fx:id="candidatePartyListLabel" layoutX="245.0" layoutY="206.0" prefHeight="58.0" prefWidth="631.0" text="Candidate PartyList" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

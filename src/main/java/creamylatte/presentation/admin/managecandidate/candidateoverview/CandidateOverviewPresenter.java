@@ -17,7 +17,6 @@ import creamylatte.presentation.admin.managecandidate.candidateprofile.Candidate
 import creamylatte.presentation.admin.managecandidate.candidateprofile.CandidateProfileView;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ChangeListener;
@@ -33,7 +32,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 import javax.inject.Inject;
@@ -162,6 +160,7 @@ public class CandidateOverviewPresenter implements Initializable {
     private void removeCandidateButtonAction(ActionEvent event) {
         Candidate candidate = selectedCandidate.get();
         service.remove(candidate);
+        candidateListView.setItems(FXCollections.observableArrayList(service.getAllCandidates()));
     }
     
     private void changePane(Parent parent){

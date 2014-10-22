@@ -13,8 +13,8 @@ import creamylatte.business.models.UserAccount;
 import creamylatte.business.services.Authenticator;
 import creamylatte.presentation.admin.AdminPresenter;
 import creamylatte.presentation.admin.AdminView;
-import creamylatte.presentation.vote.vote.VotePresenter;
-import creamylatte.presentation.vote.vote.VoteView;
+import creamylatte.presentation.vote.VotePresenter;
+import creamylatte.presentation.vote.VoteView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
@@ -125,5 +125,7 @@ public class LoginPresenter implements Initializable {
         contentPane.getChildren().add(parent);
         
     }
+    
+
     
 }
