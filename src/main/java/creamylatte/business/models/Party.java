@@ -78,5 +78,9 @@ public class Party implements Serializable {
         return this.getName();
     }
     
+    public StringProperty nameProperty(){
+        return name;
+    }
+    
     
 }

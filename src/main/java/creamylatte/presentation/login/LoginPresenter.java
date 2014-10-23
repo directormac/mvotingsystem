@@ -13,14 +13,12 @@ import creamylatte.business.models.UserAccount;
 import creamylatte.business.services.Authenticator;
 import creamylatte.presentation.admin.AdminPresenter;
 import creamylatte.presentation.admin.AdminView;
-
-import creamylatte.presentation.vote.vote.VotePresenter;
-import creamylatte.presentation.vote.vote.VoteView;
+import creamylatte.presentation.vote.VotePresenter;
+import creamylatte.presentation.vote.VoteView;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -61,7 +59,6 @@ public class LoginPresenter implements Initializable {
     AdminPresenter adminPresenter;
     ObservableList<UserAccount> userList;
     private ObjectProperty<UserAccount> user;
-
     
     @FXML
     private Label incorrectPasswordLabel;
@@ -75,7 +72,6 @@ public class LoginPresenter implements Initializable {
                 incorrectPasswordLabel.setVisible(false);
             }
         });
-
     }    
 
     @FXML
@@ -84,44 +80,52 @@ public class LoginPresenter implements Initializable {
     }
     
     private void login(){
-        if(!accountCBox.getEditor().textProperty().get().isEmpty()){          
+        if(!accountCBox.getEditor().textProperty().get().isEmpty()){
+
             try{
                 this.user.set(auth.checkCredentials(accountCBox.getEditor().textProperty().get(), passwordField.getText()));
-                System.out.println("username:" + this.user.get().getUsername());
+
                     if(this.getUser().get().getUsername().equals("admin")){
                         AdminView adminView = new AdminView();
-                        adminPresenter = (AdminPresenter)adminView.getPresenter();
+                        this.adminPresenter = (AdminPresenter) adminView.getPresenter();                
                         changeContentPane(adminView.getView());
                     }else{
-                        changeContentPane(new VoteView().getView());
+                        VoteView voteView = new VoteView();
+                        this.votePresenter = (VotePresenter) voteView.getPresenter();
+                        this.votePresenter.getUser().bindBidirectional(user);
+                        changeContentPane(voteView.getView());
                     }
+
             }catch(NullPointerException e){
-                incorrectPasswordLabel.setVisible(true);                
+                incorrectPasswordLabel.setVisible(true);
             }
+
         }
     }
     
     @FXML
     private void comboAction(Event event) { 
-       userList = FXCollections.observableList(auth.findByUserName(accountCBox.getEditor().textProperty().get()));
-       accountCBox.setItems(userList); 
-    }
-    
-    private void mooose(ActionEvent event){
-        accountCBox.setEditable(true);
+       if(!accountCBox.getEditor().textProperty().get().isEmpty()){           
+           userList = FXCollections.observableList(auth.findByUserName(accountCBox.getEditor().textProperty().get()));
+           accountCBox.setItems(userList); 
+       }else{
+//           accountCBox.tooltipProperty().get().
+       }
+        
+       
     }
 
-    /**
-     * @return the user
-     */
     public ObjectProperty<UserAccount> getUser() {
         return user;
     }
     
     public void changeContentPane(Parent parent){
-        AnchorPane mainPane = (AnchorPane) currentPane.getParent();
-        mainPane.getChildren().clear();
-        mainPane.getChildren().add(parent);
+        AnchorPane contentPane = (AnchorPane)currentPane.getParent();
+        contentPane.getChildren().clear();
+        contentPane.getChildren().add(parent);
+        
     }
+    
+
     
 }

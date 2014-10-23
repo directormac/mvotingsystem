@@ -31,7 +31,10 @@ import javax.persistence.*;
 @Entity
 @Table(name = "candidate")
 @NamedQueries({
-@NamedQuery(name = "Candidate.findAll", query = "SELECT c FROM Candidate c")})
+@NamedQuery(name = "Candidate.findAll", query = "SELECT c FROM Candidate c")
+//        ,
+//    @NamedQuery(name = "Candidate.findByGradeLevel", query = "SELECT c FROM Candidate c WHERE c. ")
+})
 public class Candidate implements Serializable {
     private IntegerProperty id;
     private ObjectProperty<Voter> voterId;
@@ -48,6 +51,15 @@ public class Candidate implements Serializable {
         this.partylist = new SimpleObjectProperty<>();
         this.voters = new SimpleListProperty<>();
     }
+    
+    public Candidate(String name) {       
+        this.id = new SimpleIntegerProperty();                
+        this.voterId = new SimpleObjectProperty<>();
+        this.position = new SimpleObjectProperty<>();
+        this.partylist = new SimpleObjectProperty<>();
+        this.voters = new SimpleListProperty<>();
+    }
+    
     
     public Candidate(Voter voterId ,Position position,Party party){
         this();
@@ -67,6 +79,7 @@ public class Candidate implements Serializable {
         this.id.set(id);
     }    
     
+    @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "voter_id")
     public Voter getVoterId(){
         return this.voterId.get();
@@ -115,5 +128,8 @@ public class Candidate implements Serializable {
         this.voters.set(FXCollections.observableArrayList(voters));
     }
 
+    public StringProperty partyNameProperty(){
+        return partylist.get().nameProperty();
+    }
     
 }

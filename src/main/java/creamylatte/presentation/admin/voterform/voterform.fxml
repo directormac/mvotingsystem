@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="currentPane" prefHeight="610.0" prefWidth="1136.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.voterform.VoterFormPresenter">
+    <children>
+      <VBox layoutX="24.0" layoutY="86.0" prefHeight="424.0" prefWidth="544.0" spacing="15.0">
+         <children>
+            <HBox layoutX="43.0" layoutY="128.0" spacing="15.0">
+               <children>
+                  <TextField fx:id="searchField" layoutX="43.0" layoutY="129.0" />
+                  <Button fx:id="searchButton" layoutX="207.0" layoutY="128.0" mnemonicParsing="false" onAction="#searchVoter" prefHeight="25.0" prefWidth="58.0" text="Search" />
+                  <Button fx:id="editButton" layoutX="270.0" layoutY="128.0" mnemonicParsing="false" onAction="#editVoter" prefHeight="25.0" prefWidth="73.0" text="Edit" />
+                  <Button fx:id="deleteButton" layoutX="318.0" layoutY="129.0" mnemonicParsing="false" onAction="#deleteVoter" prefHeight="25.0" prefWidth="75.0" text="Remove" />
+                  <Button fx:id="addVoter" layoutX="391.0" layoutY="128.0" mnemonicParsing="false" onAction="#addVoter" prefHeight="25.0" prefWidth="63.0" text="Add" />
+               </children>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+            </HBox>
+            <StackPane fx:id="stackPane" layoutX="43.0" layoutY="169.0" prefHeight="379.0" prefWidth="493.0" />
+         </children>
+         <padding>
+            <Insets top="5.0" />
+         </padding>
+      </VBox>
+      <Label layoutX="44.0" layoutY="14.0" prefHeight="65.0" prefWidth="206.0" style="-fx-font-size: 40;" text="Voters List">
+        </Label>
+      <AnchorPane fx:id="dynamicPane" layoutX="585.0" layoutY="86.0" prefHeight="454.0" prefWidth="493.0">
+         <children>
+            <PieChart fx:id="voterChart" prefHeight="454.0" prefWidth="528.0" />
+         </children>
+      </AnchorPane>
+      <Label fx:id="dyanmicLabel" layoutX="649.0" layoutY="14.0" prefHeight="65.0" prefWidth="436.0" style="-fx-font-size: 40;" text="Voters Per Grade Level" />
+      <HBox layoutX="24.0" layoutY="528.0" spacing="10.0">
+         <children>
+            <TextField fx:id="firstNameField" layoutX="20.0" layoutY="563.0" promptText="First Name" visible="false">
+               <tooltip>
+                  <Tooltip text="First Name" />
+               </tooltip>
+            </TextField>
+            <TextField fx:id="lastNameField" layoutX="174.0" layoutY="563.0" promptText="Last Name" visible="false">
+               <tooltip>
+                  <Tooltip text="Last Name" />
+               </tooltip>
+            </TextField>
+            <ComboBox fx:id="gradeLevelCBox" layoutX="331.0" layoutY="563.0" prefHeight="25.0" prefWidth="128.0" promptText="Grade Level" visible="false">
+               <tooltip>
+                  <Tooltip text="Grade Level" />
+               </tooltip>
+            </ComboBox>
+            <Button fx:id="saveButton" layoutX="475.0" layoutY="563.0" mnemonicParsing="false" onAction="#saveVoter" prefHeight="25.0" prefWidth="50.0" text="Save" visible="false" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -10,6 +10,8 @@
 package creamylatte.presentation.welcome;
 
 import creamylatte.business.models.UserAccount;
+import creamylatte.presentation.framework.ControlledScreen;
+import creamylatte.presentation.framework.ViewController;
 import creamylatte.presentation.login.LoginView;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,6 +19,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -24,11 +27,16 @@ import javafx.scene.layout.AnchorPane;
  *
  * @author Hadouken
  */
-public class WelcomePresenter implements Initializable {
+public class WelcomePresenter implements Initializable, ControlledScreen {
+    ViewController viewController;
     
     @FXML
     private AnchorPane currentPane;
     private ObjectProperty<UserAccount> user;
+    @FXML
+    private Hyperlink voteHyperlink;
+    @FXML
+    private Hyperlink monitorHyperlink;
     /**
      * Initializes the controller class.
      */
@@ -36,32 +44,31 @@ public class WelcomePresenter implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
-    @FXML
-    private void goToLogin(ActionEvent event) {
+    
+    private void loginButtonAction(ActionEvent event) {
         AnchorPane p = (AnchorPane)currentPane.getParent();
         p.getChildren().clear();
         p.getChildren().add(new LoginView().getView());
     }
 
     @FXML
-    private void goToResults(ActionEvent event) {
-        
-        
+    private void voteHyperlinkAction(ActionEvent event) {
+        AnchorPane p = (AnchorPane)currentPane.getParent();
+        p.getChildren().clear();
+        p.getChildren().add(new LoginView().getView());
     }
 
-    /**
-     * @return the user
-     */
-    public ObjectProperty<UserAccount> getUser() {
-        return user;
+    @FXML
+    private void monitorHyperlinkAction(ActionEvent event) {
+        AnchorPane p = (AnchorPane)currentPane.getParent();
+        p.getChildren().clear();
+        p.getChildren().add(new LoginView().getView());
     }
 
-    /**
-     * @param user the user to set
-     */
-    public void setUser(ObjectProperty<UserAccount> user) {
-        this.user = user;
+    @Override
+    public void setScreenParent(ViewController screenParent) {
+        viewController = screenParent;
     }
+    
     
 }

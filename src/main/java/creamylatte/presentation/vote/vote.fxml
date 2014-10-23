@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" styleClass="background" stylesheets="@../../app.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.vote.VotePresenter">
+   <children>
+      <Button fx:id="voteStraightButton" layoutX="450.0" layoutY="307.0" mnemonicParsing="false" onAction="#voteStraightAction" text="Straight" />
+      <Button fx:id="voteManuallyButton" layoutX="783.0" layoutY="307.0" mnemonicParsing="false" onAction="#voteManuallyAction" text="Manually" />
+   </children>
+</AnchorPane>

@@ -12,7 +12,8 @@ package creamylatte.presentation.main;
 
 import creamylatte.business.models.UserAccount;
 import creamylatte.business.services.Authenticator;
-import creamylatte.business.services.CandidateService;
+import creamylatte.business.services.VoterService;
+import creamylatte.presentation.admin.voterform.VoterFormPresenter;
 import creamylatte.presentation.login.LoginPresenter;
 import creamylatte.presentation.welcome.WelcomePresenter;
 import creamylatte.presentation.welcome.WelcomeView;
@@ -20,15 +21,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.MenuButton;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javax.inject.Inject;
 
 
@@ -38,41 +38,33 @@ import javax.inject.Inject;
  * @author Hadouken
  */
 public class MainPresenter implements Initializable {
-
-    @Inject
-    private CandidateService vs;    
-    @Inject
-    private Authenticator auth;
-    @FXML
-    private BorderPane mainPane;
     @FXML
     private AnchorPane contentPane;
     
-    @FXML
-    private MenuButton menuButton;
-    
-    
     private ObjectProperty<UserAccount> user;
     private ObservableList<UserAccount> userList;
+    private LoginPresenter loginPresenter;
+    private VoterFormPresenter voterPresenter;
+    
+    @Inject
+    private VoterService vs;    
+    @Inject
+    private Authenticator auth;
+    @FXML
+    private MenuItem partylistMenu;
+    @FXML
+    private Button closeButton;
     private WelcomePresenter welcomePresenter;
-
-
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         this.user = new SimpleObjectProperty<>();
-//        this.user.addListener((ObservableValue<? extends UserAccount> observable, UserAccount oldValue, UserAccount newValue) -> {
-//            if(newValue.getUsername().equals("admin")){
-//                 menuButton.setVisible(true);
-//            }else{
-//                menuButton.setVisible(false);
-//            }
-//        });
+        
         
         WelcomeView wc = new WelcomeView();
         welcomePresenter = (WelcomePresenter)wc.getPresenter();
-
         contentPane.getChildren().add(wc.getView());
+  
     }    
 
 
@@ -80,18 +72,18 @@ public class MainPresenter implements Initializable {
         return user;
     }
 
+    @FXML
+    private void searchCandidate(ActionEvent event) {
+    }
 
+    @FXML
+    private void searchPartylist(ActionEvent event) {
+      
+    }
+
+    @FXML
     private void closeStage(ActionEvent event) {
         ((Node)(event.getSource())).getScene().getWindow().hide();
     }
-    
-    
-    @FXML
-    private void homeAction(ActionEvent event) {
-        ((Node)(event.getSource())).getScene().getWindow().hide();
-    }
-    @FXML
-    private void loginAction(ActionEvent event) {
-        ((Node)(event.getSource())).getScene().getWindow().hide();
-    }    
+
 }
