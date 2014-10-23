@@ -11,7 +11,9 @@ package creamylatte.presentation.vote.straight;
 
 import creamylatte.business.models.Candidate;
 import creamylatte.business.models.Party;
+import creamylatte.business.models.Voter;
 import creamylatte.business.services.CandidateService;
+import creamylatte.business.services.VoterService;
 import creamylatte.presentation.vote.linearcandidate.LinearCandidatePresenter;
 import creamylatte.presentation.vote.linearcandidate.LinearCandidateView;
 import creamylatte.presentation.vote.viewframework.ControlledScreen;
@@ -22,9 +24,12 @@ import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javax.inject.Inject;
 
@@ -42,11 +47,20 @@ public class StraightPresenter implements Initializable , ControlledScreen{
     private VBox candidateVerticalBox;
 
     ObjectProperty<Party> selectedParty;
-
-    
+    private ObjectProperty<Voter> voter;
+    @FXML
+    private Label voterNameLabel;
     
     @Inject
     CandidateService service;
+    @Inject
+    VoterService voterService;
+    @FXML
+    private Button voteButton;
+    @FXML
+    private Button closeButton;
+    
+    
     
     
     /**
@@ -74,6 +88,42 @@ public class StraightPresenter implements Initializable , ControlledScreen{
     @Override
     public void setScreenParent(ViewController screenParent) {
         viewController = screenParent;
+    }
+
+    @FXML
+    private void voteAction(ActionEvent event) {
+        Voter currentVoter = voter.get();
+        currentVoter.setCandidates(selectedPartyListComboBox.getSelectionModel()
+                                    .selectedItemProperty().get().getCandidates());
+        voterService.save(currentVoter);
+    }
+
+    @FXML
+    private void closeAction(ActionEvent event) {
+        
+    }
+    
+    public ObjectProperty<Voter> getVoter() {
+        return voter;
+    }
+
+
+    public void setVoter(ObjectProperty<Voter> voter) {
+        this.voter = voter;
+    }
+
+    /**
+     * @return the voterNameLabel
+     */
+    public Label getVoterNameLabel() {
+        return voterNameLabel;
+    }
+
+    /**
+     * @param voterNameLabel the voterNameLabel to set
+     */
+    public void setVoterNameLabel(Label voterNameLabel) {
+        this.voterNameLabel = voterNameLabel;
     }
     
     

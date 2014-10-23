@@ -13,7 +13,6 @@ package creamylatte.presentation.main;
 import creamylatte.business.models.UserAccount;
 import creamylatte.business.services.Authenticator;
 import creamylatte.business.services.VoterService;
-import creamylatte.presentation.admin.voterform.VoterFormPresenter;
 import creamylatte.presentation.login.LoginPresenter;
 import creamylatte.presentation.welcome.WelcomePresenter;
 import creamylatte.presentation.welcome.WelcomeView;
@@ -44,7 +43,6 @@ public class MainPresenter implements Initializable {
     private ObjectProperty<UserAccount> user;
     private ObservableList<UserAccount> userList;
     private LoginPresenter loginPresenter;
-    private VoterFormPresenter voterPresenter;
     
     @Inject
     private VoterService vs;    

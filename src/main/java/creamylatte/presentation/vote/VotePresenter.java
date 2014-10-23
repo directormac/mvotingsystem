@@ -10,6 +10,9 @@
 package creamylatte.presentation.vote;
 
 import creamylatte.business.models.UserAccount;
+import creamylatte.business.models.Voter;
+import creamylatte.business.services.VoterService;
+import creamylatte.presentation.vote.straight.StraightPresenter;
 import creamylatte.presentation.vote.straight.StraightView;
 import creamylatte.presentation.vote.viewframework.ViewController;
 import java.net.URL;
@@ -22,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
+import javax.inject.Inject;
 
 /**
  * FXML Controller class
@@ -46,6 +50,9 @@ public class VotePresenter implements Initializable {
     private static final String straightPresenter = "voteStraightPresenter";
     StraightView straightView;
 
+    @Inject
+    VoterService service;
+    
     /**
      * Initializes the controller class.
      */
@@ -61,6 +68,10 @@ public class VotePresenter implements Initializable {
     private void voteStraightAction(ActionEvent event) {
         viewController.loadScreen(straightPresenter, straightView);        
         root.getChildren().addAll(viewController);
+        StraightPresenter voteStraightPresenter = (StraightPresenter) straightView.getPresenter();
+        Voter voter = service.searchByAccount(user.get());
+        voteStraightPresenter.getVoterNameLabel().setText(voter.getLastName().toUpperCase()+" , " + voter.getFirstName().toUpperCase());
+        voteStraightPresenter.setVoter(new SimpleObjectProperty<>(voter));
         viewController.setScreen(VotePresenter.straightPresenter);
         changePane(root);
     }
@@ -79,4 +90,5 @@ public class VotePresenter implements Initializable {
     public ObjectProperty<UserAccount> getUser() {
         return user;
     }
+    
 }

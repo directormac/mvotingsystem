@@ -7,7 +7,7 @@
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presentation.admin.managevotertest.voterchart;
+package creamylatte.presentation.admin.managevoter.voterchart;
 
 import creamylatte.business.models.Voter;
 import java.net.URL;

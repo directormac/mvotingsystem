@@ -10,7 +10,9 @@
 package creamylatte.presentation.login;
 
 import creamylatte.business.models.UserAccount;
+import creamylatte.business.models.Voter;
 import creamylatte.business.services.Authenticator;
+import creamylatte.business.services.VoterService;
 import creamylatte.presentation.admin.AdminPresenter;
 import creamylatte.presentation.admin.AdminView;
 import creamylatte.presentation.vote.VotePresenter;
@@ -54,6 +56,9 @@ public class LoginPresenter implements Initializable {
     
     @Inject
     Authenticator auth;
+    @Inject
+    VoterService service;
+    
     
     VotePresenter votePresenter;
     AdminPresenter adminPresenter;
@@ -90,13 +95,22 @@ public class LoginPresenter implements Initializable {
                         this.adminPresenter = (AdminPresenter) adminView.getPresenter();                
                         changeContentPane(adminView.getView());
                     }else{
-                        VoteView voteView = new VoteView();
-                        this.votePresenter = (VotePresenter) voteView.getPresenter();
-                        this.votePresenter.getUser().bindBidirectional(user);
-                        changeContentPane(voteView.getView());
+                        Voter voter = service.searchByAccount(user.get());
+                        if(voter.getCandidates().isEmpty()){
+                            VoteView voteView = new VoteView();
+                            this.votePresenter = (VotePresenter) voteView.getPresenter();
+                            this.votePresenter.getUser().bindBidirectional(user);
+                            changeContentPane(voteView.getView());
+                        }else{
+                            incorrectPasswordLabel.setText("Voting twice is an illegal crime,\n Please try again next election");
+                            incorrectPasswordLabel.setVisible(true);
+                        }
+                        
+                        
                     }
 
             }catch(NullPointerException e){
+                incorrectPasswordLabel.setText("Password incorrect!, please try again.");
                 incorrectPasswordLabel.setVisible(true);
             }
 

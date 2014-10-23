@@ -37,7 +37,8 @@ import javax.persistence.Table;
     @NamedQuery(name = "Voter.find", query = "SELECT V FROM Voter V WHERE v.firstName = :firstName OR v.lastName = :lastName"),
     @NamedQuery(name = "Voter.SearchByName", 
             query = "SELECT c FROM Voter c WHERE lower('c.lastName') like :lastName OR lower('c.firstName') like :firstName" ),
-    @NamedQuery(name = "Voter.findByGradeLevel", query = "SELECT c FROM Voter c WHERE c.gradeLevel = :gradeLevel")})
+    @NamedQuery(name = "Voter.findByGradeLevel", query = "SELECT c FROM Voter c WHERE c.gradeLevel = :gradeLevel"),
+    @NamedQuery(name = "Voter.findByAccount", query = "SELECT c FROM Voter c WHERE c.account = :account")})
 public class Voter implements Serializable {
     private IntegerProperty id;
     private StringProperty firstName;    

@@ -7,7 +7,7 @@
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presentation.admin.managecandidate.partylistform;
+package creamylatte.presentation.admin.managevoter.voterchart;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -15,6 +15,6 @@ import com.airhacks.afterburner.views.FXMLView;
  *
  * @author Hadouken
  */
-public class PartyListFormView extends FXMLView{
+public class VoterChartView extends FXMLView{
     
 }

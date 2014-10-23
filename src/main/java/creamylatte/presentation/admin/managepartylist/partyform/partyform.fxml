@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" stylesheets="@../../../../app.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managepartylist.partyform.PartyFormPresenter">
+   <children>
+      <Label layoutX="14.0" layoutY="18.0" text="Party Name :" />
+      <Button fx:id="addPartyListButton" layoutX="91.0" layoutY="58.0" mnemonicParsing="false" onAction="#addPartyListAction" text="Add PartyList" />
+      <TextField fx:id="partyNameField" layoutX="91.0" layoutY="14.0" />
+   </children>
+</AnchorPane>

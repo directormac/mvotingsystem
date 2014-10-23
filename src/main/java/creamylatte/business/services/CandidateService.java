@@ -77,5 +77,11 @@ public class CandidateService {
         service.getTransaction().commit();
     }
     
+    public void removeParty(Party party){
+        service.getTransaction().begin();
+        service.getManager().remove(party);
+        service.getTransaction().commit();
+    }
+    
     
 }

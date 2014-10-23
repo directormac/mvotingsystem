@@ -292,16 +292,34 @@ public class CandidateFormPresenter implements Initializable {
     private List<Position> getAvailablePositions(Party party){
         service.refresh(party);
         List<Position> positions = service.getAllPositions();
+        int sargeantCounter = 0;
+        int bmanagerCounter = 0;        
+        for(Position position: positions){
+            if(position.getName().equalsIgnoreCase("Sgt. at Arms")){
+                sargeantCounter++;
+            }else if(position.getName().equalsIgnoreCase("Bus. Manager")){
+                bmanagerCounter++;
+            }
+        }
         List<Candidate> candidates = party.getCandidates();
         if(candidates.isEmpty()){
             return positions;
         }else{
             for(Candidate candidate : candidates){
+                if(candidate.getPosition().getName().equalsIgnoreCase("Sgt. at Arms") 
+                        || candidate.getPosition().getName().equalsIgnoreCase("Bus. Manager") ){
+                    if(sargeantCounter == 2 || bmanagerCounter == 2){
+                        positions.remove(candidate.getPosition());
+                    }                    
+                }                    
+               else
                 positions.remove(candidate.getPosition());
             }
             return positions;
         }
     }
+    
+    
     
     private void changePane(Parent parent){
         AnchorPane mainPane1 = (AnchorPane)mainPane.getParent();

@@ -12,8 +12,8 @@ package creamylatte.business.services;
 
 
 import creamylatte.business.models.Candidate;
+import creamylatte.business.models.UserAccount;
 import creamylatte.business.models.Voter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Inject;
 
@@ -40,6 +40,10 @@ public class VoterService {
                 .setParameter("lastName", "%" + search + "%").getResultList();
     }
     
+    public Voter searchByAccount(UserAccount account){
+        return (Voter)service.getManager().createNamedQuery("Voter.findByAccount")
+                .setParameter("account", account).getSingleResult();
+    }
     
     public List<Voter> searchByGradeLevel(String gradeLevel){
         return service.getManager().createNamedQuery("Voter.findByGradeLevel").setParameter("gradeLevel", gradeLevel).getResultList();

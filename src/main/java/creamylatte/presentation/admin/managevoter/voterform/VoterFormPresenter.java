@@ -7,13 +7,14 @@
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presentation.admin.managevotertest.voterform;
+package creamylatte.presentation.admin.managevoter.voterform;
 
 import creamylatte.business.models.UserAccount;
 import creamylatte.business.models.Voter;
 import creamylatte.business.services.VoterService;
-import creamylatte.presentation.admin.managevotertest.voterchart.VoterChartPresenter;
-import creamylatte.presentation.admin.managevotertest.voterchart.VoterChartView;
+import creamylatte.presentation.admin.managevoter.voterchart.VoterChartPresenter;
+import creamylatte.presentation.admin.managevoter.voterchart.VoterChartView;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;

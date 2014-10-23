@@ -1,33 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1140.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managepartylist.ManagePartyListPresenter">
+<AnchorPane id="AnchorPane" prefHeight="690.0" prefWidth="1040.0" stylesheets="@../../../app.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.managepartylist.ManagePartyListPresenter">
    <children>
-      <TreeTableView fx:id="partylistTable" layoutX="29.0" layoutY="112.0" prefHeight="392.0" prefWidth="565.0">
+      <Button fx:id="removePartylistButton" layoutX="416.0" layoutY="586.0" mnemonicParsing="false" onAction="#removePartylistAction" prefHeight="31.0" prefWidth="149.0" text="Remove Partylist" />
+      <Button fx:id="renamePartyListButton" layoutX="278.0" layoutY="586.0" mnemonicParsing="false" onAction="#renamePartyListAction" text="Rename Partylist" />
+      <AnchorPane fx:id="formPane" layoutX="343.0" layoutY="55.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" />
+      <Button fx:id="addNewPartyButton" layoutX="252.0" layoutY="59.0" mnemonicParsing="false" onAction="#addNewPartyAction" text="Add New" />
+      <ComboBox fx:id="partyListComboBox" layoutX="69.0" layoutY="74.0" onShown="#partyListComboBoxShown" prefHeight="38.0" prefWidth="150.0" promptText="Select here" />
+      <Label layoutX="70.0" layoutY="52.0" text="Select Party List here" />
+      <TableView fx:id="partylistTable" layoutX="69.0" layoutY="176.0" prefHeight="385.0" prefWidth="528.0">
         <columns>
-            <TreeTableColumn fx:id="positionColumn" prefWidth="207.0" text="Position" />
-            <TreeTableColumn fx:id="nameColumn" prefWidth="234.0" text="Name" />
-            <TreeTableColumn fx:id="gradeColumn" prefWidth="122.0" text="Grade Level" />
+            <TableColumn fx:id="candidateNameColumn" prefWidth="332.0" text="Name" />
+            <TableColumn fx:id="candidatePositionColumn" prefWidth="164.0" text="Position" />
         </columns>
-      </TreeTableView>
-      <Button fx:id="addNewPartyButton" layoutX="29.0" layoutY="522.0" mnemonicParsing="false" onAction="#addNewPartyAction" text="Add New" />
-      <AnchorPane fx:id="addPartyPane" layoutX="62.0" layoutY="556.0">
-         <children>
-            <Label layoutY="4.0" text="Party Name :" />
-            <Button fx:id="addPartyListButton" layoutX="185.0" layoutY="43.0" mnemonicParsing="false" onAction="#addPartyListAction" text="Add" />
-            <TextField fx:id="partyNameField" layoutX="77.0" />
-         </children>
-      </AnchorPane>
-      <Button fx:id="candidateProfileButton" layoutX="371.0" layoutY="70.0" mnemonicParsing="false" onAction="#candidateProfileAction" text="Candidate Profile" />
-      <Button fx:id="renamePartyListButton" layoutX="29.0" layoutY="70.0" mnemonicParsing="false" onAction="#renamePartyListAction" text="Rename Partylist" />
-      <Button fx:id="removeCandidateButton" layoutX="488.0" layoutY="70.0" mnemonicParsing="false" onAction="#removeCandidateAction" text="Remove" />
-      <Button fx:id="editCandidateButton" layoutX="553.0" layoutY="70.0" mnemonicParsing="false" onAction="#editCandidateAction" prefHeight="25.0" prefWidth="41.0" text="Edit" />
-      <Button fx:id="removePartylistButton" layoutX="141.0" layoutY="70.0" mnemonicParsing="false" onAction="#removePartylistAction" prefHeight="25.0" prefWidth="105.0" text="Remove Partylist" />
+      </TableView>
+      <Label layoutX="70.0" layoutY="105.0" prefHeight="65.0" prefWidth="264.0" text="Party name">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
