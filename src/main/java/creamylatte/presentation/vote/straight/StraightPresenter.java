@@ -30,7 +30,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.FlowPane;
 import javax.inject.Inject;
 
 /**
@@ -44,7 +44,7 @@ public class StraightPresenter implements Initializable , ControlledScreen{
     @FXML
     private ComboBox<Party> selectedPartyListComboBox;
     @FXML
-    private VBox candidateVerticalBox;
+    private FlowPane flowPane;
 
     ObjectProperty<Party> selectedParty;
     private ObjectProperty<Voter> voter;
@@ -72,16 +72,17 @@ public class StraightPresenter implements Initializable , ControlledScreen{
     public void initialize(URL url, ResourceBundle rb) {
         selectedPartyListComboBox.setItems(FXCollections.observableArrayList(service.getAllParty()));
         selectedPartyListComboBox.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Party> observable, Party oldValue, Party newValue) -> {
-            candidateVerticalBox.getChildren().clear();
+            flowPane.getChildren().clear();
             List<Candidate> currentCandidates = newValue.getCandidates();
             currentCandidates.stream().forEach((candidate) -> {
                 LinearCandidateView candidateView = new LinearCandidateView();
                 LinearCandidatePresenter candidatePresenter = (LinearCandidatePresenter)candidateView.getPresenter();
                 candidatePresenter.setCandidate(candidate);
-                candidateVerticalBox.getChildren().add(candidateView.getView());
+                candidatePresenter.getVoteCandidateButton().setVisible(false);
+                candidatePresenter.getSelectCandidateCBox().setVisible(false);
+                flowPane.getChildren().add(candidateView.getView());
             });
         });
-        
         
     }    
 

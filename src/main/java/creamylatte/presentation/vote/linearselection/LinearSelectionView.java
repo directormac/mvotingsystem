@@ -1,13 +1,12 @@
 /*
- * Voting System
+ * Computerized Voting System
  * Project By:  * 
  * Almiradz Mling  * 
- * Eduard John Madriaga  * 
  * Rodz Aguilar Piang  * 
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presentation.vote.selected;
+package creamylatte.presentation.vote.linearselection;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -15,6 +14,6 @@ import com.airhacks.afterburner.views.FXMLView;
  *
  * @author Hadouken
  */
-public class SelectedView extends FXMLView{
+public class LinearSelectionView extends FXMLView{
     
 }

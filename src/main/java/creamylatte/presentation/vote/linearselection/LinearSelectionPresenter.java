@@ -1,13 +1,12 @@
 /*
- * Voting System
+ * Computerized Voting System
  * Project By:  * 
  * Almiradz Mling  * 
- * Eduard John Madriaga  * 
  * Rodz Aguilar Piang  * 
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presentation.vote.abstractposition;
+package creamylatte.presentation.vote.linearselection;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,7 +17,7 @@ import javafx.fxml.Initializable;
  *
  * @author Hadouken
  */
-public class AbstractPositionPresenter implements Initializable {
+public class LinearSelectionPresenter implements Initializable {
 
     /**
      * Initializes the controller class.

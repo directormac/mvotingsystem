@@ -43,9 +43,14 @@
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #3498db;
 } 
+#candidateImageView{
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 1;
+} 
+
 
 #mainPane{
-    -fx-background-image: url("images/fullpane.png");
+    /*-fx-background-image: url("images/fullpane.png");*/
 }
 
 #candidateAnchorPane{
@@ -69,11 +74,17 @@
 }
 
 #voteButton{
-    -fx-graphic: url("images/vote.png");
+    -fx-graphic: url("images/vote1.png");
     -fx-border-color: transparent;
     -fx-font-size: 25px;
     -fx-font-weight: bold;
 }
+
+#voteButton2{
+    -fx-graphic: url("images/vote.png");
+    -fx-border-color: transparent;
+}
+
 
 /*******************************************************************************
  *                                                                             *
