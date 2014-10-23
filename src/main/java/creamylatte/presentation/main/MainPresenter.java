@@ -64,15 +64,7 @@ public class MainPresenter implements Initializable {
         WelcomeView wc = new WelcomeView();
         welcomePresenter = (WelcomePresenter)wc.getPresenter();
         contentPane.getChildren().add(wc.getView());
-        
-        
-        
-        
-//        LoginView loginView = new LoginView();
-//        this.loginPresenter = (LoginPresenter) loginView.getPresenter();
-//        this.user.bindBidirectional(this.loginPresenter.getUser());
-//        contentPane.getChildren().clear();
-//        contentPane.getChildren().add(loginView.getView());
+  
     }    
 
 

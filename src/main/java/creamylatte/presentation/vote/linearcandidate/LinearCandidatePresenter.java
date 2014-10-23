@@ -10,6 +10,8 @@
 package creamylatte.presentation.vote.linearcandidate;
 
 import creamylatte.business.models.Candidate;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
@@ -18,6 +20,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
@@ -45,18 +48,18 @@ public class LinearCandidatePresenter implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         candidate = new SimpleObjectProperty<>();
-                
         candidate.addListener((ObservableValue<? extends Candidate> observable, Candidate oldValue, Candidate newValue) -> {
-            candidateGradeLevel.setText(candidate.get().getVoterId().getLastName()
+            candidateNameLabel.setText(candidate.get().getVoterId().getLastName()
                     + " , " + candidate.get().getVoterId().getFirstName());
             candidatePositionLabel.setText(candidate.get().getPosition().getName());
             candidateGradeLevel.setText(candidate.get().getVoterId().getGradeLevel());
             candidatePartyListLabel.setText(candidate.get().getParty().getName());
+            InputStream inputStream = new ByteArrayInputStream(newValue.getImage().getData());
+            Image image = new Image(inputStream);
+            candidateImageView.setImage(image);
         });
         
     }    
-    
-   
 
 
     public ImageView getCandidateImageView() {

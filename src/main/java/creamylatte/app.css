@@ -22,35 +22,52 @@
 }     
 
 #positionLabel{
-    -fx-font-size: 25pt;
+    -fx-font-size: 20px;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: white;
 
 } 
 
 #candidateName{
-    -fx-font-size: 25pt;
+    -fx-font-size: 20px;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #2ecc71;
-    -fx-font-style: bold;
 } 
 #candidatePosition{
-    -fx-font-size: 25pt;
+    -fx-font-size: 20px;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #1abc9c;
-    -fx-font-style: bold;
 } 
 #candidateParty{
-    -fx-font-size: 25pt;
+    -fx-font-size: 20px;
     -fx-font-family: "Segoe UI Semibold";
     -fx-text-fill: #3498db;
-    -fx-font-style: bold;
 } 
 
 
 
 #mainPane{
     -fx-background-image: url("images/fullpane.png");
+}
+
+#candidateAnchorPane{
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 1;
+}
+
+#logoutButton{
+    -fx-graphic: url("images/logout.png");
+    -fx-border-color: transparent;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-size: 1pt;
+}
+#closeButton{
+    -fx-graphic: url("images/close.png");
+    -fx-border-color: transparent;
+    -fx-background-radius: 0;
+    -fx-background-color: transparent;
+    -fx-font-size: 1pt;
 }
 
 /*******************************************************************************
@@ -62,10 +79,10 @@
 .button {
     /*-fx-padding: 5 22 5 22;*/
     -fx-border-color: #e2e2e2;
-    -fx-border-width: 2;
+    -fx-border-width: 1;
     -fx-background-radius: 0;
     -fx-background-color: #1d1d1d;
-     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #d8d8d8;
 }

@@ -9,6 +9,7 @@
 
 package creamylatte.presentation.vote.straight;
 
+import creamylatte.business.models.Candidate;
 import creamylatte.business.models.Party;
 import creamylatte.business.services.CandidateService;
 import creamylatte.presentation.vote.linearcandidate.LinearCandidatePresenter;
@@ -16,9 +17,11 @@ import creamylatte.presentation.vote.linearcandidate.LinearCandidateView;
 import creamylatte.presentation.vote.viewframework.ControlledScreen;
 import creamylatte.presentation.vote.viewframework.ViewController;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.ObservableList;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
@@ -37,11 +40,9 @@ public class StraightPresenter implements Initializable , ControlledScreen{
     private ComboBox<Party> selectedPartyListComboBox;
     @FXML
     private VBox candidateVerticalBox;
-    
-    ObservableList<Party> partylists;
-    
-    LinearCandidateView candidate;
-    LinearCandidatePresenter candidatePresenter;
+
+    ObjectProperty<Party> selectedParty;
+
     
     
     @Inject
@@ -55,17 +56,18 @@ public class StraightPresenter implements Initializable , ControlledScreen{
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        candidate = new LinearCandidateView();
-        candidatePresenter = (LinearCandidatePresenter) candidate.getPresenter();
-        candidatePresenter.setCandidate(service.findCandidate(15));
-//        partylists.addAll(service.getAllParty());
-//        selectedPartyListComboBox.setItems(partylists);
+        selectedPartyListComboBox.setItems(FXCollections.observableArrayList(service.getAllParty()));
+        selectedPartyListComboBox.getSelectionModel().selectedItemProperty().addListener((ObservableValue<? extends Party> observable, Party oldValue, Party newValue) -> {
+            candidateVerticalBox.getChildren().clear();
+            List<Candidate> currentCandidates = newValue.getCandidates();
+            currentCandidates.stream().forEach((candidate) -> {
+                LinearCandidateView candidateView = new LinearCandidateView();
+                LinearCandidatePresenter candidatePresenter = (LinearCandidatePresenter)candidateView.getPresenter();
+                candidatePresenter.setCandidate(candidate);
+                candidateVerticalBox.getChildren().add(candidateView.getView());
+            });
+        });
         
-        candidateVerticalBox.getChildren().add(candidate.getView());
-        candidateVerticalBox.getChildren().add(candidate.getView());
-        candidateVerticalBox.getChildren().add(candidate.getView());
-        candidateVerticalBox.getChildren().add(candidate.getView());
-        candidateVerticalBox.getChildren().add(candidate.getView());
         
     }    
 
