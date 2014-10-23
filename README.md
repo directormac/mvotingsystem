@@ -1,16 +1,15 @@
-Voting System
+Computerized Voting System
 ===========
 <h4>Project by:</h4>
 <ul>
 <li>Almiradz Mling
-<li>Eduard John Madriaga
 <li>Rodz Aguilar Piang
 <li>Mark Kendrick Asena
 </ul>
 <hr>
 <h4>Description</h4>
 <p>This project is built on Netbeans 8.0 and Java 8</p>
-<h5>Libraries as of <small>8/12/2014</small></h5>
+<h5>Libraries as of <small>10/23/2014</small></h5>
 <ul>
 <li>Afterburner.fx 1.5.1
 <li>PostgreSQL Driver 9.3
