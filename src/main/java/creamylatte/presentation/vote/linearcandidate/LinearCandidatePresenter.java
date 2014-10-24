@@ -23,10 +23,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -69,7 +72,23 @@ public class LinearCandidatePresenter implements Initializable {
                 .addListener((ObservableValue<? extends Candidate> observable, Candidate oldValue, Candidate newValue) -> {
                     candidate.set(newValue);
         });
-        
+        selectCandidateCBox.setCellFactory(new Callback<ListView<Candidate>,ListCell<Candidate>>(){ 
+            @Override
+            public ListCell<Candidate> call(ListView<Candidate> p) {                 
+                final ListCell<Candidate> cell = new ListCell<Candidate>(){ 
+                    @Override
+                    protected void updateItem(Candidate t, boolean bln) {
+                        super.updateItem(t, bln);                         
+                        if(t != null){
+                            setText(t.getVoterId().getLastName().concat(" , ").concat(t.getVoterId().getFirstName()));
+                        }else{
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        });
     }    
 
 

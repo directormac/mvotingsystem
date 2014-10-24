@@ -36,7 +36,7 @@
                </children>
             </HBox>
             <ComboBox fx:id="selectCandidateCBox" layoutX="14.0" layoutY="33.0" prefHeight="38.0" prefWidth="191.0" promptText="Candidate" />
-            <Button id="voteButton2" fx:id="voteCandidateButton" layoutX="354.0" layoutY="11.0" mnemonicParsing="false" onAction="#voteCandidateAction" prefHeight="64.0" prefWidth="64.0">
+            <Button id="voteButton2" fx:id="voteCandidateButton" layoutX="354.0" layoutY="11.0" mnemonicParsing="false" onAction="#voteCandidateAction" prefHeight="64.0" prefWidth="64.0" visible="false">
                <tooltip>
                   <Tooltip text="Click this to Vote this candidate" />
                </tooltip>

@@ -6,7 +6,7 @@
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presentation.vote.linearselection;
+package creamylatte.presentation.blindresult.randomcandidate;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -14,6 +14,6 @@ import com.airhacks.afterburner.views.FXMLView;
  *
  * @author Hadouken
  */
-public class LinearSelectionView extends FXMLView{
+public class RandomCandidateView extends FXMLView{
     
 }

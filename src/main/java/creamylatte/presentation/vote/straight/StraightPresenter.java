@@ -27,6 +27,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -99,6 +100,7 @@ public class StraightPresenter implements Initializable , ControlledScreen{
         currentVoter.setCandidates(selectedPartyListComboBox.getSelectionModel()
                                     .selectedItemProperty().get().getCandidates());
         voterService.save(currentVoter);
+        ((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
     

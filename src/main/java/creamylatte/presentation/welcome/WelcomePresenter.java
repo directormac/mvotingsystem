@@ -10,6 +10,7 @@
 package creamylatte.presentation.welcome;
 
 import creamylatte.business.models.UserAccount;
+import creamylatte.presentation.blindresult.BlindResultView;
 import creamylatte.presentation.framework.ControlledScreen;
 import creamylatte.presentation.framework.ViewController;
 import creamylatte.presentation.login.LoginView;
@@ -62,7 +63,7 @@ public class WelcomePresenter implements Initializable, ControlledScreen {
     private void monitorHyperlinkAction(ActionEvent event) {
         AnchorPane p = (AnchorPane)currentPane.getParent();
         p.getChildren().clear();
-        p.getChildren().add(new LoginView().getView());
+        p.getChildren().add(new BlindResultView().getView());
     }
 
     @Override

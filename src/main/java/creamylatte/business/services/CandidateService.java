@@ -34,6 +34,10 @@ public class CandidateService {
         service.getManager().refresh(party);
     }
     
+    public void refresh(Candidate candidate){
+        service.getManager().refresh(candidate);
+    }
+    
     public void remove(Candidate candidate){
         service.getTransaction().begin();
         service.getManager().remove(candidate);
