@@ -41,8 +41,6 @@ public class AdminPresenter implements Initializable {
     @FXML
     private Button logoutButton;
     @FXML
-    private Button closeButton;
-    @FXML
     private BorderPane mainPane;
     @FXML
     private Button electionResultsButton;
@@ -85,11 +83,6 @@ public class AdminPresenter implements Initializable {
         AnchorPane anchorPane = (AnchorPane)mainPane.getParent();
         anchorPane.getChildren().clear();
         anchorPane.getChildren().add(new LoginView().getView());
-    }
-
-    @FXML
-    private void closeAction(ActionEvent event) {
-        ((Node)(event.getSource())).getScene().getWindow().hide();        
     }
 
     @FXML

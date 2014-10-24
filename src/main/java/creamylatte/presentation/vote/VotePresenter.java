@@ -59,8 +59,6 @@ public class VotePresenter implements Initializable {
     VoterService service;
     
     Voter voter;
-    @FXML
-    private Button closeButton;
     
     /**
      * Initializes the controller class.
@@ -111,8 +109,5 @@ public class VotePresenter implements Initializable {
         return user;
     }
 
-    @FXML
-    private void closeButtonAction(ActionEvent event) {
-    }
     
 }

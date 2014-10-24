@@ -10,7 +10,6 @@
 
 <BorderPane fx:id="mainPane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" styleClass="background" stylesheets="@../../app.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.AdminPresenter">
    <center>
-      
       <AnchorPane fx:id="centerPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="690.0" prefWidth="1040.0" BorderPane.alignment="CENTER" />
    </center>
    <top>
@@ -21,15 +20,10 @@
                   <Font name="Segoe UI" size="14.0" />
                </font></Label>
             <Separator layoutY="29.0" prefHeight="0.0" prefWidth="1280.0" />
-            <Button id="logoutButton" fx:id="logoutButton" layoutX="1207.0" mnemonicParsing="false" onAction="#logoutAction" prefHeight="28.0" prefWidth="25.0">
+            <Button id="logoutButton" fx:id="logoutButton" layoutX="1249.0" layoutY="1.0" mnemonicParsing="false" onAction="#logoutAction" prefHeight="28.0" prefWidth="25.0">
                <tooltip>
                   <Tooltip text="Logout" />
                </tooltip></Button>
-            <Button id="closeButton" fx:id="closeButton" layoutX="1249.0" mnemonicParsing="false" onAction="#closeAction" prefHeight="28.0" prefWidth="25.0">
-               <tooltip>
-                  <Tooltip text="Exit Application" />
-               </tooltip>
-            </Button>
          </children>
       </AnchorPane>
    </top>
