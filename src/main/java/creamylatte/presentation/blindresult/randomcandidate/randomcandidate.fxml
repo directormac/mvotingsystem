@@ -29,6 +29,6 @@
             <Label id="positionLabel" fx:id="candidateName1" layoutX="299.0" layoutY="75.0" text="Candidate Name" visible="false" />
          </children>
       </GridPane>
-      <ImageView fx:id="randomImageView" fitHeight="272.0" fitWidth="220.0" layoutX="14.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" />
+      <AnchorPane id="imegPane" fx:id="imagePane" layoutX="25.0" layoutY="22.0" prefHeight="256.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

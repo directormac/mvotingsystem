@@ -55,6 +55,7 @@ public class BlindResultPresenter implements Initializable {
         for(Position position: positions){
             randomCandidateView = new RandomCandidateView();
             randomCandidatePresenter = (RandomCandidatePresenter) randomCandidateView.getPresenter();
+            randomCandidatePresenter.getPositonLabel().setText(position.getName());
             randomCandidatePresenter.setPosition(position);
             randoms.put(counter++, randomCandidateView);
         }
@@ -63,7 +64,5 @@ public class BlindResultPresenter implements Initializable {
         });
 
     }    
-    
-    
     
 }

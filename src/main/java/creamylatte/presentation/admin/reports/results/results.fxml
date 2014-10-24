@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1040.0" styleClass="background" stylesheets="@../../../../app.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="creamylatte.presentation.admin.reports.results.ResultsPresenter">
+   <children>
+      <TableView fx:id="candidateTableView" layoutX="89.0" layoutY="75.0" prefHeight="452.0" prefWidth="651.0">
+         <columns>
+            <TableColumn fx:id="partyColumn" prefWidth="111.0" text="Party" />
+            <TableColumn fx:id="positionColumn" prefWidth="157.0" text="Position" />
+            <TableColumn fx:id="nameColumn" minWidth="0.0" prefWidth="273.0" text="Name" />
+            <TableColumn fx:id="votesColumn" prefWidth="110.0" text="Votes" />
+         </columns>
+      </TableView>
+      <Button fx:id="saveReportButton" layoutX="89.0" layoutY="35.0" mnemonicParsing="false" onAction="#saveReportButtonAction" text="Save Report" />
+   </children>
+</AnchorPane>

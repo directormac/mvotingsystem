@@ -63,6 +63,9 @@
     -fx-border-width: 1;
 } 
 
+#imegPane{
+    -fx-background-image: url("images/candidates.png");
+}
 
 #mainPane{
     /*-fx-background-image: url("images/fullpane.png");*/

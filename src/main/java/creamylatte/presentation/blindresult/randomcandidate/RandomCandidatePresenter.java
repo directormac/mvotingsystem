@@ -22,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javax.inject.Inject;
 
 /**
@@ -32,7 +33,7 @@ import javax.inject.Inject;
 public class RandomCandidatePresenter implements Initializable {
 
     @FXML
-    private ImageView randomImageView;
+    private AnchorPane imagePane;
     @FXML
     private Label positonLabel;
     @FXML
@@ -71,6 +72,10 @@ public class RandomCandidatePresenter implements Initializable {
                         Platform.runLater(new Runnable() {
                             @Override
                             public void run() {
+                                System.out.println("i is" + finalI );
+                                service.refresh(candidate1);
+                                service.refresh(candidate2);
+                                service.refresh(candidate3);
                                 votesLabel1.setText("Total Votes:" + candidate1.getVoters().size());
                                 votesLabel2.setText("Total Votes:" + candidate2.getVoters().size());
                                 votesLabel3.setText("Total Votes:" + candidate3.getVoters().size());
@@ -80,11 +85,10 @@ public class RandomCandidatePresenter implements Initializable {
                                 candidateName1.setVisible(true);
                                 candidateName2.setVisible(true);
                                 candidateName3.setVisible(true);
-                                
                             }
                         });
                         i++;
-                        Thread.sleep(1000);
+                        Thread.sleep(10000);
                     }
                 }
             };
@@ -111,5 +115,12 @@ public class RandomCandidatePresenter implements Initializable {
     
     public void setPosition(Position position){
         this.position.set(position);
+    }
+
+    /**
+     * @return the positonLabel
+     */
+    public Label getPositonLabel() {
+        return positonLabel;
     }
 }

@@ -6,7 +6,7 @@
  * Mark Kendrick Asena * 
  */
 
-package creamylatte.presentation.admin.reports.useraccountsreport;
+package creamylatte.presentation.admin.reports.results;
 
 import com.airhacks.afterburner.views.FXMLView;
 
@@ -14,6 +14,6 @@ import com.airhacks.afterburner.views.FXMLView;
  *
  * @author Hadouken
  */
-public class UserAccountsReportView extends FXMLView{
+public class ResultsView extends FXMLView{
     
 }

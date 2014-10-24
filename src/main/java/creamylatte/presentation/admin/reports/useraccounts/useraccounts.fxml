@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1040.0" styleClass="background" stylesheets="@../../../../app.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="creamylatte.presentation.admin.reports.useraccounts.UserAcountsPresenter">
+   <children>
+       
+      <TableView fx:id="voterTableView" layoutX="87.0" layoutY="94.0" prefHeight="386.0" prefWidth="531.0">
+        <columns>
+          <TableColumn fx:id="gradeLevelColumn" prefWidth="138.0" text="Grade Level" />
+          <TableColumn fx:id="nameColumn" prefWidth="239.0" text="Name" />
+            <TableColumn fx:id="passwordColumn" prefWidth="153.0" text="Password" />
+        </columns>
+      </TableView>
+      <Button fx:id="saveAsPDFButton" layoutX="87.0" layoutY="41.0" mnemonicParsing="false" onAction="#userReportsButtonAction" text="Save as PDF" />
+   </children>
+</AnchorPane>
