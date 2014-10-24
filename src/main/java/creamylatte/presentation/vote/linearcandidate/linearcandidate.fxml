@@ -8,16 +8,16 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TitledPane fx:id="titledPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="700.0" text="Position" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.vote.linearcandidate.LinearCandidatePresenter">
+<TitledPane fx:id="titledPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" text="Position" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.vote.linearcandidate.LinearCandidatePresenter">
    <content>
-      <AnchorPane id="candidateAnchorPane" fx:id="currentPane" maxHeight="350.0" maxWidth="700.0" minHeight="350.0" minWidth="700.0" prefHeight="350.0" prefWidth="700.0" styleClass="background" stylesheets="@../../../app.css">
+      <AnchorPane id="candidateAnchorPane" fx:id="currentPane" styleClass="background" stylesheets="@../../../app.css">
          <children>
-            <AnchorPane id="candidateImageView" layoutX="454.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="302.0" prefWidth="232.0">
+            <AnchorPane id="candidateImageView" layoutX="454.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="302.0" prefWidth="232.0" AnchorPane.bottomAnchor="22.0">
                <children>
                   <ImageView fx:id="candidateImageView" fitHeight="300.0" fitWidth="230.0" pickOnBounds="true" />
                </children>
             </AnchorPane>
-            <HBox layoutX="17.0" layoutY="119.0" prefHeight="191.0" prefWidth="411.0">
+            <HBox layoutX="14.0" layoutY="90.0" prefHeight="191.0" prefWidth="411.0">
                <children>
                   <VBox layoutX="14.0" layoutY="15.0" prefHeight="232.0" prefWidth="140.0" spacing="15.0">
                      <children>
@@ -35,8 +35,8 @@
                   </VBox>
                </children>
             </HBox>
-            <ComboBox fx:id="selectCandidateCBox" layoutX="17.0" layoutY="50.0" prefHeight="38.0" prefWidth="191.0" promptText="Candidate" />
-            <Button id="voteButton2" fx:id="voteCandidateButton" layoutX="254.0" layoutY="36.0" mnemonicParsing="false" onAction="#voteCandidateAction" prefHeight="64.0" prefWidth="64.0">
+            <ComboBox fx:id="selectCandidateCBox" layoutX="14.0" layoutY="33.0" prefHeight="38.0" prefWidth="191.0" promptText="Candidate" />
+            <Button id="voteButton2" fx:id="voteCandidateButton" layoutX="354.0" layoutY="11.0" mnemonicParsing="false" onAction="#voteCandidateAction" prefHeight="64.0" prefWidth="64.0">
                <tooltip>
                   <Tooltip text="Click this to Vote this candidate" />
                </tooltip>

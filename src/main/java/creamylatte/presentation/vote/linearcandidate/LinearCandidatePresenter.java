@@ -50,8 +50,6 @@ public class LinearCandidatePresenter implements Initializable {
     private ObjectProperty<Candidate> candidate;
     
     
-
-
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         candidate = new SimpleObjectProperty<>();
@@ -67,8 +65,10 @@ public class LinearCandidatePresenter implements Initializable {
             Image image = new Image(inputStream);
             candidateImageView.setImage(image);
         });
-        
-        
+        selectCandidateCBox.getSelectionModel().selectedItemProperty()
+                .addListener((ObservableValue<? extends Candidate> observable, Candidate oldValue, Candidate newValue) -> {
+                    candidate.set(newValue);
+        });
         
     }    
 
@@ -102,9 +102,7 @@ public class LinearCandidatePresenter implements Initializable {
 
     @FXML
     private void voteCandidateAction(ActionEvent event) {
-        
-        
-        
+
     }
 
     public ComboBox<Candidate> getSelectCandidateCBox() {

@@ -10,10 +10,11 @@
    <children>
       <AnchorPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1280.0" AnchorPane.topAnchor="20.0">
          <children>
-            <Button fx:id="voteStraightButton" layoutX="450.0" layoutY="307.0" mnemonicParsing="false" onAction="#voteStraightAction" text="Straight" />
-            <Button fx:id="voteManuallyButton" layoutX="783.0" layoutY="307.0" mnemonicParsing="false" onAction="#voteManuallyAction" text="Manually" />
+            <Button id="straightButton" fx:id="voteStraightButton" contentDisplay="TOP" layoutX="166.0" layoutY="213.0" mnemonicParsing="false" onAction="#voteStraightAction" text="STRAIGHT" />
+            <Button id="manualButton" fx:id="voteManuallyButton" contentDisplay="TOP" layoutX="784.0" layoutY="213.0" mnemonicParsing="false" onAction="#voteManuallyAction" text="MANUALLY" />
+            <Label id="titleLabel" layoutX="519.0" layoutY="67.0" text="Vote" />
          </children>
       </AnchorPane>
-      <Button id="closeButton" layoutX="1252.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="7.0" />
+      <Button id="closeButton" fx:id="closeButton" layoutX="1252.0" mnemonicParsing="false" onAction="#closeButtonAction" prefHeight="12.0" prefWidth="7.0" />
    </children>
 </AnchorPane>

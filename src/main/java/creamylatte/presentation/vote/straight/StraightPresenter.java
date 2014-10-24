@@ -43,11 +43,13 @@ public class StraightPresenter implements Initializable , ControlledScreen{
     ViewController viewController;
     @FXML
     private ComboBox<Party> selectedPartyListComboBox;
+    
     @FXML
     private FlowPane flowPane;
 
     ObjectProperty<Party> selectedParty;
     private ObjectProperty<Voter> voter;
+    
     @FXML
     private Label voterNameLabel;
     
@@ -55,10 +57,10 @@ public class StraightPresenter implements Initializable , ControlledScreen{
     CandidateService service;
     @Inject
     VoterService voterService;
+    
     @FXML
     private Button voteButton;
-    @FXML
-    private Button closeButton;
+
     
     
     
@@ -99,10 +101,6 @@ public class StraightPresenter implements Initializable , ControlledScreen{
         voterService.save(currentVoter);
     }
 
-    @FXML
-    private void closeAction(ActionEvent event) {
-        
-    }
     
     public ObjectProperty<Voter> getVoter() {
         return voter;
@@ -113,20 +111,12 @@ public class StraightPresenter implements Initializable , ControlledScreen{
         this.voter = voter;
     }
 
-    /**
-     * @return the voterNameLabel
-     */
     public Label getVoterNameLabel() {
         return voterNameLabel;
     }
 
-    /**
-     * @param voterNameLabel the voterNameLabel to set
-     */
     public void setVoterNameLabel(Label voterNameLabel) {
         this.voterNameLabel = voterNameLabel;
     }
-    
-    
-    
+
 }
