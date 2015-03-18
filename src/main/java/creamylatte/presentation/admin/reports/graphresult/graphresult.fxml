@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.chart.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640.0" prefWidth="1040.0" styleClass="background" stylesheets="@../../../../app.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.admin.reports.graphresult.GraphResultPresenter">
+   <children>
+      <PieChart fx:id="resultChart" layoutX="245.0" layoutY="78.0" prefHeight="472.0" prefWidth="528.0" />
+      <ComboBox fx:id="positionComboBox" layoutX="126.0" layoutY="22.0" onShown="#partyListComboBoxShown" prefHeight="31.0" prefWidth="171.0" />
+      <Label layoutX="41.0" layoutY="23.0" text="Position" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

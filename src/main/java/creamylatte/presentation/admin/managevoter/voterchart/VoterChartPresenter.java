@@ -64,7 +64,7 @@ public class VoterChartPresenter implements Initializable {
         int size = 0;
         for(Voter voter : getMasterData()){
             
-            if(voter.getGradeLevel().equalsIgnoreCase(string))
+            if(voter.getYearLevel().equalsIgnoreCase(string))
                 size++;
         }
 //        size = masterData.stream().filter((voter) -> (voter.getGradeLevel().equalsIgnoreCase(string))).map((_item) -> 1).reduce(size, Integer::sum);

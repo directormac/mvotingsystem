@@ -1,12 +1,3 @@
-/*
- * Voting System
- * Project By:  * 
- * Almiradz Mling  * 
- * Eduard John Madriaga  * 
- * Rodz Aguilar Piang  * 
- * Mark Kendrick Asena * 
- */
-
 
 package creamylatte.business.models;
 
@@ -22,11 +13,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
-/**
- *
- * @author Hadouken
- * This entity is using property access.
- */
+
 @Entity
 @Table(name="user_accouunt")
 @NamedQueries({

@@ -12,11 +12,7 @@
    <content>
       <AnchorPane id="candidateAnchorPane" fx:id="currentPane" styleClass="background" stylesheets="@../../../app.css">
          <children>
-            <AnchorPane id="candidateImageView" layoutX="454.0" layoutY="32.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="302.0" prefWidth="232.0" AnchorPane.bottomAnchor="22.0">
-               <children>
-                  <ImageView fx:id="candidateImageView" fitHeight="300.0" fitWidth="230.0" pickOnBounds="true" />
-               </children>
-            </AnchorPane>
+            
             <HBox layoutX="14.0" layoutY="90.0" prefHeight="191.0" prefWidth="411.0">
                <children>
                   <VBox layoutX="14.0" layoutY="15.0" prefHeight="232.0" prefWidth="140.0" spacing="15.0">

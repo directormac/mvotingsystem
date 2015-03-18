@@ -10,8 +10,6 @@
 package creamylatte.presentation.admin.managecandidate.candidateprofile;
 
 import creamylatte.business.models.Candidate;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
@@ -23,8 +21,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 
 /**
  * FXML Controller class
@@ -32,8 +29,7 @@ import javafx.scene.image.ImageView;
  * @author Hadouken
  */
 public class CandidateProfilePresenter implements Initializable {
-    @FXML
-    private ImageView candidateImageView;
+
     @FXML
     private Label candidateNameLabel;
     @FXML
@@ -56,10 +52,7 @@ public class CandidateProfilePresenter implements Initializable {
         selectedCandidate = new SimpleObjectProperty<>();
         getSelectedCandidate().addListener(new ChangeListener<Candidate>() {
             @Override
-            public void changed(ObservableValue<? extends Candidate> observable, Candidate oldValue, Candidate newValue) {
-                InputStream inputStream = new ByteArrayInputStream(newValue.getImage().getData());
-                Image image = new Image(inputStream);
-                candidateImageView.setImage(image);
+            public void changed(ObservableValue<? extends Candidate> observable, Candidate oldValue, Candidate newValue) {               
                 candidateNameLabel.setText(firstCharToUpperCase(newValue.getVoterId().getLastName()).concat(" , ")
                                             .concat(firstCharToUpperCase(newValue.getVoterId().getFirstName())));
                 positionPartyLabel.setText(newValue.getPosition().getName().concat(" , ")

@@ -1,11 +1,3 @@
-/*
- * Voting System
- * Project By:  * 
- * Almiradz Mling  * 
- * Eduard John Madriaga  * 
- * Rodz Aguilar Piang  * 
- * Mark Kendrick Asena * 
- */
 
 package creamylatte.business.services;
 
@@ -14,11 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
-/**
- *
- * @author Hadouken
- * This class handles every transaction that will occur.
- */
+
 public class DBService {
     private EntityManager em;
     private EntityTransaction et;

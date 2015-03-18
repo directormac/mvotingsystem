@@ -12,8 +12,7 @@ package creamylatte.presentation.admin.managevoter.voterform;
 import creamylatte.business.models.UserAccount;
 import creamylatte.business.models.Voter;
 import creamylatte.business.services.VoterService;
-import creamylatte.presentation.admin.managevoter.voterchart.VoterChartPresenter;
-import creamylatte.presentation.admin.managevoter.voterchart.VoterChartView;
+
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -51,8 +50,7 @@ public class VoterFormPresenter implements Initializable {
     
     
     private ObjectProperty<Voter> currentVoter;
-    private VoterChartPresenter voterChartPresenter;
-    private VoterChartView voterChartView;
+
     @Inject
     VoterService service;
     @FXML
@@ -60,7 +58,7 @@ public class VoterFormPresenter implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        gradeLevelCBox.setItems(FXCollections.observableArrayList("Seven","Eight","Nine","Ten"));
+        gradeLevelCBox.setItems(FXCollections.observableArrayList("Firsy Year","Second Year","Third Year","Fourth Year"));
         currentVoter = new SimpleObjectProperty<>();
         currentVoter.addListener(new ChangeListener<Voter>() {
             @Override
@@ -70,7 +68,7 @@ public class VoterFormPresenter implements Initializable {
                 if(newValue != null){
                     firstNameField.textProperty().set(newValue.getFirstName());
                     lastNameField.textProperty().set(newValue.getLastName());
-                    gradeLevelCBox.getSelectionModel().select(currentVoter.get().getGradeLevel());
+                    gradeLevelCBox.getSelectionModel().select(currentVoter.get().getYearLevel());
                 }else{
                     
                 }
@@ -97,7 +95,7 @@ public class VoterFormPresenter implements Initializable {
             voter = getCurrentVoter().get();
         voter.setFirstName(firstNameField.textProperty().get().toLowerCase());
         voter.setLastName(lastNameField.textProperty().get().toLowerCase());
-        voter.setGradeLevel(gradeLevelCBox.getSelectionModel().getSelectedItem());
+        voter.setYearLevel(gradeLevelCBox.getSelectionModel().getSelectedItem());
         UserAccount ua;
         if(voter.getAccount() == null){
             ua = new UserAccount();
@@ -109,7 +107,7 @@ public class VoterFormPresenter implements Initializable {
         service.save(voter);
         AnchorPane currentPane = (AnchorPane) contentPane.getParent();
         currentPane.getChildren().clear();
-        currentPane.getChildren().add(voterChartView.getView());
+
     }
     
     private String firstCharToUpperCase(String string){
@@ -123,29 +121,6 @@ public class VoterFormPresenter implements Initializable {
                 tf.setText(oldValue);
         };
         
-    }
-
-
-    public VoterChartPresenter getVoterChartPresenter() {
-        return voterChartPresenter;
-    }
-
-    public void setVoterChartPresenter(VoterChartPresenter voterChartPresenter) {
-        this.voterChartPresenter = voterChartPresenter;
-    }
-
-    /**
-     * @return the voterChartView
-     */
-    public VoterChartView getVoterChartView() {
-        return voterChartView;
-    }
-
-    /**
-     * @param voterChartView the voterChartView to set
-     */
-    public void setVoterChartView(VoterChartView voterChartView) {
-        this.voterChartView = voterChartView;
     }
 
     /**
@@ -180,7 +155,7 @@ public class VoterFormPresenter implements Initializable {
     private void cancelButtonAction(ActionEvent event) {
         AnchorPane currentPane = (AnchorPane) contentPane.getParent();
         currentPane.getChildren().clear();
-        currentPane.getChildren().add(voterChartView.getView());
+
     }
     
     

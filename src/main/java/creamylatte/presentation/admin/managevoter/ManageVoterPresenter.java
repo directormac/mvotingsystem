@@ -13,10 +13,9 @@ package creamylatte.presentation.admin.managevoter;
 import creamylatte.business.models.Voter;
 import creamylatte.business.services.CandidateService;
 import creamylatte.business.services.VoterService;
-import creamylatte.presentation.admin.managevoter.voterchart.VoterChartPresenter;
-import creamylatte.presentation.admin.managevoter.voterchart.VoterChartView;
 import creamylatte.presentation.admin.managevoter.voterform.VoterFormPresenter;
 import creamylatte.presentation.admin.managevoter.voterform.VoterFormView;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
@@ -38,6 +37,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javax.inject.Inject;
+import org.controlsfx.control.action.Action;
+import org.controlsfx.dialog.Dialogs;
+import org.eclipse.persistence.exceptions.DatabaseException;
 
 /**
  * FXML Controller class
@@ -73,8 +75,7 @@ public class ManageVoterPresenter implements Initializable {
     @Inject
     CandidateService candidateService;
     
-    private VoterChartPresenter voterChartPresenter;
-    private VoterChartView voterChartView;
+
     VoterFormPresenter voterFormPresenter;
     VoterFormView voterFormView;
     
@@ -89,7 +90,7 @@ public class ManageVoterPresenter implements Initializable {
       masterData.addAll(service.all());
       firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
       lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
-      gradeLevelColumn.setCellValueFactory(cellData -> cellData.getValue().gradeLEvelProperty());
+      gradeLevelColumn.setCellValueFactory(cellData -> cellData.getValue().yearLevelProperty());
       passwordColumn.setCellValueFactory(cellData -> cellData.getValue().getAccount().passwordProperty());
       filteredData = new FilteredList<>(masterData, p -> true);
       filterTextField.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
@@ -118,24 +119,17 @@ public class ManageVoterPresenter implements Initializable {
 
        voterTable.setItems(sortedData);
        
-       setVoterChartView(new VoterChartView());
-       setVoterChartPresenter((VoterChartPresenter) getVoterChartView().getPresenter());
-       getVoterChartPresenter().getMasterData().setAll(masterData.sorted());
        
        voterFormView = new VoterFormView();
        voterFormPresenter = (VoterFormPresenter) voterFormView.getPresenter();
-       voterFormPresenter.setVoterChartView(voterChartView);
-//       currentVoter.bindBidirectional(voterFormPresenter.getCurrentVoter());
-       rightPane.getChildren().clear();
-       rightPane.getChildren().add(getVoterChartView().getView());
+
        
        
        
        masterData.addListener(new ListChangeListener<Voter>() {
           @Override
           public void onChanged(ListChangeListener.Change<? extends Voter> c) {
-              getVoterChartPresenter().getMasterData().clear();
-              getVoterChartPresenter().getMasterData().addAll(service.all());
+            
           }
         }
        );
@@ -151,17 +145,15 @@ public class ManageVoterPresenter implements Initializable {
           }
         }
        );
-      
-        rightPane.getChildren().addListener(new ListChangeListener<Node>() {
+        
+         rightPane.getChildren().addListener(new ListChangeListener<Node>() {
           @Override
           public void onChanged(ListChangeListener.Change<? extends Node> c) {
-              if(rightPane.getChildren().contains(voterChartView.getView())){
                   masterData.clear();
                   masterData.addAll(service.all());
-              }
           }
       });
-        
+      
         
     }
 
@@ -169,7 +161,6 @@ public class ManageVoterPresenter implements Initializable {
     private void addVoterButtonAction(ActionEvent event) {
        voterFormView = new VoterFormView();
        voterFormPresenter = (VoterFormPresenter)voterFormView.getPresenter();
-       voterFormPresenter.setVoterChartView(voterChartView);
        rightPane.getChildren().clear();
        rightPane.getChildren().add(voterFormView.getView());
        voterTable.getSelectionModel().clearSelection();
@@ -177,10 +168,20 @@ public class ManageVoterPresenter implements Initializable {
 
     @FXML
     private void removeVoterButtonAction(ActionEvent event) {
-        service.remove(currentVoter.get());
-        voterTable.getSelectionModel().clearSelection();
-        masterData.clear();
-        masterData.addAll(service.all());
+        try{
+            service.remove(currentVoter.get());
+            voterTable.getSelectionModel().clearSelection();
+            masterData.clear();
+            masterData.addAll(service.all());
+        }catch(DatabaseException e){
+            Action response = Dialogs.create()           
+                .title("Fail to remove voter")            
+                .message( "The voter belongs to a party list")
+                .showConfirm();
+        }
+        
+        
+        
     }
 
     @FXML
@@ -191,24 +192,7 @@ public class ManageVoterPresenter implements Initializable {
 //       voterTable.getSelectionModel().clearSelection();     
     }
 
-
-    public VoterChartPresenter getVoterChartPresenter() {
-        return voterChartPresenter;
-    }
-
-
-    public void setVoterChartPresenter(VoterChartPresenter voterChartPresenter) {
-        this.voterChartPresenter = voterChartPresenter;
-    }
-
-    public VoterChartView getVoterChartView() {
-        return voterChartView;
-    }
-
-    public void setVoterChartView(VoterChartView voterChartView) {
-        this.voterChartView = voterChartView;
-    }
-    
+   
     
     
 }

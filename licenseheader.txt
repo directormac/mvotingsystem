@@ -2,10 +2,8 @@
 ${licenseFirst}
 </#if>
 ${licensePrefix}Computerized Voting System
-${licensePrefix}Project By: ${licensePrefix}
-${licensePrefix}Almiradz Mling ${licensePrefix}
-${licensePrefix}Rodz Aguilar Piang ${licensePrefix}
-${licensePrefix}Mark Kendrick Asena${licensePrefix}
+
+
 <#if licenseLast??>
 ${licenseLast}
 </#if>

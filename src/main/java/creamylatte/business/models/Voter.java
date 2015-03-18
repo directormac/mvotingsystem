@@ -1,11 +1,3 @@
-/*
- * Voting System
- * Project By:  * 
- * Almiradz Mling  * 
- * Eduard John Madriaga  * 
- * Rodz Aguilar Piang  * 
- * Mark Kendrick Asena * 
- */
 
 package creamylatte.business.models;
 
@@ -26,10 +18,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-/**
- *
- * @author Hadouken
- */
 @Entity
 @Table(name = "voter")
 @NamedQueries({
@@ -37,20 +25,21 @@ import javax.persistence.Table;
     @NamedQuery(name = "Voter.find", query = "SELECT V FROM Voter V WHERE v.firstName = :firstName OR v.lastName = :lastName"),
     @NamedQuery(name = "Voter.SearchByName", 
             query = "SELECT c FROM Voter c WHERE lower('c.lastName') like :lastName OR lower('c.firstName') like :firstName" ),
-    @NamedQuery(name = "Voter.findByGradeLevel", query = "SELECT c FROM Voter c WHERE c.gradeLevel = :gradeLevel"),
+    @NamedQuery(name = "Voter.findByYearLevel", query = "SELECT c FROM Voter c WHERE c.yearLevel = :yearLevel"),
     @NamedQuery(name = "Voter.findByAccount", query = "SELECT c FROM Voter c WHERE c.account = :account")})
 public class Voter implements Serializable {
     private IntegerProperty id;
     private StringProperty firstName;    
     private StringProperty lastName;    
-    private StringProperty gradeLevel;
+    private StringProperty yearLevel;
     private ObjectProperty<UserAccount> account;
     private ListProperty<Candidate> candidates;
+    
     public Voter(){
         this.id = new SimpleIntegerProperty();
         this.firstName = new SimpleStringProperty();
         this.lastName = new SimpleStringProperty();
-        this.gradeLevel = new SimpleStringProperty();  
+        this.yearLevel = new SimpleStringProperty();
         this.account = new SimpleObjectProperty<>();        
         this.candidates = new SimpleListProperty<>();
     }
@@ -84,14 +73,17 @@ public class Voter implements Serializable {
         this.lastName.set(lastName);
     }
 
-    @Column(name = "grade_level")
-    public String getGradeLevel() {
-        return this.gradeLevel.get();
+    
+    @Column(name = "year_level")
+    public String getYearLevel() {
+        return this.yearLevel.get();
     }
     
-    public void setGradeLevel(String gradeLevel){
-        this.gradeLevel.set(gradeLevel);
+    public void setYearLevel(String yearLevel){
+        this.yearLevel.set(yearLevel);
     }
+    
+    
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "account")
@@ -125,8 +117,8 @@ public class Voter implements Serializable {
         return lastName;
     }
     
-    public StringProperty gradeLEvelProperty(){
-        return gradeLevel;
+    public StringProperty yearLevelProperty(){
+        return yearLevel;
     }
     
 }

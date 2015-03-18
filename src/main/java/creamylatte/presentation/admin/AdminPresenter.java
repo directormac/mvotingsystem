@@ -12,6 +12,7 @@ package creamylatte.presentation.admin;
 import creamylatte.presentation.admin.managecandidate.ManageCandidateView;
 import creamylatte.presentation.admin.managepartylist.ManagePartyListView;
 import creamylatte.presentation.admin.managevoter.ManageVoterView;
+import creamylatte.presentation.admin.reports.graphresult.GraphResultView;
 import creamylatte.presentation.admin.reports.results.ResultsView;
 import creamylatte.presentation.admin.reports.useraccounts.UserAccountsView;
 import creamylatte.presentation.login.LoginView;
@@ -20,7 +21,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
@@ -44,6 +44,8 @@ public class AdminPresenter implements Initializable {
     private BorderPane mainPane;
     @FXML
     private Button electionResultsButton;
+    @FXML
+    private Button electionGraphResultButton;
     @FXML
     private Button userReportsButton;
 
@@ -93,6 +95,11 @@ public class AdminPresenter implements Initializable {
     @FXML
     private void userReportsButtonAction(ActionEvent event) {
         changePane(new UserAccountsView().getView());
+    }
+    
+    @FXML
+    private void electionGraphResultButtonAction(ActionEvent event){
+        changePane(new GraphResultView().getView());
     }
     
 }

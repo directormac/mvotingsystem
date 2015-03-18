@@ -21,7 +21,6 @@ import com.itextpdf.text.pdf.CMYKColor;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
-import creamylatte.business.models.Candidate;
 import creamylatte.business.models.Voter;
 import creamylatte.business.services.VoterService;
 import java.io.FileNotFoundException;
@@ -70,7 +69,7 @@ public class UserAcountsPresenter implements Initializable {
         voterTableView.setItems(masterData);
         nameColumn.setCellValueFactory((cellData) -> cellData.getValue().lastNameProperty()
                 .concat(" , ").concat(cellData.getValue().firstNameProperty()));
-        gradeLevelColumn.setCellValueFactory((cellData) -> cellData.getValue().gradeLEvelProperty());
+        gradeLevelColumn.setCellValueFactory((cellData) -> cellData.getValue().yearLevelProperty());
         passwordColumn.setCellValueFactory((cellData) -> cellData.getValue().getAccount().passwordProperty());
         
     }    
@@ -101,7 +100,7 @@ public class UserAcountsPresenter implements Initializable {
         PdfPCell c3 = new PdfPCell(new Phrase("Password"));
         t.addCell(c3);
         for(Voter voter: masterData){
-            t.addCell(voter.getGradeLevel());
+            t.addCell(voter.getYearLevel());
             t.addCell(voter.getLastName() + " , " + voter.getFirstName());
             t.addCell(voter.getAccount().getPassword());
         }

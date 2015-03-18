@@ -1,21 +1,13 @@
-/*
- * Voting System
- * Project By:  * 
- * Almiradz Mling  * 
- * Eduard John Madriaga  * 
- * Rodz Aguilar Piang  * 
- * Mark Kendrick Asena * 
- */
+
 
 package creamylatte.presentation.vote.linearcandidate;
 
 import creamylatte.business.models.Candidate;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -26,19 +18,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TitledPane;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
-/**
- * FXML Controller class
- *
- * @author Hadouken
- */
+
 public class LinearCandidatePresenter implements Initializable {
-    @FXML
-    private ImageView candidateImageView;
+
     @FXML
     private Label candidateGradeLevel,candidatePartyListLabel,candidateNameLabel;
     @FXML
@@ -55,23 +40,30 @@ public class LinearCandidatePresenter implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+         for(Candidate candidate: selectCandidateCBox.getItems() ){
+             System.out.println(candidate);
+         }
+        
+        
         candidate = new SimpleObjectProperty<>();
-        candidate.addListener((ObservableValue<? extends Candidate> observable, Candidate oldValue, Candidate newValue) -> {
-            titledPane.setText(newValue.getPosition().getName()
-                                .concat(" - ").concat(newValue.getVoterId().getLastName()
+        candidate.addListener(new ChangeListener<Candidate>() {
+            public void changed(ObservableValue<? extends Candidate> observable, Candidate oldValue, Candidate newValue) {
+                titledPane.setText(newValue.getPosition().getName()
+                        .concat(" - ").concat(newValue.getVoterId().getLastName()
                                 .concat(" , ").concat(newValue.getVoterId().getFirstName())));
-            candidateNameLabel.setText(candidate.get().getVoterId().getLastName()
-                    + " , " + candidate.get().getVoterId().getFirstName());
-            candidateGradeLevel.setText(candidate.get().getVoterId().getGradeLevel());
-            candidatePartyListLabel.setText(candidate.get().getParty().getName());
-            InputStream inputStream = new ByteArrayInputStream(newValue.getImage().getData());
-            Image image = new Image(inputStream);
-            candidateImageView.setImage(image);
+                candidateNameLabel.setText(candidate.get().getVoterId().getLastName()
+                        + " , " + candidate.get().getVoterId().getFirstName());
+                candidateGradeLevel.setText(candidate.get().getVoterId().getYearLevel());
+                candidatePartyListLabel.setText(candidate.get().getParty().getName());
+            }
         });
         selectCandidateCBox.getSelectionModel().selectedItemProperty()
-                .addListener((ObservableValue<? extends Candidate> observable, Candidate oldValue, Candidate newValue) -> {
-                    candidate.set(newValue);
+                .addListener(new ChangeListener<Candidate>() {
+                public void changed(ObservableValue<? extends Candidate> observable, Candidate oldValue, Candidate newValue) {
+                candidate.set(newValue);
+            }
         });
+        
         selectCandidateCBox.setCellFactory(new Callback<ListView<Candidate>,ListCell<Candidate>>(){ 
             @Override
             public ListCell<Candidate> call(ListView<Candidate> p) {                 
@@ -80,7 +72,7 @@ public class LinearCandidatePresenter implements Initializable {
                     protected void updateItem(Candidate t, boolean bln) {
                         super.updateItem(t, bln);                         
                         if(t != null){
-                            setText(t.getVoterId().getLastName().concat(" , ").concat(t.getVoterId().getFirstName()));
+                            setText(t.firstNameProperty().get() + ", " + t.lastNameProperty().get() );
                         }else{
                             setText(null);
                         }
@@ -89,12 +81,14 @@ public class LinearCandidatePresenter implements Initializable {
                 return cell;
             }
         });
+        
+        
+        
+        
+        
+        
     }    
 
-
-    public ImageView getCandidateImageView() {
-        return candidateImageView;
-    }
 
     public Label getCandidateNameLabel() {
         return candidateNameLabel;

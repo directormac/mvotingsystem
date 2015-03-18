@@ -7,11 +7,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="welcomePane" fx:id="currentPane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" styleClass="background" stylesheets="@../../app.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.welcome.WelcomePresenter">
+<AnchorPane fx:id="currentPane" maxHeight="720.0" maxWidth="1280.0" minHeight="720.0" minWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" styleClass="background" stylesheets="@../../app.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="creamylatte.presentation.welcome.WelcomePresenter">
    <children>
-      <Label id="titleLabel" layoutX="322.0" layoutY="14.0" styleClass="header" text="Computerized " />
-      <Label id="titleLabel" layoutX="327.0" layoutY="130.0" styleClass="header" text="Voting System" />
-      <Button id="voteHereButton" contentDisplay="TOP" layoutX="68.0" layoutY="282.0" mnemonicParsing="false" onAction="#voteHyperlinkAction" text="Vote Here" />
-      <Button id="monitorHereButton" contentDisplay="TOP" layoutX="862.0" layoutY="276.0" mnemonicParsing="false" onAction="#monitorHyperlinkAction" text="Blind Results" />
+      <Label id="titleLabel" layoutX="344.0" layoutY="112.0" styleClass="header" text="Voting System" />
+      <Button id="voteHereButton" contentDisplay="TOP" layoutX="453.0" layoutY="301.0" mnemonicParsing="false" onAction="#voteHyperlinkAction" text="Click me to login" textAlignment="CENTER" />
+      <Label layoutX="548.0" layoutY="52.0" prefHeight="80.0" prefWidth="225.0" styleClass="header" text="Notre Dame of Dukay, Inc">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

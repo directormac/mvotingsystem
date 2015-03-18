@@ -3,7 +3,6 @@
   <persistence-unit name="VotingSystemPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>creamylatte.business.models.Candidate</class>
-    <class>creamylatte.business.models.ImageWrapper</class>
     <class>creamylatte.business.models.Party</class>
     <class>creamylatte.business.models.Position</class>
     <class>creamylatte.business.models.UserAccount</class>
@@ -13,7 +12,7 @@
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
       <property name="javax.persistence.jdbc.password" value="password"/>
-<!--      <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>-->
+      <!--<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>-->
       <property name="eclipselink.logging.level" value="FINE"/>
     </properties>
   </persistence-unit>

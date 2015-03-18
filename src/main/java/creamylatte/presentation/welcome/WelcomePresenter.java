@@ -10,7 +10,6 @@
 package creamylatte.presentation.welcome;
 
 import creamylatte.business.models.UserAccount;
-import creamylatte.presentation.blindresult.BlindResultView;
 import creamylatte.presentation.login.LoginView;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -18,7 +17,6 @@ import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.AnchorPane;
 
 /**
@@ -31,11 +29,9 @@ public class WelcomePresenter implements Initializable{
     
     @FXML
     private AnchorPane currentPane;
+    
+    
     private ObjectProperty<UserAccount> user;
-    @FXML
-    private Hyperlink voteHyperlink;
-    @FXML
-    private Hyperlink monitorHyperlink;
     /**
      * Initializes the controller class.
      */
@@ -57,11 +53,5 @@ public class WelcomePresenter implements Initializable{
         p.getChildren().add(new LoginView().getView());
     }
 
-    @FXML
-    private void monitorHyperlinkAction(ActionEvent event) {
-        AnchorPane p = (AnchorPane)currentPane.getParent();
-        p.getChildren().clear();
-        p.getChildren().add(new BlindResultView().getView());
-    }
 
 }

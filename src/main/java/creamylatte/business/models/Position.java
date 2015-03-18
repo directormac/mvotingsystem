@@ -1,11 +1,3 @@
-/*
- * Voting System
- * Project By:  * 
- * Almiradz Mling  * 
- * Eduard John Madriaga  * 
- * Rodz Aguilar Piang  * 
- * Mark Kendrick Asena * 
- */
 
 package creamylatte.business.models;
 
@@ -16,13 +8,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javax.persistence.*;
 
-/**
- *
- * @author Hadouken
- * This entity is using property access.
- * Known relationships:
- * *OneToMany to Candidate
- */
+
 @Entity
 @Table(name= "position")
 @NamedQueries({
@@ -34,8 +20,6 @@ public class Position implements Serializable {
     private StringProperty name;
     private ListProperty<Candidate> candidates;
     
-    
-
     public Position(){
         this.id = new SimpleIntegerProperty();
         this.name = new SimpleStringProperty();

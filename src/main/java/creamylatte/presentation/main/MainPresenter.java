@@ -10,8 +10,10 @@
 
 package creamylatte.presentation.main;
 
+import creamylatte.business.models.Position;
 import creamylatte.business.models.UserAccount;
 import creamylatte.business.services.Authenticator;
+import creamylatte.business.services.DBService;
 import creamylatte.business.services.VoterService;
 import creamylatte.presentation.login.LoginPresenter;
 import creamylatte.presentation.welcome.WelcomePresenter;
@@ -44,6 +46,10 @@ public class MainPresenter implements Initializable {
     private ObservableList<UserAccount> userList;
     private LoginPresenter loginPresenter;
     
+    
+    @Inject
+    private DBService service;
+    
     @Inject
     private VoterService vs;    
     @Inject
@@ -56,13 +62,13 @@ public class MainPresenter implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         this.user = new SimpleObjectProperty<>();
-        
-        
         WelcomeView wc = new WelcomeView();
         welcomePresenter = (WelcomePresenter)wc.getPresenter();
         contentPane.getChildren().add(wc.getView());
   
+        
     }    
 
 

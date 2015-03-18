@@ -1,11 +1,3 @@
-/*
- * Voting System
- * Project By:  * 
- * Almiradz Mling  * 
- * Eduard John Madriaga  * 
- * Rodz Aguilar Piang  * 
- * Mark Kendrick Asena * 
- */
 
 package creamylatte.business.models;
 
@@ -14,14 +6,7 @@ import java.util.List;
 import javafx.beans.property.*;
 import javafx.collections.*;
 import javax.persistence.*;
-/**
- *
- * @author Hadouken
- * This entity is using property access.
- * Known relationships:
- * *OneToMany to Candidate
- * 
- */
+
 @Entity
 @Table(name= "party")
 @NamedQueries({

@@ -34,6 +34,11 @@ public class CandidateService {
         service.getManager().refresh(party);
     }
     
+    public void refresh(Position position){
+        service.getManager().refresh(position);
+    }
+    
+    
     public void refresh(Candidate candidate){
         service.getManager().refresh(candidate);
     }
@@ -57,13 +62,13 @@ public class CandidateService {
         return service.getManager().createNamedQuery("Voter.findAll").getResultList();
     }
     
-    public List<Voter> searchByGradeLevel(String gradeLevel){
-        return service.getManager().createNamedQuery("Voter.findByGradeLevel").setParameter("gradeLevel", gradeLevel).getResultList();
+    public List<Voter> searchByYearLevel(String yearLevel){
+        return service.getManager().createNamedQuery("Voter.findByYearLevel").setParameter("yearLevel", yearLevel).getResultList();
     }
     
-    public List<Voter> searchByPartyList(String gradeLevel){
-        return service.getManager().createNamedQuery("Voter.findByGradeLevel").setParameter("gradeLevel", gradeLevel).getResultList();
-    }
+//    public List<Voter> searchByPartyList(String gradeLevel){
+//        return service.getManager().createNamedQuery("Voter.findByGradeLevel").setParameter("gradeLevel", gradeLevel).getResultList();
+//    }
     
     public List<Candidate> getAllCandidates(){
         return service.getManager().createNamedQuery("Candidate.findAll").getResultList();

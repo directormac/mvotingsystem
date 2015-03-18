@@ -1,12 +1,3 @@
-/*
- * Voting System
- * Project By:  * 
- * Almiradz Mling  * 
- * Eduard John Madriaga  * 
- * Rodz Aguilar Piang  * 
- * Mark Kendrick Asena * 
- */
-
 
 package creamylatte.business.models;
 
@@ -17,17 +8,6 @@ import javafx.collections.FXCollections;
 import javax.persistence.*;
 
 
-/**
- *
- * @author Hadouken
- * This entity is using property access.
- * Entity for candidate table
- * Known relationships:
- * *OneToOne to UserAccount,ImageWrapper
- * **ManyToOne to Party, Position
- * ***ManyToMany to self where every candidate can also vote a candidate
- * 
- */
 @Entity
 @Table(name = "candidate")
 @NamedQueries({
@@ -40,7 +20,7 @@ public class Candidate implements Serializable {
     private ObjectProperty<Voter> voterId;
     private ObjectProperty<Position> position;
     private ObjectProperty<Party> partylist;
-    private ImageWrapper image;
+ 
     private ListProperty<Voter> voters;
     
     //initiating properties
@@ -108,17 +88,7 @@ public class Candidate implements Serializable {
     public void setPosition(Position pos){
         position.set(pos);
     }
-    
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="image")
-    public ImageWrapper getImage(){
-        return this.image;
-    }    
-    
-    public void setImage(ImageWrapper image){
-        this.image = image;
-    }
-
+   
     @ManyToMany(mappedBy = "candidates")
     public List<Voter> getVoters(){
         return this.voters.get();
@@ -130,6 +100,19 @@ public class Candidate implements Serializable {
 
     public StringProperty partyNameProperty(){
         return partylist.get().nameProperty();
+    }
+    
+    public StringProperty firstNameProperty(){
+        return voterId.get().firstNameProperty();
+    }
+    
+    public StringProperty lastNameProperty(){
+        return voterId.get().lastNameProperty();
+    }
+    
+    @Override
+    public String toString(){
+        return voterId.get().getFirstName() + " , " + voterId.get().getLastName();
     }
     
 
